@@ -60,11 +60,11 @@ module.exports = function (options) {
 
       rules: [
 
-        /**
-         * Tslint loader support for *.ts files
-         *
-         * See: https://github.com/wbuchwalter/tslint-loader
-         */
+      /**
+       * Tslint loader support for *.ts files
+       *
+       * See: https://github.com/wbuchwalter/tslint-loader
+       */
         {
           enforce: 'pre',
           test: /\.ts$/,
@@ -72,12 +72,12 @@ module.exports = function (options) {
           exclude: [helpers.root('node_modules')]
         },
 
-        /**
-         * Source map loader support for *.js files
-         * Extracts SourceMaps for source files that as added as sourceMappingURL comment.
-         *
-         * See: https://github.com/webpack/source-map-loader
-         */
+      /**
+       * Source map loader support for *.js files
+       * Extracts SourceMaps for source files that as added as sourceMappingURL comment.
+       *
+       * See: https://github.com/webpack/source-map-loader
+       */
         {
           enforce: 'pre',
           test: /\.js$/,
@@ -89,11 +89,11 @@ module.exports = function (options) {
           ]
         },
 
-        /**
-         * Typescript loader support for .ts and Angular 2 async routes via .async.ts
-         *
-         * See: https://github.com/s-panferov/awesome-typescript-loader
-         */
+      /**
+       * Typescript loader support for .ts and Angular 2 async routes via .async.ts
+       *
+       * See: https://github.com/s-panferov/awesome-typescript-loader
+       */
         {
           test: /\.ts$/,
           loader: 'awesome-typescript-loader',
@@ -112,47 +112,47 @@ module.exports = function (options) {
           exclude: [/\.e2e\.ts$/]
         },
 
-        /**
-         * Json loader support for *.json files.
-         *
-         * See: https://github.com/webpack/json-loader
-         */
+      /**
+       * Json loader support for *.json files.
+       *
+       * See: https://github.com/webpack/json-loader
+       */
         {
           test: /\.json$/,
           loader: 'json-loader',
           exclude: [helpers.root('src/index.html')]
         },
 
-        /**
-         * Raw loader support for *.css files
-         * Returns file content as string
-         *
-         * See: https://github.com/webpack/raw-loader
-         */
+      /**
+       * Raw loader support for *.css files
+       * Returns file content as string
+       *
+       * See: https://github.com/webpack/raw-loader
+       */
         {
           test: /\.css$/,
           loaders: ['to-string-loader', 'css-loader'],
           exclude: [helpers.root('src/index.html')]
         },
 
-        /**
-         * Raw loader support for *.html
-         * Returns file content as string
-         *
-         * See: https://github.com/webpack/raw-loader
-         */
+      /**
+       * Raw loader support for *.html
+       * Returns file content as string
+       *
+       * See: https://github.com/webpack/raw-loader
+       */
         {
           test: /\.html$/,
           loader: 'raw-loader',
           exclude: [helpers.root('src/index.html')]
         },
 
-        /**
-         * Instruments JS files with Istanbul for subsequent code coverage reporting.
-         * Instrument only testing sources.
-         *
-         * See: https://github.com/deepsweet/istanbul-instrumenter-loader
-         */
+      /**
+       * Instruments JS files with Istanbul for subsequent code coverage reporting.
+       * Instrument only testing sources.
+       *
+       * See: https://github.com/deepsweet/istanbul-instrumenter-loader
+       */
         {
           enforce: 'post',
           test: /\.(js|ts)$/,
@@ -174,15 +174,15 @@ module.exports = function (options) {
      */
     plugins: [
 
-      /**
-       * Plugin: DefinePlugin
-       * Description: Define free variables.
-       * Useful for having development builds with debug logging or adding global constants.
-       *
-       * Environment helpers
-       *
-       * See: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
-       */
+    /**
+     * Plugin: DefinePlugin
+     * Description: Define free variables.
+     * Useful for having development builds with debug logging or adding global constants.
+     *
+     * Environment helpers
+     *
+     * See: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
+     */
       // NOTE: when adding more properties make sure you include them in custom-typings.d.ts
       new DefinePlugin({
         'ENV': JSON.stringify(ENV),
@@ -194,24 +194,24 @@ module.exports = function (options) {
         }
       }),
 
-      /**
-       * Plugin: ContextReplacementPlugin
-       * Description: Provides context to Angular's use of System.import
-       *
-       * See: https://webpack.github.io/docs/list-of-plugins.html#contextreplacementplugin
-       * See: https://github.com/angular/angular/issues/11580
-       */
+    /**
+     * Plugin: ContextReplacementPlugin
+     * Description: Provides context to Angular's use of System.import
+     *
+     * See: https://webpack.github.io/docs/list-of-plugins.html#contextreplacementplugin
+     * See: https://github.com/angular/angular/issues/11580
+     */
       new ContextReplacementPlugin(
         // The (\\|\/) piece accounts for path separators in *nix and Windows
         /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
         helpers.root('src') // location of your src
       ),
 
-       /**
-       * Plugin LoaderOptionsPlugin (experimental)
-       *
-       * See: https://gist.github.com/sokra/27b24881210b56bbaff7
-       */
+    /**
+     * Plugin LoaderOptionsPlugin (experimental)
+     *
+     * See: https://gist.github.com/sokra/27b24881210b56bbaff7
+     */
       new LoaderOptionsPlugin({
         debug: true,
         options: {

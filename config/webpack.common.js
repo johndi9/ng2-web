@@ -1,5 +1,6 @@
-const webpack = require('webpack');
 const helpers = require('./helpers');
+const path = require('path');
+const webpack = require('webpack');
 
 /*
  * Webpack Plugins
@@ -13,6 +14,7 @@ const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin
 const HtmlElementsPlugin = require('./html-elements-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
+const SassLintPlugin = require('sasslint-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 
 /*
@@ -24,6 +26,8 @@ const METADATA = {
   baseUrl: '/',
   isDevServer: helpers.isWebpackDevServer()
 };
+const HELPER_SCSS_PATH = path.resolve(__dirname, 'src', 'assets', 'scss');
+const BROWSERS = ['ie >= 9', 'Chrome >= 39', 'Safari >= 8', 'Firefox >= 34', 'ChromeAndroid >= 39', 'last 2 versions'];
 
 /*
  * Webpack configuration
@@ -31,7 +35,24 @@ const METADATA = {
  * See: http://webpack.github.io/docs/configuration.html#cli
  */
 module.exports = function (options) {
-  isProd = options.env === 'production';
+  const isProd = options.env === 'production';
+  let htmlLoader;
+
+
+  if (isProd) {
+    htmlLoader = {
+      minimize: true,
+        removeAttributeQuotes: false,
+        caseSensitive: true,
+        customAttrSurround: [
+        [/#/, /(?:)/],
+        [/\*/, /(?:)/],
+        [/\[?\(?/, /(?:)/]
+      ],
+      customAttrAssign: [/\)?\]?=/]
+    }
+  }
+
   return {
 
     /*
@@ -69,7 +90,7 @@ module.exports = function (options) {
        *
        * See: http://webpack.github.io/docs/configuration.html#resolve-extensions
        */
-      extensions: ['.ts', '.js', '.json'],
+      extensions: ['.ts', '.js', '.json', '.html', '.txt', '.gif', '.jpg', '.png', '.woff', '.woff2', '.ttf', '.eot', '.svg', '.scss'],
 
       // An array of directory names to be resolved to the current directory
       modules: [helpers.root('src'), 'node_modules'],
@@ -84,6 +105,59 @@ module.exports = function (options) {
     module: {
 
       rules: [
+
+        /*
+         * Tslint loader support for *.ts files
+         *
+         * See: https://github.com/wbuchwalter/tslint-loader
+         */
+        {
+          enforce: 'pre',
+          test: /\.ts$/,
+          loader: 'tslint-loader',
+          exclude: [helpers.root('node_modules')]
+        },
+
+        /*
+         * Sasslint loader support for *.sass files
+         *
+         * See: https://github.com/alleyinteractive/sasslint-webpack-plugin
+         */
+        {
+          enforce: 'pre',
+          test: /\.scss$/,
+          loader: 'sasslint-loader',
+          exclude: [helpers.root('node_modules')]
+        },
+
+        /*
+         * Sasslint loader support for *.sass files
+         *
+         * See: https://github.com/alleyinteractive/sasslint-webpack-plugin
+         */
+        //{
+        //  enforce: 'pre',
+        //  test: /\.html$/,
+        //  loader: 'html?minimize=false',
+        //  exclude: [helpers.root('src/index.html')]
+        //},
+
+        /*
+         * Source map loader support for *.js files
+         * Extracts SourceMaps for source files that as added as sourceMappingURL comment.
+         *
+         * See: https://github.com/webpack/source-map-loader
+         */
+        {
+          enforce: 'pre',
+          test: /\.js$/,
+          loader: 'source-map-loader',
+          exclude: [
+            // these packages have problems with their sourcemaps
+            helpers.root('node_modules/rxjs'),
+            helpers.root('node_modules/@angular')
+          ]
+        },
 
         /*
          * Typescript loader support for .ts and Angular 2 async routes via .async.ts
@@ -122,23 +196,77 @@ module.exports = function (options) {
           loaders: ['to-string-loader', 'css-loader']
         },
 
-        /* Raw loader support for *.html
+        /*
+         * Raw loader support for *.html
          * Returns file content as string
          *
          * See: https://github.com/webpack/raw-loader
          */
         {
           test: /\.html$/,
-          loader: 'raw-loader',
+          loader: 'html?minimize=false',
           exclude: [helpers.root('src/index.html')]
         },
 
-        /* File loader for supporting images, for example, in CSS files.
+        /*
+         * File loader for supporting images, for example, in CSS files.
          */
         {
           test: /\.(jpg|png|gif)$/,
-          loader: 'file'
+          loader: 'url?limit=10000&mimetype=image/[ext]'
         },
+
+        /*
+         * File loader for supporting fonts
+         */
+        {
+          test: /\.woff(\?.*)?$/,
+          loader: 'url?mimetype=application/font-woff'
+        },
+        {
+          test: /\.woff2(\?.*)?$/,
+          loader: 'url?mimetype=application/font-woff2'
+        },
+        {
+          test: /\.ttf(\?.*)?$/,
+          loader: 'url?mimetype=application/vnd.ms-fontobject'
+        },
+        {
+          test: /\.eot(\?.*)?$/,
+          loader: 'url?mimetype=application/x-font-ttf'
+        },
+        {
+          test: /\.svg(\?.*)?$/,
+          loader: 'url?mimetype=image/svg+xml'
+        },
+
+        /*
+         * File loader for supporting SASS files
+         */
+        {
+          test: /\.scss$/,
+          use: [
+            'to-string',
+            'css-loader?sourceMap',
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: [
+                  require('postcss-url')(),
+                  require('postcss-cssnext')({ browsers: BROWSERS }),
+                  require('postcss-browser-reporter')(),
+                  require('postcss-reporter')()
+                ]
+              }
+            },
+            {
+              loader: 'sass-loader?sourceMap',
+              options: {
+                includePaths: [HELPER_SCSS_PATH]
+              }
+            }
+          ]
+        }
 
       ],
 
@@ -175,13 +303,13 @@ module.exports = function (options) {
         name: ['polyfills', 'vendor'].reverse()
       }),
 
-      /**
-       * Plugin: ContextReplacementPlugin
-       * Description: Provides context to Angular's use of System.import
-       *
-       * See: https://webpack.github.io/docs/list-of-plugins.html#contextreplacementplugin
-       * See: https://github.com/angular/angular/issues/11580
-       */
+    /**
+     * Plugin: ContextReplacementPlugin
+     * Description: Provides context to Angular's use of System.import
+     *
+     * See: https://webpack.github.io/docs/list-of-plugins.html#contextreplacementplugin
+     * See: https://github.com/angular/angular/issues/11580
+     */
       new ContextReplacementPlugin(
         // The (\\|\/) piece accounts for path separators in *nix and Windows
         /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
@@ -196,12 +324,11 @@ module.exports = function (options) {
        *
        * See: https://www.npmjs.com/package/copy-webpack-plugin
        */
-      new CopyWebpackPlugin([{
-        from: 'src/assets',
-        to: 'assets',
-      }, {
-        from: 'src/meta',
-      }, ]),
+      new CopyWebpackPlugin([
+          { from: 'src/assets', to: 'assets' },
+          { from: 'src/meta' },
+        ],  { ignore: ['*.scss']}
+      ),
 
 
       /*
@@ -216,8 +343,7 @@ module.exports = function (options) {
         template: 'src/index.html',
         title: METADATA.title,
         chunksSortMode: 'dependency',
-        metadata: METADATA,
-        inject: 'head'
+        metadata: METADATA
       }),
 
       /*
@@ -257,12 +383,53 @@ module.exports = function (options) {
         headTags: require('./head-config.common')
       }),
 
-      /**
-       * Plugin LoaderOptionsPlugin (experimental)
-       *
-       * See: https://gist.github.com/sokra/27b24881210b56bbaff7
-       */
-      new LoaderOptionsPlugin({}),
+      new SassLintPlugin({
+        configFile: '.sass-lint.yml',
+        context: ['./src/app'],
+        failOnWarning: true,
+        failOnError: true
+      }),
+
+    /**
+     * Plugin LoaderOptionsPlugin (experimental)
+     *
+     * See: https://gist.github.com/sokra/27b24881210b56bbaff7
+     */
+      new LoaderOptionsPlugin({
+        debug: !isProd,
+        options: {
+
+          /**
+           * Static analysis linter for TypeScript advanced options configuration
+           * Description: An extensible linter for the TypeScript language.
+           *
+           * See: https://github.com/wbuchwalter/tslint-loader
+           */
+          tslint: {
+            emitErrors: true,
+            emitWarning: true,
+            failOnHint: true,
+            resourcePath: 'src'
+          },
+
+          //htmlhint: {
+          //  configFile: '.htmlhintrc',
+          //  emitError: true,
+          //  emitWarning: true,
+          //  failOnError: true,
+          //  failOnWarning: true
+          //},
+
+          /**
+           * Html loader advanced options
+           *
+           * See: https://github.com/webpack/html-loader#advanced-options
+           */
+          // TODO: Need to workaround Angular 2's html syntax => #id [bind] (event) *ngFor
+          htmlLoader: htmlLoader,
+
+        }
+      }),
 
     ],
 
@@ -279,7 +446,7 @@ module.exports = function (options) {
       module: false,
       clearImmediate: false,
       setImmediate: false
-    }
+    },
 
   };
 }

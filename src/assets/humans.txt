@@ -1,0 +1,10 @@
+# humanstxt.org/
+# The humans responsible & technologies
+
+# HUMANS
+
+  Juan Diego de Miguel -- johndi9@hotmail.com -- @juandiegodemi
+
+# TECHNOLOGIES
+
+  Angular2, Typescript, Webpack, HTML5, SASS

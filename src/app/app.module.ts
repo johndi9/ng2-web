@@ -15,6 +15,9 @@ import { AppState, InternalStateType } from './app.service';
 // Components
 import { AppComponent } from './app.component';
 import { Home } from './components/pages/home/home.component';
+import { Ng2Footer } from './components/panels/common/ng2-footer/ng2-footer.component';
+import { Ng2Header } from './components/panels/common/ng2-header/ng2-header.component';
+import { Ng2LoadingScreen } from './components/layers/ng2-loading-screen/ng2-loading-screen.component';
 import { NoContent } from './components/pages/no-content/no-content.component';
 import { WhoIAm } from './components/pages/who-i-am/who-i-am.component';
 
@@ -40,7 +43,10 @@ type StoreType = {
     AppComponent,
     WhoIAm,
     Home,
-    NoContent
+    NoContent,
+    Ng2Footer,
+    Ng2Header,
+    Ng2LoadingScreen
   ],
   imports: [ // import Angular's modules
     BrowserModule,

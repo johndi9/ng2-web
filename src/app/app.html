@@ -1,34 +1,12 @@
-<nav>
-  <span>
-    <a [routerLink]=" ['./'] ">
-      <i class="fa fa-plus" aria-hidden="true"></i> Index
-    </a>
-  </span>
-  |
-  <span>
-    <a [routerLink]=" ['./home'] ">
-      <i class="fa fa-plus" aria-hidden="true"></i> Home
-    </a>
-  </span>
-  |
-  <span>
-    <a [routerLink]=" ['./whoIAm'] ">
-      About
-    </a>
-  </span>
-</nav>
+<!-- Main heading structure -->
+<h1 class="sr-only"></h1>
 
-<main>
+<ng2-loading-screen></ng2-loading-screen>
+
+<ng2-header></ng2-header>
+
+<div id="main" role="main" class="ng2-container">
   <router-outlet></router-outlet>
-</main>
+</div>
 
-<pre class="app-state">this.appState.state = {{ appState.state | json }}</pre>
-
-<footer>
-  <span>WebPack Angular 2 Starter by <a [href]="url">@AngularClass</a></span>
-  <div>
-    <a [href]="url">
-      <img [src]="angularclassLogo" width="25%">
-    </a>
-  </div>
-</footer>
+<ng2-footer></ng2-footer>

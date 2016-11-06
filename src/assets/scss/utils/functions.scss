@@ -1,0 +1,31 @@
+/*
+ * Functions
+ */
+
+/*
+ * Function to convert px to em
+ * $pixels
+ * $context: default browser unit in px
+ * $unit: em or rem units admitted (default em)
+ */
+
+@function em($pixels, $unit: em, $context: $font-size-root) {
+  @if (unitless($pixels)) {
+    $pixels: $pixels * 1px;
+  }
+  @if (unitless($context)) {
+    $context: $context * 1px;
+  }
+  @return ($pixels / $context) * 1#{$unit};
+}
+
+/*
+ * Function to convert px to rem
+ * $pixels
+ * $context: default browser unit in px
+ * $unit: rem units
+ */
+
+@function rem($pixels, $context: $font-size-root) {
+  @return em($pixels, rem, $context);
+}

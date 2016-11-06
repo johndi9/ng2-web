@@ -1,0 +1,15 @@
+/*
+ * Common styles for the app
+ */
+
+// Import utils
+@import 'utils/utils';
+
+// Import bootstrap framework from node_modules
+@import '~bootstrap/scss/bootstrap';
+
+// Import fonts
+@import 'fonts/fonts';
+
+// Import common custom styles
+@import 'common/common';

@@ -20,14 +20,17 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 /*
  * Webpack Constants
  */
+const BROWSERS = ['ie >= 9', 'Chrome >= 39', 'Safari >= 8', 'Firefox >= 34', 'ChromeAndroid >= 39', 'last 2 versions'];
+const HELPER_SASS_PATHS = [
+  './src/assets/scss/',
+  './node_modules/bootstrap/scss/'
+];
 const HMR = helpers.hasProcessFlag('hot');
 const METADATA = {
   title: 'Juan Diego de Miguel Web',
   baseUrl: '/',
   isDevServer: helpers.isWebpackDevServer()
 };
-const HELPER_SCSS_PATH = path.resolve(__dirname, 'src', 'assets', 'scss');
-const BROWSERS = ['ie >= 9', 'Chrome >= 39', 'Safari >= 8', 'Firefox >= 34', 'ChromeAndroid >= 39', 'last 2 versions'];
 
 /*
  * Webpack configuration
@@ -247,22 +250,23 @@ module.exports = function (options) {
           test: /\.scss$/,
           use: [
             'to-string',
-            'css-loader?sourceMap',
             {
-              loader: 'postcss-loader',
+              loader: 'css-loader',
               options: {
-                plugins: [
-                  require('postcss-url')(),
-                  require('postcss-cssnext')({ browsers: BROWSERS }),
-                  require('postcss-browser-reporter')(),
-                  require('postcss-reporter')()
-                ]
+                sourceMap: true
               }
             },
             {
-              loader: 'sass-loader?sourceMap',
-              options: {
-                includePaths: [HELPER_SCSS_PATH]
+              loader: 'postcss-loader',
+              query: {
+                sourceMap: 'inline'
+              }
+            },
+            {
+              loader: 'sass-loader',
+              query: {
+                sourceMap: true,
+                includePaths: HELPER_SASS_PATHS
               }
             }
           ]
@@ -303,13 +307,13 @@ module.exports = function (options) {
         name: ['polyfills', 'vendor'].reverse()
       }),
 
-    /**
-     * Plugin: ContextReplacementPlugin
-     * Description: Provides context to Angular's use of System.import
-     *
-     * See: https://webpack.github.io/docs/list-of-plugins.html#contextreplacementplugin
-     * See: https://github.com/angular/angular/issues/11580
-     */
+      /*
+       * Plugin: ContextReplacementPlugin
+       * Description: Provides context to Angular's use of System.import
+       *
+       * See: https://webpack.github.io/docs/list-of-plugins.html#contextreplacementplugin
+       * See: https://github.com/angular/angular/issues/11580
+       */
       new ContextReplacementPlugin(
         // The (\\|\/) piece accounts for path separators in *nix and Windows
         /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
@@ -386,8 +390,8 @@ module.exports = function (options) {
       new SassLintPlugin({
         configFile: '.sass-lint.yml',
         context: ['./src/app'],
-        failOnWarning: true,
-        failOnError: true
+        failOnWarning: false,
+        failOnError: false
       }),
 
     /**
@@ -398,6 +402,8 @@ module.exports = function (options) {
       new LoaderOptionsPlugin({
         debug: !isProd,
         options: {
+
+          context: path.resolve(__dirname, '..'), // must evaluate to root of project
 
           /**
            * Static analysis linter for TypeScript advanced options configuration
@@ -411,6 +417,14 @@ module.exports = function (options) {
             failOnHint: true,
             resourcePath: 'src'
           },
+
+          postcss: [
+            require('postcss-url')({}),
+            require('postcss-import')({}),
+            require('postcss-cssnext')({ browsers: BROWSERS }),
+            require('postcss-browser-reporter')({}),
+            require('postcss-reporter')({})
+          ],
 
           //htmlhint: {
           //  configFile: '.htmlhintrc',

@@ -12,9 +12,7 @@ import { AppState } from './app.service';
 @Component({
   selector: 'app',
   encapsulation: ViewEncapsulation.None,
-  styleUrls: [
-    './app.component.css'
-  ],
+  styleUrls: ['../assets/scss/index.scss', './app.scss'],
   template: `
     <nav>
       <span>

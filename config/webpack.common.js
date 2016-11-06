@@ -74,11 +74,9 @@ module.exports = function (options) {
      * See: http://webpack.github.io/docs/configuration.html#entry
      */
     entry: {
-
       'polyfills': './src/polyfills.browser.ts',
       'vendor': './src/vendor.browser.ts',
       'main': './src/main.browser.ts'
-
     },
 
     /*
@@ -87,7 +85,6 @@ module.exports = function (options) {
      * See: http://webpack.github.io/docs/configuration.html#resolve
      */
     resolve: {
-
       /*
        * An array of extensions that should be used to resolve modules.
        *
@@ -97,7 +94,6 @@ module.exports = function (options) {
 
       // An array of directory names to be resolved to the current directory
       modules: [helpers.root('src'), 'node_modules'],
-
     },
 
     /*
@@ -106,9 +102,7 @@ module.exports = function (options) {
      * See: http://webpack.github.io/docs/configuration.html#module
      */
     module: {
-
       rules: [
-
         /*
          * Tslint loader support for *.ts files
          *
@@ -223,24 +217,12 @@ module.exports = function (options) {
          * File loader for supporting fonts
          */
         {
-          test: /\.woff(\?.*)?$/,
-          loader: 'url?mimetype=application/font-woff'
+          test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+          loader: 'file-loader'
         },
         {
-          test: /\.woff2(\?.*)?$/,
-          loader: 'url?mimetype=application/font-woff2'
-        },
-        {
-          test: /\.ttf(\?.*)?$/,
-          loader: 'url?mimetype=application/vnd.ms-fontobject'
-        },
-        {
-          test: /\.eot(\?.*)?$/,
-          loader: 'url?mimetype=application/x-font-ttf'
-        },
-        {
-          test: /\.svg(\?.*)?$/,
-          loader: 'url?mimetype=image/svg+xml'
+          test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+          loader: 'url-loader?limit=10000&minetype=application/font-woff'
         },
 
         /*
@@ -271,9 +253,7 @@ module.exports = function (options) {
             }
           ]
         }
-
       ],
-
     },
 
     /*
@@ -334,7 +314,6 @@ module.exports = function (options) {
         ],  { ignore: ['*.scss']}
       ),
 
-
       /*
        * Plugin: HtmlWebpackPlugin
        * Description: Simplifies creation of HTML files to serve your webpack bundles.
@@ -394,11 +373,11 @@ module.exports = function (options) {
         failOnError: false
       }),
 
-    /**
-     * Plugin LoaderOptionsPlugin (experimental)
-     *
-     * See: https://gist.github.com/sokra/27b24881210b56bbaff7
-     */
+      /*
+       * Plugin LoaderOptionsPlugin (experimental)
+       *
+       * See: https://gist.github.com/sokra/27b24881210b56bbaff7
+       */
       new LoaderOptionsPlugin({
         debug: !isProd,
         options: {
@@ -441,10 +420,8 @@ module.exports = function (options) {
            */
           // TODO: Need to workaround Angular 2's html syntax => #id [bind] (event) *ngFor
           htmlLoader: htmlLoader,
-
         }
       }),
-
     ],
 
     /*

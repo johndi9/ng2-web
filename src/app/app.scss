@@ -1,9 +1,6 @@
 @import 'helpers';
 
-$var: .5;
-
 a {
   background: $gray-lighter;
   display: flex;
-  transform: scale($var);
 }

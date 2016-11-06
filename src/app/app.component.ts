@@ -17,13 +17,13 @@ import { AppState } from './app.service';
     <nav>
       <span>
         <a [routerLink]=" ['./'] ">
-          Index
+          <i class="fa fa-plus" aria-hidden="true"></i> Index
         </a>
       </span>
       |
       <span>
         <a [routerLink]=" ['./home'] ">
-          Home
+          <i class="fa fa-plus" aria-hidden="true"></i> Home
         </a>
       </span>
       |

@@ -1,0 +1,17 @@
+@import 'helpers';
+
+.video-container {
+  background: $black;
+  bottom: 0%;
+  height: 100%;
+  left: 0%;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+
+  video {
+    &.fill-width {
+      width: 100%;
+    }
+  }
+}

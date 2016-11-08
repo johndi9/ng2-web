@@ -173,4 +173,4 @@ rules:
     - 2
     - allow-leading-underscore: true
       convention: hyphenatedlowercase
-  zero-unit: 2
+  zero-unit: 0

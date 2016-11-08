@@ -1,0 +1,21 @@
+@import 'helpers';
+
+.logo {
+  color: $white;
+  font-family: 'Montserrat', sans-serif;
+  font-size: rem(80);
+  opacity: .8;
+  position: absolute;
+  text-align: center;
+  top: 35%;
+  width: 100%;
+  z-index: 1000;
+}
+
+.square {
+  border: 8px solid $white;
+  display: inline-block;
+  filter: drop-shadow(10px 10px 5px $gray-dark-1);
+  height: rem(60);
+  width: rem(60);
+}

@@ -1,5 +1,7 @@
 /.idea
 /yarn.lock
+/yarn-error.log
 /Dockerfile
 /npm-debug.log
 /node_modules
+/annotations

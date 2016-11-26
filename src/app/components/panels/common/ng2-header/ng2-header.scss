@@ -1,0 +1,16 @@
+@import 'helpers';
+
+.md-toolbar {
+  background: transparent;
+  color: $white;
+}
+
+.ng2-toolbar {
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+}
+
+.ng2-toolbar-icon {
+  padding: 0 14px;
+}

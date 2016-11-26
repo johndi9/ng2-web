@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 
 @Component({
@@ -8,5 +8,15 @@ import { Component } from '@angular/core';
 })
 
 export class Ng2Header {
+  @Output() callback = new EventEmitter();
+
   constructor() {}
+
+  /**
+   * Method to handle click events
+   * @param event
+   */
+  private openSidebar($event: Event): void {
+    this.callback.emit($event);
+  }
 }

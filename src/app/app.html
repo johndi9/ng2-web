@@ -3,10 +3,22 @@
 
 <loading-screen></loading-screen>
 
-<ng2-header></ng2-header>
+<ng2-header (callback)="end.toggle()"></ng2-header>
 
 <div id="main" role="main" class="ng2-container">
-  <router-outlet></router-outlet>
+
+  <md-sidenav-layout>
+
+    <md-sidenav #end mode="side" align="end">
+      <h2>Sidebar</h2>
+      <button md-button (click)="end.close()">Close</button>
+    </md-sidenav>
+
+    <router-outlet></router-outlet>
+
+  </md-sidenav-layout>
+
 </div>
 
 <ng2-footer></ng2-footer>
+

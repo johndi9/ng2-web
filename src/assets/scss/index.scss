@@ -1,10 +1,6 @@
 // Common styles for the app
 
-// Import utils
-@import 'utils/utils';
-
 // Import bootstrap framework from node_modules
-@import '~bootstrap/scss/bootstrap';
 @import '~@angular/material/core/theming/prebuilt/indigo-pink';
 
 // Import fonts

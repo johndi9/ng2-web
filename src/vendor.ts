@@ -19,8 +19,11 @@ import '@angular/material';
 import '@angularclass/hmr';
 
 // RxJS
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/mergeMap';
+require('rxjs/add/operator/map');
+require('rxjs/add/operator/share');
+require('rxjs/add/observable/of');
+require('rxjs/add/operator/merge');
+require('rxjs/add/operator/toArray');
 
 if ('production' === ENV) {
   // Production

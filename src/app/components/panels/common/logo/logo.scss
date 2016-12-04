@@ -1,9 +1,9 @@
 @import 'helpers';
 
 .logo {
-  color: $white;
+  color: $logo-color;
   font-family: 'Montserrat', sans-serif;
-  font-size: rem(80);
+  font-size: rem(50);
   opacity: .8;
   position: absolute;
   text-align: center;
@@ -13,9 +13,9 @@
 }
 
 .square {
-  border: 8px solid $white;
+  border: 5px solid $logo-color;
   display: inline-block;
-  filter: drop-shadow(10px 10px 5px $gray-dark-1);
-  height: rem(60);
-  width: rem(60);
+  filter: drop-shadow(5px 5px 4px $logo-color);
+  height: rem(28);
+  width: rem(28);
 }

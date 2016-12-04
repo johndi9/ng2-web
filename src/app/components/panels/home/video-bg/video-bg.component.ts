@@ -8,5 +8,10 @@ import { Component } from '@angular/core';
 })
 
 export class VideoBg {
+  private numVideos: number = 5;
+  private videoPath: string = '/assets/video/bg_' + Math.floor(Math.random() * this.numVideos) + '.mov';
+
   constructor() {}
+
+
 }

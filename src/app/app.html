@@ -9,16 +9,16 @@
 
   <md-sidenav-layout>
 
-    <md-sidenav #end mode="side" align="end">
-      <h2>Sidebar</h2>
-      <button md-button (click)="end.close()">Close</button>
-    </md-sidenav>
-
     <router-outlet></router-outlet>
 
   </md-sidenav-layout>
 
 </div>
+
+<md-sidenav #end mode="side" align="end">
+  <h2>Sidebar</h2>
+  <button md-button (click)="end.close()">Close</button>
+</md-sidenav>
 
 <ng2-footer></ng2-footer>
 

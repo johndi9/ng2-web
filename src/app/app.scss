@@ -5,3 +5,16 @@ a {
   display: flex;
   font-family: 'Roboto-Light', sans-serif;
 }
+
+.md-sidenav {
+  background: transparent;
+  position: fixed;
+
+  &.md-sidenav-end {
+    &.md-sidenav-opened,
+    &.md-sidenav-opening,
+    &.md-sidenav-closing {
+      box-shadow: none;
+    }
+  }
+}

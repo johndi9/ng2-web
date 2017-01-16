@@ -2,8 +2,8 @@ import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { RouterModule } from '@angular/router';
 import { MaterialModule } from '@angular/material';
+import { RouterModule } from '@angular/router';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
 
 // Providers/directives/pipes
@@ -12,14 +12,15 @@ import { ENV_PROVIDERS } from './environment';
 // Services
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
+import { CurriculumService } from './services/curriculum.service';
 
 // Components
 import { AppComponent } from './app.component';
 import { Home } from './components/pages/home/home.component';
-import { Ng2Footer } from './components/panels/common/ng2-footer/ng2-footer.component';
-import { Ng2Header } from './components/panels/common/ng2-header/ng2-header.component';
 import { LoadingScreen } from './components/layers/loading-screen/loading-screen.component';
 import { Logo } from './components/panels/common/logo/logo.component';
+import { Ng2Footer } from './components/panels/common/ng2-footer/ng2-footer.component';
+import { Ng2Header } from './components/panels/common/ng2-header/ng2-header.component';
 import { NoContent } from './components/pages/no-content/no-content.component';
 import { VideoBg } from './components/panels/home/video-bg/video-bg.component';
 import { WhoIAm } from './components/pages/who-i-am/who-i-am.component';
@@ -62,7 +63,8 @@ type StoreType = {
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
-    APP_PROVIDERS
+    APP_PROVIDERS,
+    CurriculumService
   ]
 })
 

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { CurriculumService } from '../../../services/curriculum.service';
+
 
 @Component({
   selector: 'home',
@@ -8,5 +10,7 @@ import { Component } from '@angular/core';
 })
 
 export class Home {
-  constructor() {}
+  constructor(private _curriculumService: CurriculumService) {
+    console.log(_curriculumService.resume);
+  }
 }

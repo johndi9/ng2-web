@@ -1,3 +1,5 @@
+import { JsonProperty } from '../../utils/modelParser';
+
 import { Certificate } from './Certificate/Certificate';
 import { Contact } from './Contact/Contact';
 import { Education } from './Education/Education';
@@ -16,26 +18,59 @@ import { Writing } from './Writing/Writing';
 
 export class Curriculum {
   name: string;
+  aboutMe: string[];
+  @JsonProperty({clazz: Info})
   info: Info;
+  @JsonProperty({clazz: Contact})
   contact: Contact;
+  @JsonProperty({clazz: Location})
   location: Location;
-  projects: Array<Project>;
-  social: Array<Social>;
+  @JsonProperty({clazz: Project})
+  projects: Project[];
+  @JsonProperty({clazz: Social})
+  social: Social[];
+  @JsonProperty({clazz: Writing})
+  writing: Writing[];
+  @JsonProperty({clazz: Speaking})
+  speaking: Speaking[];
+  @JsonProperty({clazz: Certificate})
+  certificates: Certificate[];
+  @JsonProperty({clazz: Seminar})
+  seminars: Seminar[];
+  @JsonProperty({clazz: Language})
+  languages: Language[];
+  @JsonProperty({clazz: Interest})
+  interests: Interest[];
+  @JsonProperty({clazz: Employ})
   employment: {
     summary: string,
-    history: Array<Employ>
+    history: Employ[]
   };
+  @JsonProperty({clazz: Education})
   education: {
-    history: Array<Education>
+    history: Education[]
   };
+  @JsonProperty({clazz: Skill})
   skills: {
-    sets: Array<Skill>
+    sets: Skill[]
+  };
+
+  constructor() {
+    this.name = undefined;
+    this.aboutMe = undefined;
+    this.info = undefined;
+    this.contact = undefined;
+    this.location = undefined;
+    this.projects = undefined;
+    this.social = undefined;
+    this.writing = undefined;
+    this.speaking = undefined;
+    this.certificates = undefined;
+    this.seminars = undefined;
+    this.languages = undefined;
+    this.interests = undefined;
+    this.employment = undefined;
+    this.education = undefined;
+    this.skills = undefined;
   }
-  writing: Array<Writing>;
-  speaking: Array<Speaking>;
-  certificates: Array<Certificate>;
-  seminars: Array<Seminar>;
-  languages: Array<Language>;
-  interests: Array<Interest>;
-  aboutMe: Array<string>;
 }

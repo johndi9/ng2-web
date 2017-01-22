@@ -3,4 +3,11 @@ export class Seminar {
   organism: string;
   location: string;
   date: Date;
+
+  constructor() {
+    this.title = undefined;
+    this.organism = undefined;
+    this.location = undefined;
+    this.date = undefined;
+  }
 }

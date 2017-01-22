@@ -3,4 +3,11 @@ export class Info {
   brief: string;
   image: string;
   quote: string;
+
+  constructor() {
+    this.label = undefined;
+    this.brief = undefined;
+    this.image = undefined;
+    this.quote = undefined;
+  }
 }

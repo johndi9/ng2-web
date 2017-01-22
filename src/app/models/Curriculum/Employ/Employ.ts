@@ -6,6 +6,18 @@ export class Employ {
   summary: string;
   start: Date;
   end: Date;
-  keywords: Array<string>;
-  highlights: Array<string>;
+  keywords: string[];
+  highlights: string[];
+
+  constructor() {
+    this.employer = undefined;
+    this.location = undefined;
+    this.url = undefined;
+    this.position = undefined;
+    this.summary = undefined;
+    this.start = undefined;
+    this.end = undefined;
+    this.keywords = undefined;
+    this.highlights = undefined;
+  }
 }

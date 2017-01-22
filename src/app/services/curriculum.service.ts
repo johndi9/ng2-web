@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { HttpService } from './http.service';
+import { Curriculum } from '../models/Curriculum/Curriculum';
 
 @Injectable()
 export class CurriculumService {
@@ -18,19 +19,10 @@ export class CurriculumService {
     this._resume = value;
   }
 
-  constructor(protected http: Http) {
+  constructor(private _httpService: HttpService) {
   }
 
   public updateCurriculumJSON(): void {
-    this.http.get(this.urlCVStored)
-      .map((res: Response) => res.json())
-      .subscribe(
-        data => {
-          this.resume = data;
-          console.log(data);
-        },
-        err => console.error(err),
-        () => console.log('done')
-      );
+    this._httpService.getSingle(Curriculum, this.urlCVStored);
   }
 }

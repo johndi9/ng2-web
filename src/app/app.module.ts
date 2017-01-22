@@ -13,6 +13,7 @@ import { ENV_PROVIDERS } from './environment';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
 import { CurriculumService } from './services/curriculum.service';
+import { HttpService } from './services/http.service';
 
 // Components
 import { AppComponent } from './app.component';
@@ -64,7 +65,8 @@ type StoreType = {
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
     APP_PROVIDERS,
-    CurriculumService
+    CurriculumService,
+    HttpService
   ]
 })
 

@@ -6,23 +6,26 @@ import { Curriculum } from '../models/Curriculum/Curriculum';
 export class CurriculumService {
   private readonly urlCVStored: string = 'https://raw.githubusercontent.com/johndi9/PersonalCV/master/curriculum/personal-cv.json';
 
-  private _resume: any;
+  private _resume: Curriculum;
 
-  get resume(): any {
+  get resume(): Curriculum {
     if (!this._resume) {
       this.updateCurriculumJSON();
     }
     return this._resume;
   }
 
-  set resume(value: any) {
-    this._resume = value;
+  set resume(value: Curriculum) {
+    throw Error('The object ' + Curriculum.name + ' cannot be modified.');
   }
 
   constructor(private _httpService: HttpService) {
   }
 
-  public updateCurriculumJSON(): void {
-    this._httpService.getSingle(Curriculum, this.urlCVStored);
+  private updateCurriculumJSON(): void {
+    this._httpService.getSingle(Curriculum, this.urlCVStored)
+      .subscribe((response: Curriculum) => {
+        this._resume = response;
+      });
   }
 }

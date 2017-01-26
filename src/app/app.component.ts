@@ -1,7 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
-import { AppState } from './app.service';
-
 
 @Component({
   selector: 'app',
@@ -11,11 +9,8 @@ import { AppState } from './app.service';
 })
 
 export class AppComponent {
-  angularclassLogo = 'assets/img/angularclass-avatar.png';
-  name = 'Angular 2 Webpack Starter';
-  url = 'https://twitter.com/AngularClass';
 
-  constructor(public appState: AppState) {
+  constructor() {
   }
 
 }

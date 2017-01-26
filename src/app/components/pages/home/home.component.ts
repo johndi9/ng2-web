@@ -11,6 +11,5 @@ import { CurriculumService } from '../../../services/curriculum.service';
 
 export class Home {
   constructor(private _curriculumService: CurriculumService) {
-    console.log(_curriculumService.resume);
   }
 }

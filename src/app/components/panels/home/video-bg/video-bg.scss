@@ -4,9 +4,23 @@
   overflow: hidden;
 }
 
-video {
+.video-bg {
   height: 100vh;
   object-fit: cover;
   width: 100vw;
   z-index: -1;
+}
+
+.video-bg-fade-in {
+  animation: sharpen 1s both;
+}
+
+@keyframes sharpen {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }

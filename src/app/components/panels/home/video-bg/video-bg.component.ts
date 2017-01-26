@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { Observable, Subscription } from 'rxjs/Rx';
 
 
 @Component({
@@ -7,11 +9,36 @@ import { Component } from '@angular/core';
   templateUrl: './video-bg.html'
 })
 
-export class VideoBg {
-  private numVideos: number = 5;
-  private videoPath: string = '/assets/video/bg_' + Math.floor(Math.random() * this.numVideos) + '.mov';
+export class VideoBg implements OnInit {
+  private videoLoaded: boolean;
+  private numVideosStored: number = 4;
+  private videoPath: string = '/assets/video/bg_' + Math.floor(Math.random() * this.numVideosStored) + '.mp4';
+  private subscription: Subscription;
 
-  constructor() {}
+  constructor() {
+  }
 
+  ngOnInit(): void {
+    this.subscription = this.loadVideo().subscribe(() => this.videoLoaded = true);
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  private loadVideo(): Observable<HTMLVideoElement> {
+    return Observable
+      .create(observer => {
+        const video: HTMLVideoElement = document.createElement('video');
+        video.src = this.videoPath;
+
+        video.load();
+        video.addEventListener('loadeddata', () => {
+          observer.next();
+          observer.complete();
+        });
+        video.onerror = err => observer.error(err);
+      });
+  }
 
 }

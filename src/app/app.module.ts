@@ -11,7 +11,7 @@ import { ENV_PROVIDERS } from './environment';
 
 // Services
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
-import { AppState, InternalStateType } from './app.service';
+import { AppState, InternalStateType } from './services/app.service';
 import { CurriculumService } from './services/curriculum.service';
 import { HttpService } from './services/http.service';
 

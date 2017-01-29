@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 
 
 @Component({
-  selector: 'employer-wrapper',
-  styleUrls: ['./employer-wrapper.scss'],
-  templateUrl: './employer-wrapper.html'
+  selector: 'personal-info-wrapper',
+  styleUrls: ['./personal-info-wrapper.scss'],
+  templateUrl: './personal-info-wrapper.html'
 })
 
 export class PersonalInfoWrapper {

@@ -14,17 +14,24 @@ import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './services/app.service';
 import { CurriculumService } from './services/curriculum.service';
 import { HttpService } from './services/http.service';
+import { NotificationService } from './services/notification.service';
 
 // Components
 import { AppComponent } from './app.component';
+import { CvContainer } from './components/panels/home/cv-container/cv-container.component';
+import { CvMenuWrapper } from './components/panels/home/cv-container/cv-menu-wrapper/cv-menu-wrapper.component';
+import { EducationWrapper } from './components/panels/home/cv-container/education-wrapper/education-wrapper.component';
+import { EmployerWrapper } from './components/panels/home/cv-container/employer-wrapper/employer-wrapper.component';
 import { Home } from './components/pages/home/home.component';
 import { LoadingScreen } from './components/layers/loading-screen/loading-screen.component';
 import { Logo } from './components/panels/common/logo/logo.component';
 import { Ng2Footer } from './components/panels/common/ng2-footer/ng2-footer.component';
 import { Ng2Header } from './components/panels/common/ng2-header/ng2-header.component';
 import { NoContent } from './components/pages/no-content/no-content.component';
+import { OtherInfoWrapper } from './components/panels/home/cv-container/other-info-wrapper/other-info-wrapper.component';
+import { PersonalInfoWrapper } from './components/panels/home/cv-container/personal-info-wrapper/personal-info-wrapper.component';
+import { ProjectWrapper } from './components/panels/home/cv-container/project-wrapper/project-wrapper.component';
 import { VideoBg } from './components/panels/home/video-bg/video-bg.component';
-import { WhoIAm } from './components/pages/who-i-am/who-i-am.component';
 
 // Routes
 import { ROUTES } from './app.routes';
@@ -46,14 +53,20 @@ type StoreType = {
   bootstrap: [AppComponent],
   declarations: [
     AppComponent,
-    WhoIAm,
     Home,
     NoContent,
     Ng2Footer,
     Ng2Header,
     LoadingScreen,
     Logo,
-    VideoBg
+    VideoBg,
+    CvContainer,
+    CvMenuWrapper,
+    EducationWrapper,
+    EmployerWrapper,
+    OtherInfoWrapper,
+    PersonalInfoWrapper,
+    ProjectWrapper
   ],
   imports: [ // import Angular's modules
     BrowserModule,
@@ -66,7 +79,8 @@ type StoreType = {
     ENV_PROVIDERS,
     APP_PROVIDERS,
     CurriculumService,
-    HttpService
+    HttpService,
+    NotificationService
   ]
 })
 

@@ -1,0 +1,15 @@
+export enum STATE_KEYS {
+  CV_OPTION_SELECTED
+}
+
+export enum EVENT_TYPES {
+  CV_OPTION_CHANGED
+}
+
+export enum CV_OPTION_TYPES {
+  PERSONAL_INFO,
+  PROJECTS,
+  EMPLOYERS,
+  EDUCATION,
+  OTHER_INFO
+}

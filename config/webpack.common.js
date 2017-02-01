@@ -244,7 +244,7 @@ module.exports = function (options) {
         {
           test: /\.scss$/,
           use: [
-            'raw-loader',
+            'to-string-loader',
             {
               loader: 'css-loader',
               // options: {

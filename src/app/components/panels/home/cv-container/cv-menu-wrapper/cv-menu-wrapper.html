@@ -1,5 +1,22 @@
-<a md-button (click)="selectOption(cvTabSelected.PERSONAL_INFO)">Personal Information</a>
-<a md-button (click)="selectOption(cvTabSelected.PROJECTS)">Projects</a>
-<a md-button (click)="selectOption(cvTabSelected.EMPLOYERS)">Employers</a>
-<a md-button (click)="selectOption(cvTabSelected.EDUCATION)">Education</a>
-<a md-button (click)="selectOption(cvTabSelected.OTHER_INFO)">Other information</a>
+<md-nav-list>
+  <a md-list-item (click)="selectOption(cvTabSelected.PERSONAL_INFO)">
+    <md-icon md-list-icon>menu</md-icon>
+    <span md-line>Personal Information</span>
+  </a>
+  <a md-list-item (click)="selectOption(cvTabSelected.PROJECTS)">
+    <md-icon md-list-icon>menu</md-icon>
+    <span md-line>Projects</span>
+  </a>
+  <a md-list-item (click)="selectOption(cvTabSelected.EMPLOYERS)">
+    <md-icon md-list-icon>menu</md-icon>
+    <span md-line>Employers</span>
+  </a>
+  <a md-list-item (click)="selectOption(cvTabSelected.EDUCATION)">
+    <md-icon md-list-icon>menu</md-icon>
+    <span md-line>Education</span>
+  </a>
+  <a md-list-item (click)="selectOption(cvTabSelected.OTHER_INFO)">
+    <md-icon md-list-icon>menu</md-icon>
+    <span md-line>Other information</span>
+  </a>
+</md-nav-list>

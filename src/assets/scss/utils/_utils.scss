@@ -1,17 +1,16 @@
 /* SASS utils */
 
 // List of colors
-@import 'colors.scss';
+@import 'src/assets/scss/utils/colors';
 
 // Color association with components
-@import 'color-association';
-
+@import 'src/assets/scss/utils/color-association';
 
 // Internal variables
-@import 'internal-variables';
+@import 'src/assets/scss/utils/internal-variables';
 
 // Mixins
-@import 'mixins';
+@import 'src/assets/scss/utils/mixins';
 
 // Functions
-@import 'functions';
+@import 'src/assets/scss/utils/functions';

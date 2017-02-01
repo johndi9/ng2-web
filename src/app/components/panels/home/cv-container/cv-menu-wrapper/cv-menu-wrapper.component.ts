@@ -21,7 +21,9 @@ export class CvMenuWrapper {
   }
 
   private selectOption(option: CV_OPTION_TYPES): void {
-    this._appState.set(STATE_KEYS[STATE_KEYS.CV_OPTION_SELECTED], option);
-    this._notificationService.notifyListener(EVENT_TYPES.CV_OPTION_CHANGED);
+    if (this._appState.get(STATE_KEYS[STATE_KEYS.CV_OPTION_SELECTED]) !== option) {
+      this._appState.set(STATE_KEYS[STATE_KEYS.CV_OPTION_SELECTED], option);
+      this._notificationService.notifyListener(EVENT_TYPES.CV_OPTION_CHANGED);
+    }
   }
 }

@@ -10,10 +10,12 @@ const AssetsPlugin = require('assets-webpack-plugin');
 const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin');
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
+const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
 const HtmlElementsPlugin = require('./html-elements-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
+const ngcWebpack = require('ngc-webpack');
+const NormalModuleReplacementPlugin = require('webpack/lib/NormalModuleReplacementPlugin');
 const SassLintPlugin = require('sasslint-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 
@@ -22,10 +24,10 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
  */
 const BROWSERS = ['ie >= 9', 'Chrome >= 39', 'Safari >= 8', 'Firefox >= 34', 'ChromeAndroid >= 39', 'last 2 versions'];
 const HELPER_SASS_PATHS = [
-  './src/assets/scss/',
-  './node_modules/bootstrap/scss/'
+  path.resolve(__dirname, './src/assets/scss/helpers.scss')
 ];
 const HMR = helpers.hasProcessFlag('hot');
+const AOT = helpers.hasNpmFlag('aot');
 const METADATA = {
   title: 'Juan Diego de Miguel Web',
   baseUrl: '/',
@@ -39,23 +41,6 @@ const METADATA = {
  */
 module.exports = function (options) {
   const isProd = options.env === 'production';
-  let htmlLoader;
-
-
-  if (isProd) {
-    htmlLoader = {
-      minimize: true,
-        removeAttributeQuotes: false,
-        caseSensitive: true,
-        customAttrSurround: [
-        [/#/, /(?:)/],
-        [/\*/, /(?:)/],
-        [/\[?\(?/, /(?:)/]
-      ],
-      customAttrAssign: [/\)?\]?=/]
-    }
-  }
-
   return {
 
     /*
@@ -74,9 +59,8 @@ module.exports = function (options) {
      * See: http://webpack.github.io/docs/configuration.html#entry
      */
     entry: {
-      'polyfills': './src/polyfills.ts',
-      'vendor': './src/vendor.ts',
-      'main': './src/main.ts'
+      'polyfills': './src/polyfills.browser.ts',
+      'main': AOT ? './src/main.browser.aot.ts' : './src/main.browser.ts'
     },
 
     /*
@@ -93,7 +77,8 @@ module.exports = function (options) {
       extensions: ['.ts', '.js', '.json', '.html', '.txt', '.gif', '.jpg', '.png', '.woff', '.woff2', '.ttf', '.eot', '.svg', '.scss'],
 
       // An array of directory names to be resolved to the current directory
-      modules: [helpers.root('src'), 'node_modules'],
+      modules: [helpers.root('src'), helpers.root('node_modules')],
+
     },
 
     /*
@@ -157,18 +142,45 @@ module.exports = function (options) {
         },
 
         /*
-         * Typescript loader support for .ts and Angular 2 async routes via .async.ts
-         * Replace templateUrl and stylesUrl with require()
+         * Typescript loader support for .ts
+         *
+         * Component Template/Style integration using `angular2-template-loader`
+         * Angular 2 lazy loading (async routes) via `ng-router-loader`
+         *
+         * `ng-router-loader` expects vanilla JavaScript code, not TypeScript code. This is why the
+         * order of the loader matter.
          *
          * See: https://github.com/s-panferov/awesome-typescript-loader
          * See: https://github.com/TheLarkInn/angular2-template-loader
+         * See: https://github.com/shlomiassaf/ng-router-loader
          */
         {
           test: /\.ts$/,
-          loaders: [
-            '@angularclass/hmr-loader?pretty=' + !isProd + '&prod=' + isProd,
-            'awesome-typescript-loader',
-            'angular2-template-loader'
+          use: [
+            {
+              loader: '@angularclass/hmr-loader',
+              options: {
+                pretty: !isProd,
+                prod: isProd
+              }
+            },
+            { // MAKE SURE TO CHAIN VANILLA JS CODE, I.E. TS COMPILATION OUTPUT.
+              loader: 'ng-router-loader',
+              options: {
+                loader: 'async-import',
+                genDir: 'compiled',
+                aot: AOT
+              }
+            },
+            {
+              loader: 'awesome-typescript-loader',
+              options: {
+                configFileName: 'tsconfig.webpack.json'
+              }
+            },
+            {
+              loader: 'angular2-template-loader'
+            }
           ],
           exclude: [/\.(spec|e2e)\.ts$/]
         },
@@ -184,13 +196,14 @@ module.exports = function (options) {
         },
 
         /*
-         * to string and css loader support for *.css files
+         * to string and css loader support for *.css files (from Angular components)
          * Returns file content as string
          *
          */
         {
           test: /\.css$/,
-          loaders: ['to-string-loader', 'css-loader']
+          use: ['to-string-loader', 'css-loader'],
+          exclude: [helpers.root('src', 'styles')]
         },
 
         /*
@@ -201,7 +214,7 @@ module.exports = function (options) {
          */
         {
           test: /\.html$/,
-          loader: 'html?minimize=false',
+          use: 'raw-loader',
           exclude: [helpers.root('src/index.html')]
         },
 
@@ -210,7 +223,7 @@ module.exports = function (options) {
          */
         {
           test: /\.(jpg|png|gif)$/,
-          loader: 'url?limit=10000&mimetype=image/[ext]'
+          loader: 'url-loader?limit=10000&mimetype=image/[ext]'
         },
 
         /*
@@ -231,12 +244,12 @@ module.exports = function (options) {
         {
           test: /\.scss$/,
           use: [
-            'to-string',
+            'raw-loader',
             {
               loader: 'css-loader',
-              options: {
-                sourceMap: true
-              }
+              // options: {
+              //     sourceMap: true
+              // }
             },
             {
               loader: 'postcss-loader',
@@ -247,11 +260,24 @@ module.exports = function (options) {
             {
               loader: 'sass-loader',
               query: {
-                sourceMap: true,
-                includePaths: HELPER_SASS_PATHS
+                // sourceMap: true,
+                plugins: () => [
+                  require('postcss-url')({}),
+                  require('postcss-import')({}),
+                  require('postcss-cssnext')({browsers: BROWSERS}),
+                  require('postcss-browser-reporter')({}),
+                  require('postcss-reporter')({})
+                ]
               }
+            },
+            {
+              loader: 'sass-resources-loader',
+              query: {
+                resources: [path.resolve(__dirname, './../src/assets/scss/utils/_utils.scss')]
+              },
             }
-          ]
+          ],
+          exclude: [helpers.root('src', 'styles')]
         }
       ],
     },
@@ -269,12 +295,12 @@ module.exports = function (options) {
       }),
 
       /*
-       * Plugin: ForkCheckerPlugin
+       * Plugin: CheckerPlugin
        * Description: Do type checking in a separate process, so webpack don't need to wait.
        *
        * See: https://github.com/s-panferov/awesome-typescript-loader#forkchecker-boolean-defaultfalse
        */
-      new ForkCheckerPlugin(),
+      new CheckerPlugin(),
       /*
        * Plugin: CommonsChunkPlugin
        * Description: Shares common code between the pages.
@@ -309,9 +335,9 @@ module.exports = function (options) {
        * See: https://www.npmjs.com/package/copy-webpack-plugin
        */
       new CopyWebpackPlugin([
-          { from: 'src/assets', to: 'assets' },
-          { from: 'src/meta' },
-        ],  { ignore: ['*.scss']}
+          {from: 'src/assets', to: 'assets'},
+          {from: 'src/meta'},
+        ], {ignore: ['*.scss']}
       ),
 
       /*
@@ -366,70 +392,62 @@ module.exports = function (options) {
         headTags: require('./head-config.common')
       }),
 
+      /**
+       * Plugin LoaderOptionsPlugin (experimental)
+       *
+       * See: https://gist.github.com/sokra/27b24881210b56bbaff7
+       */
+      new LoaderOptionsPlugin({}),
+
+      // Fix Angular 2
+      new NormalModuleReplacementPlugin(
+        /facade(\\|\/)async/,
+        helpers.root('node_modules/@angular/core/src/facade/async.js')
+      ),
+      new NormalModuleReplacementPlugin(
+        /facade(\\|\/)collection/,
+        helpers.root('node_modules/@angular/core/src/facade/collection.js')
+      ),
+      new NormalModuleReplacementPlugin(
+        /facade(\\|\/)errors/,
+        helpers.root('node_modules/@angular/core/src/facade/errors.js')
+      ),
+      new NormalModuleReplacementPlugin(
+        /facade(\\|\/)lang/,
+        helpers.root('node_modules/@angular/core/src/facade/lang.js')
+      ),
+      new NormalModuleReplacementPlugin(
+        /facade(\\|\/)math/,
+        helpers.root('node_modules/@angular/core/src/facade/math.js')
+      ),
+
+      new ngcWebpack.NgcWebpackPlugin({
+        disabled: !AOT,
+        tsConfig: helpers.root('tsconfig.webpack.json'),
+        resourceOverride: helpers.root('config/resource-override.js')
+      }),
+
       new SassLintPlugin({
         configFile: '.sass-lint.yml',
         context: ['./src/app'],
         failOnWarning: false,
         failOnError: false
-      }),
+      })
 
-      /*
-       * Plugin LoaderOptionsPlugin (experimental)
-       *
-       * See: https://gist.github.com/sokra/27b24881210b56bbaff7
-       */
-      new LoaderOptionsPlugin({
-        debug: !isProd,
-        options: {
-
-          context: path.resolve(__dirname, '..'), // must evaluate to root of project
-
-          /**
-           * Static analysis linter for TypeScript advanced options configuration
-           * Description: An extensible linter for the TypeScript language.
-           *
-           * See: https://github.com/wbuchwalter/tslint-loader
-           */
-          tslint: {
-            emitErrors: true,
-            emitWarning: true,
-            failOnHint: true,
-            resourcePath: 'src'
-          },
-
-          postcss: [
-            require('postcss-url')({}),
-            require('postcss-import')({}),
-            require('postcss-cssnext')({ browsers: BROWSERS }),
-            require('postcss-browser-reporter')({}),
-            require('postcss-reporter')({})
-          ],
-
-          //htmlhint: {
-          //  configFile: '.htmlhintrc',
-          //  emitError: true,
-          //  emitWarning: true,
-          //  failOnError: true,
-          //  failOnWarning: true
-          //},
-
-          /**
-           * Html loader advanced options
-           *
-           * See: https://github.com/webpack/html-loader#advanced-options
-           */
-          // TODO: Need to workaround Angular 2's html syntax => #id [bind] (event) *ngFor
-          htmlLoader: htmlLoader,
-        }
-      }),
     ],
 
+    /*
+     * Add additional plugins to the compiler.
+     *
+     * See: http://webpack.github.io/docs/configuration.html#plugins
+     */
     /*
      * Include polyfills or mocks for various node stuff
      * Description: Node configuration
      *
      * See: https://webpack.github.io/docs/configuration.html#node
      */
+
     node: {
       global: true,
       crypto: 'empty',

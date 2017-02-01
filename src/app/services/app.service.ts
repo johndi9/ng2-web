@@ -29,7 +29,10 @@ export class AppState {
 
   set(prop: string, value: any) {
     // internally mutate our state
-    return this._state[prop] = value;
+    // return this._state[prop] = value;
+    this._state[prop] = value;
+    console.log(this._state);
+    return this._state[prop];
   }
 
   private _clone(object: InternalStateType) {

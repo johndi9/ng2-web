@@ -10,7 +10,7 @@ import { Observable, Subscription } from 'rxjs/Rx';
 })
 
 export class VideoBg implements OnInit {
-  private videoLoaded: boolean;
+  public videoLoaded: boolean;
   private numVideosStored: number = 4;
   private videoPath: string = '/assets/video/bg_' + Math.floor(Math.random() * this.numVideosStored) + '.mp4';
   private subscription: Subscription;

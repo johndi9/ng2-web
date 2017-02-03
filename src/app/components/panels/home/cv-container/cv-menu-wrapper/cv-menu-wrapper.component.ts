@@ -14,13 +14,13 @@ import { STATE_KEYS, CV_OPTION_TYPES, EVENT_TYPES } from '../../../../../variabl
 })
 
 export class CvMenuWrapper {
-  private cvTabSelected = CV_OPTION_TYPES;
+  public cvTabSelected = CV_OPTION_TYPES;
 
   constructor(private _appState: AppState,
               private _notificationService: NotificationService) {
   }
 
-  private selectOption(option: CV_OPTION_TYPES): void {
+  public selectOption(option: CV_OPTION_TYPES): void {
     if (this._appState.get(STATE_KEYS[STATE_KEYS.CV_OPTION_SELECTED]) !== option) {
       this._appState.set(STATE_KEYS[STATE_KEYS.CV_OPTION_SELECTED], option);
       this._notificationService.notifyListener(EVENT_TYPES.CV_OPTION_CHANGED);

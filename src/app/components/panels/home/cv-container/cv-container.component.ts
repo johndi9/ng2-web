@@ -16,8 +16,8 @@ import { STATE_KEYS, CV_OPTION_TYPES } from '../../../../variables/variables';
 })
 
 export class CvContainer implements OnInit, OnDestroy {
-  private optionSelected: number;
-  private cvTabSelected = CV_OPTION_TYPES;
+  public optionSelected: number;
+  public cvTabSelected = CV_OPTION_TYPES;
   private optionChangeSubscription: Subscription;
 
   private readonly DEFAULT_OPTION: number = 0;
@@ -42,7 +42,7 @@ export class CvContainer implements OnInit, OnDestroy {
     this.optionSelected = newState !== undefined ? newState : this.DEFAULT_OPTION;
   }
 
-  private isOptionSelected(option: CV_OPTION_TYPES): boolean {
+  public isOptionSelected(option: CV_OPTION_TYPES): boolean {
     return this.optionSelected === option;
   }
 }

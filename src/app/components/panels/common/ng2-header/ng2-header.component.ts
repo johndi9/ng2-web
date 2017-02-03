@@ -26,8 +26,8 @@ import { Observable } from 'rxjs';
 export class Ng2Header implements OnInit {
   @Output() callback = new EventEmitter();
 
+  public isTopOfPage: boolean = true;
   private didScroll: boolean = false;
-  private isTopOfPage: boolean = true;
 
   constructor() {
   }
@@ -39,6 +39,13 @@ export class Ng2Header implements OnInit {
         setTimeout(() => this.scrollPage(), 250);
       }
     });
+  }
+
+  /**
+   * Method to handle click events
+   */
+  public openSidebar(): void {
+    this.callback.emit();
   }
 
   /**
@@ -55,13 +62,5 @@ export class Ng2Header implements OnInit {
    */
   private scrollY(): number {
     return window.pageYOffset || document.documentElement.scrollTop;
-  }
-
-  /**
-   * Method to handle click events
-   * @param event
-   */
-  private openSidebar($event: Event): void {
-    this.callback.emit($event);
   }
 }

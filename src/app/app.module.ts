@@ -33,6 +33,14 @@ import { PersonalInfoWrapper } from './components/panels/home/cv-container/perso
 import { ProjectWrapper } from './components/panels/home/cv-container/project-wrapper/project-wrapper.component';
 import { VideoBg } from './components/panels/home/video-bg/video-bg.component';
 
+// External components
+import { SwiperModule } from 'angular2-swiper-wrapper';
+import { SwiperConfigInterface } from 'angular2-swiper-wrapper';
+const SWIPER_CONFIG: SwiperConfigInterface = {
+  direction: 'horizontal',
+  slidesPerView: 'auto',
+  keyboardControl: true
+};
 // Routes
 import { ROUTES } from './app.routes';
 
@@ -73,7 +81,8 @@ type StoreType = {
     FormsModule,
     HttpModule,
     RouterModule.forRoot(ROUTES, { useHash: false }),
-    MaterialModule.forRoot()
+    MaterialModule.forRoot(),
+    SwiperModule.forRoot(SWIPER_CONFIG)
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,

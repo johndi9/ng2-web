@@ -5,7 +5,7 @@ import { NotificationService } from '../../../../services/notification.service';
 
 import { Observable, Subscription } from 'rxjs/Rx';
 
-import { STATE_KEYS, CV_OPTION_TYPES } from '../../../../variables/variables';
+import { STATE_KEYS, CV_OPTION_TYPES, EVENT_TYPES } from '../../../../variables/variables';
 
 
 @Component({
@@ -36,13 +36,18 @@ export class CvContainer implements OnInit, OnDestroy {
     this.optionChangeSubscription.unsubscribe();
   }
 
+  public isOptionSelected(option: CV_OPTION_TYPES): boolean {
+    return this.optionSelected === option;
+  }
+
+  public onIndexChange(index: number) {
+    this._appState.set(STATE_KEYS[STATE_KEYS.CV_OPTION_SELECTED], index);
+    this._notificationService.notifyListener(EVENT_TYPES.CV_OPTION_CHANGED);
+  }
+
   private getNewOptionState(): void {
     const newState = this._appState.get(STATE_KEYS[STATE_KEYS.CV_OPTION_SELECTED]);
 
     this.optionSelected = newState !== undefined ? newState : this.DEFAULT_OPTION;
-  }
-
-  public isOptionSelected(option: CV_OPTION_TYPES): boolean {
-    return this.optionSelected === option;
   }
 }

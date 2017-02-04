@@ -1,7 +1,19 @@
 <cv-menu-wrapper></cv-menu-wrapper>
 
-<personal-info-wrapper *ngIf="isOptionSelected(cvTabSelected.PERSONAL_INFO)"></personal-info-wrapper>
-<project-wrapper *ngIf="isOptionSelected(cvTabSelected.PROJECTS)"></project-wrapper>
-<employer-wrapper *ngIf="isOptionSelected(cvTabSelected.EMPLOYERS)"></employer-wrapper>
-<education-wrapper *ngIf="isOptionSelected(cvTabSelected.EDUCATION)"></education-wrapper>
-<other-info-wrapper *ngIf="isOptionSelected(cvTabSelected.OTHER_INFO)"></other-info-wrapper>
+<swiper [config]="config" (indexChange)="onIndexChange($event)">
+  <div class="swiper-slide" fxLayout="column" fxLayoutAlign="center center">
+    <personal-info-wrapper *ngIf="isOptionSelected(cvTabSelected.PERSONAL_INFO)"></personal-info-wrapper>
+  </div>
+  <div class="swiper-slide" fxLayout="column" fxLayoutAlign="center center">
+    <project-wrapper *ngIf="isOptionSelected(cvTabSelected.PROJECTS)"></project-wrapper>
+  </div>
+  <div class="swiper-slide" fxLayout="column" fxLayoutAlign="center center">
+    <employer-wrapper *ngIf="isOptionSelected(cvTabSelected.EMPLOYERS)"></employer-wrapper>
+  </div>
+  <div class="swiper-slide" fxLayout="column" fxLayoutAlign="center center">
+    <education-wrapper *ngIf="isOptionSelected(cvTabSelected.EDUCATION)"></education-wrapper>
+  </div>
+  <div class="swiper-slide" fxLayout="column" fxLayoutAlign="center center">
+    <other-info-wrapper *ngIf="isOptionSelected(cvTabSelected.OTHER_INFO)"></other-info-wrapper>
+  </div>
+</swiper>

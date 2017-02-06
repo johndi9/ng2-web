@@ -5,7 +5,9 @@ import { NotificationService } from '../../../../services/notification.service';
 
 import { Observable, Subscription } from 'rxjs/Rx';
 
-import { STATE_KEYS, CV_OPTION_TYPES, EVENT_TYPES } from '../../../../variables/variables';
+import { STATE_KEYS, CV_OPTION_TYPES, EVENT_TYPES, SWIPER_CONFIG } from '../../../../variables/variables';
+
+import { SwiperConfigInterface } from 'angular2-swiper-wrapper';
 
 
 @Component({
@@ -29,7 +31,10 @@ export class CvContainer implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.optionChangeSubscription = this._notificationService.triggerCVOptionChange
-      .subscribe(() => this.getNewOptionState());
+      .subscribe(() => {
+        this.getNewOptionState();
+
+      });
   }
 
   ngOnDestroy(): void {
@@ -42,7 +47,7 @@ export class CvContainer implements OnInit, OnDestroy {
 
   public onIndexChange(index: number) {
     this._appState.set(STATE_KEYS[STATE_KEYS.CV_OPTION_SELECTED], index);
-    this._notificationService.notifyListener(EVENT_TYPES.CV_OPTION_CHANGED);
+    this.getNewOptionState();
   }
 
   private getNewOptionState(): void {

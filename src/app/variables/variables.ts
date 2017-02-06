@@ -1,3 +1,5 @@
+import { SwiperConfigInterface } from 'angular2-swiper-wrapper';
+
 export enum STATE_KEYS {
   CV_OPTION_SELECTED
 }
@@ -12,4 +14,10 @@ export enum CV_OPTION_TYPES {
   EMPLOYERS,
   EDUCATION,
   OTHER_INFO
+}
+
+export const SWIPER_CONFIG: SwiperConfigInterface = {
+  direction: 'horizontal',
+  slidesPerView: 'auto',
+  keyboardControl: true
 }

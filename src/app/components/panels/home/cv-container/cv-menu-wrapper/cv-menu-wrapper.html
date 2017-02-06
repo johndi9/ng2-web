@@ -1,22 +1,14 @@
-<md-nav-list>
-  <a md-list-item (click)="selectOption(cvTabSelected.PERSONAL_INFO)">
-    <md-icon md-list-icon>menu</md-icon>
-    <span md-line>Personal Information</span>
-  </a>
-  <a md-list-item (click)="selectOption(cvTabSelected.PROJECTS)">
-    <md-icon md-list-icon>menu</md-icon>
-    <span md-line>Projects</span>
-  </a>
-  <a md-list-item (click)="selectOption(cvTabSelected.EMPLOYERS)">
-    <md-icon md-list-icon>menu</md-icon>
-    <span md-line>Employers</span>
-  </a>
-  <a md-list-item (click)="selectOption(cvTabSelected.EDUCATION)">
-    <md-icon md-list-icon>menu</md-icon>
-    <span md-line>Education</span>
-  </a>
-  <a md-list-item (click)="selectOption(cvTabSelected.OTHER_INFO)">
-    <md-icon md-list-icon>menu</md-icon>
-    <span md-line>Other information</span>
-  </a>
-</md-nav-list>
+<div class="tabs-container">
+  <nav md-tab-nav-bar aria-label="curriculum navigation links"
+       [style.min-width.px]="TAB_WIDTH * tabs.length">
+    <a md-tab-link
+       *ngFor="let tab of tabs"
+       fxFlex
+       [active]="tab.active"
+       fxLayoutAlign="center center"
+       (click)="selectOption(tab.id)">
+      <md-icon class="md-24">{{ tab.iconName }}</md-icon>
+      <span fxFlex>{{ tab.text }}</span>
+    </a>
+  </nav>
+</div>

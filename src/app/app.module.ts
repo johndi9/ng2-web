@@ -1,5 +1,6 @@
 import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FlexLayoutModule } from "@angular/flex-layout";
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
@@ -35,12 +36,8 @@ import { VideoBg } from './components/panels/home/video-bg/video-bg.component';
 
 // External components
 import { SwiperModule } from 'angular2-swiper-wrapper';
-import { SwiperConfigInterface } from 'angular2-swiper-wrapper';
-const SWIPER_CONFIG: SwiperConfigInterface = {
-  direction: 'horizontal',
-  slidesPerView: 'auto',
-  keyboardControl: true
-};
+import { SWIPER_CONFIG } from './variables/variables';
+
 // Routes
 import { ROUTES } from './app.routes';
 
@@ -82,6 +79,7 @@ type StoreType = {
     HttpModule,
     RouterModule.forRoot(ROUTES, { useHash: false }),
     MaterialModule.forRoot(),
+    FlexLayoutModule.forRoot(),
     SwiperModule.forRoot(SWIPER_CONFIG)
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection

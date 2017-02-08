@@ -1,13 +1,11 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ElementRef } from '@angular/core';
 
 import { AppState } from '../../../../services/app.service';
 import { NotificationService } from '../../../../services/notification.service';
 
-import { Observable, Subscription } from 'rxjs/Rx';
+import { STATE_KEYS } from '../../../../variables/variables';
 
-import { STATE_KEYS, CV_OPTION_TYPES, EVENT_TYPES, SWIPER_CONFIG } from '../../../../variables/variables';
-
-import { SwiperConfigInterface } from 'angular2-swiper-wrapper';
+import { Subscription } from 'rxjs/Rx';
 
 
 @Component({
@@ -18,41 +16,68 @@ import { SwiperConfigInterface } from 'angular2-swiper-wrapper';
 })
 
 export class CvContainer implements OnInit, OnDestroy {
-  public optionSelected: number;
-  public cvTabSelected = CV_OPTION_TYPES;
   private optionChangeSubscription: Subscription;
+  private tabSelected: number;
 
   private readonly DEFAULT_OPTION: number = 0;
 
   constructor(private _appState: AppState,
-              private _notificationService: NotificationService) {
-    this.getNewOptionState();
+              private _notificationService: NotificationService,
+              private _elementRef: ElementRef) {
   }
 
   ngOnInit(): void {
-    this.optionChangeSubscription = this._notificationService.triggerCVOptionChange
-      .subscribe(() => {
-        this.getNewOptionState();
+    this.updateTabSelection(this.DEFAULT_OPTION);
 
-      });
+    this.optionChangeSubscription = this._notificationService.triggerCVOptionChange.subscribe((option) => {
+      this.updateTabSelection(option);
+      this.updateSwiperSelection(option);
+    });
   }
 
   ngOnDestroy(): void {
     this.optionChangeSubscription.unsubscribe();
   }
 
-  public isOptionSelected(option: CV_OPTION_TYPES): boolean {
-    return this.optionSelected === option;
+  /**
+   * Index change based on a swiper action
+   * @param index
+   */
+  private onIndexSwiperChange(option: number) {
+    this.updateTabSelection(option);
   }
 
-  public onIndexChange(index: number) {
-    this._appState.set(STATE_KEYS[STATE_KEYS.CV_OPTION_SELECTED], index);
-    this.getNewOptionState();
+  /**
+   * Update the Swiper selection.
+   * This is a hack since input events are still not handled by the ng2-swiper API
+   * @param option
+   */
+  private updateSwiperSelection(option: number): void {
+    this._elementRef.nativeElement.getElementsByClassName('swiper-pagination-handle')[option].click();
   }
 
-  private getNewOptionState(): void {
-    const newState = this._appState.get(STATE_KEYS[STATE_KEYS.CV_OPTION_SELECTED]);
+  /**
+   * Update the state/model of the tabs
+   * @param option
+   */
+  private updateTabSelection(option: number): void {
+    this.updateTabSelectionState(option);
+    this.updateTabSelected(option);
+  }
 
-    this.optionSelected = newState !== undefined ? newState : this.DEFAULT_OPTION;
+  /**
+   * Update tab active state
+   * @param option
+   */
+  private updateTabSelectionState(option: number): void {
+    this._appState.set(STATE_KEYS[STATE_KEYS.CV_OPTION_SELECTED], option);
+  }
+
+  /**
+   * Update the tab selected to be passed to the CvMenuWrapper
+   * @param option
+   */
+  private updateTabSelected(option: number): void {
+    this.tabSelected = option;
   }
 }

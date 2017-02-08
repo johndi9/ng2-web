@@ -19,5 +19,6 @@ export enum CV_OPTION_TYPES {
 export const SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
   slidesPerView: 'auto',
-  keyboardControl: true
+  keyboardControl: true,
+  pagination: '.swiper-pagination'
 }

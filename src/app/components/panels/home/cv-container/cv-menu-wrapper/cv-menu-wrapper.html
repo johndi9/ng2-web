@@ -4,7 +4,7 @@
     <a md-tab-link
        *ngFor="let tab of tabs"
        fxFlex
-       [active]="tab.active"
+       [active]="tab.id === tabSelected"
        fxLayoutAlign="center center"
        (click)="selectOption(tab.id)">
       <md-icon class="md-24">{{ tab.iconName }}</md-icon>

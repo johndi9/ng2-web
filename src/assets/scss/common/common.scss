@@ -7,6 +7,12 @@ html, body {
   padding: 0;
 }
 
-.fill-remaining {
-  flex: 1 1 auto;
+// WCAG
+.sr-only {
+  @include sr-only;
+}
+
+// Swiper
+.swiper-pagination {
+  @include sr-only;
 }

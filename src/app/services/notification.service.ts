@@ -10,10 +10,10 @@ export class NotificationService {
   constructor() {
   }
 
-  public notifyListener(option) {
+  public notifyListener(option, value?) {
     switch (option) {
       case EVENT_TYPES.CV_OPTION_CHANGED:
-        this.triggerCVOptionChange.emit();
+        this.triggerCVOptionChange.emit(value);
         break;
       default:
         break;

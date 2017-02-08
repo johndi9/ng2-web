@@ -1,11 +1,13 @@
-import { Component, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
 import { AppState } from '../../../../../services/app.service';
 import { NotificationService } from '../../../../../services/notification.service';
-import MapUtils from '../../../../../utils/modelParser';
 
 import { STATE_KEYS, CV_OPTION_TYPES, EVENT_TYPES } from '../../../../../variables/variables';
 import { Tab } from '../../../../../models/Components/Tab/Tab';
+import MapUtils from '../../../../../utils/modelParser';
+
+import { data } from '../../../../../data/data';
 
 
 @Component({
@@ -16,53 +18,25 @@ import { Tab } from '../../../../../models/Components/Tab/Tab';
 })
 
 export class CvMenuWrapper {
-  public CV_OPTION_TYPES = CV_OPTION_TYPES;
+  @Input() tabSelected: number;
+
   private tabs: Tab[];
+
+  public CV_OPTION_TYPES = CV_OPTION_TYPES;
   private readonly TAB_WIDTH: number = 160;
 
   constructor(private _appState: AppState,
               private _notificationService: NotificationService) {
-    this.initializeTabs();
+    this.tabs = data.tabs.map((tab) => MapUtils.deserialize(Tab, tab));
   }
 
-  public selectOption(option: CV_OPTION_TYPES): void {
+  /**
+   * Notify the central CVContainer as soon as the user selects some tab here
+   * @param option
+   */
+  private selectOption(option: CV_OPTION_TYPES): void {
     if (this._appState.get(STATE_KEYS[STATE_KEYS.CV_OPTION_SELECTED]) !== option) {
-      // Update central state
-      this._appState.set(STATE_KEYS[STATE_KEYS.CV_OPTION_SELECTED], option);
-      // Notify listeners
-      this._notificationService.notifyListener(EVENT_TYPES.CV_OPTION_CHANGED);
+      this._notificationService.notifyListener(EVENT_TYPES.CV_OPTION_CHANGED, option);
     }
-  }
-
-  private initializeTabs(): void {
-    const tabJson = [
-      {
-        id: this.CV_OPTION_TYPES.PERSONAL_INFO,
-        text: 'Personal Information',
-        iconName: 'fingerprint',
-        active: true
-      },
-      {
-        id: this.CV_OPTION_TYPES.PROJECTS,
-        text: 'Projects',
-        iconName: 'important_devices',
-      },
-      {
-        id: this.CV_OPTION_TYPES.EMPLOYERS,
-        text: 'Employers',
-        iconName: 'business_center',
-      },
-      {
-        id: this.CV_OPTION_TYPES.EDUCATION,
-        text: 'Education',
-        iconName: 'school',
-      },
-      {
-        id: this.CV_OPTION_TYPES.OTHER_INFO,
-        text: 'Other information',
-        iconName: 'description',
-      }];
-
-    this.tabs = tabJson.map((tab) => MapUtils.deserialize(Tab, tab));
   }
 }

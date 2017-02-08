@@ -1,0 +1,28 @@
+export const data = {
+  tabs: [
+    {
+      id: 0,
+      text: 'Personal Information',
+      iconName: 'fingerprint'
+    },
+    {
+      id: 1,
+      text: 'Projects',
+      iconName: 'important_devices',
+    },
+    {
+      id: 2,
+      text: 'Employers',
+      iconName: 'business_center',
+    },
+    {
+      id: 3,
+      text: 'Education',
+      iconName: 'school',
+    },
+    {
+      id: 4,
+      text: 'Other information',
+      iconName: 'description',
+    }]
+};

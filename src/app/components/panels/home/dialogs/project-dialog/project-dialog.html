@@ -1,0 +1,23 @@
+<h2 md-dialog-title>{{ project.title }}</h2>
+
+<md-dialog-content>
+  <p>{{ project.category }} {{ project.role }}</p>
+  <p>{{ project.employer }}</p>
+  <p>{{ project.start | date:'yM' }} {{ project.end ? (project.end | date:'yM') : 'currently' }}</p>
+  <p>{{ project.summary }}</p>
+  <ul class="items">
+    <li *ngFor="let highlight of project.highlights">
+      {{ highlight }}
+    </li>
+  </ul>
+</md-dialog-content>
+
+<md-dialog-actions>
+  <a *ngIf="project.url"
+     href="{{ project.url }}"
+     md-raised-button
+     color="primary">URL</a>
+  <button
+    md-button
+    md-dialog-close>Close</button>
+</md-dialog-actions>

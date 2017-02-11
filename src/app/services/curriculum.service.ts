@@ -1,31 +1,40 @@
 import { Injectable } from '@angular/core';
+
 import { HttpService } from './http.service';
+
 import { Curriculum } from '../models/Curriculum/Curriculum';
+
+import { Observable, Subscription } from 'rxjs/Rx';
+
 
 @Injectable()
 export class CurriculumService {
   private readonly urlCVStored: string = 'https://raw.githubusercontent.com/johndi9/PersonalCV/master/curriculum/personal-cv.json';
 
-  private _resume: Curriculum;
+  private _curriculum: Curriculum;
 
-  get resume(): Curriculum {
-    if (!this._resume) {
-      this.updateCurriculumJSON();
-    }
-    return this._resume;
+  get curriculum(): Curriculum {
+    return this._curriculum;
   }
 
-  set resume(value: Curriculum) {
+  set curriculum(value: Curriculum) {
     throw Error('The object ' + Curriculum.name + ' cannot be modified.');
   }
 
   constructor(private _httpService: HttpService) {
   }
 
-  private updateCurriculumJSON(): void {
-    this._httpService.getSingle(Curriculum, this.urlCVStored)
-      .subscribe((response: Curriculum) => {
-        this._resume = response;
-      });
+  /**
+   * Retrieve the curriculum json and parte it to the app model
+   * @returns {Subscription}
+   */
+  public updateCurriculumJSON(): Observable<Curriculum> {
+    const cvObservable: Observable<Curriculum> = this._httpService.getSingle(Curriculum, this.urlCVStored);
+
+    cvObservable.subscribe(
+        (response: Curriculum) => this._curriculum = response,
+        (error: any) => Observable.throw(error));
+
+    return cvObservable;
   }
 }

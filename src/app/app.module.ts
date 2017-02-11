@@ -31,6 +31,7 @@ import { Ng2Header } from './components/panels/common/ng2-header/ng2-header.comp
 import { NoContent } from './components/pages/no-content/no-content.component';
 import { OtherInfoWrapper } from './components/panels/home/cv-container/other-info-wrapper/other-info-wrapper.component';
 import { PersonalInfoWrapper } from './components/panels/home/cv-container/personal-info-wrapper/personal-info-wrapper.component';
+import { ProjectDialog } from './components/panels/home/dialogs/project-dialog/project-dialog.component';
 import { ProjectWrapper } from './components/panels/home/cv-container/project-wrapper/project-wrapper.component';
 import { VideoBg } from './components/panels/home/video-bg/video-bg.component';
 
@@ -71,7 +72,8 @@ type StoreType = {
     EmployerWrapper,
     OtherInfoWrapper,
     PersonalInfoWrapper,
-    ProjectWrapper
+    ProjectWrapper,
+    ProjectDialog
   ],
   imports: [ // import Angular's modules
     BrowserModule,
@@ -88,7 +90,8 @@ type StoreType = {
     CurriculumService,
     HttpService,
     NotificationService
-  ]
+  ],
+  entryComponents: [ProjectDialog]
 })
 
 export class AppModule {

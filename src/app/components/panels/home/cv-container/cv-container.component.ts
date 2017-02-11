@@ -1,7 +1,10 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ElementRef } from '@angular/core';
 
 import { AppState } from '../../../../services/app.service';
+import { CurriculumService } from '../../../../services/curriculum.service';
 import { NotificationService } from '../../../../services/notification.service';
+
+import { Curriculum } from '../../../../models/Curriculum/Curriculum';
 
 import { STATE_KEYS } from '../../../../variables/variables';
 
@@ -17,17 +20,21 @@ import { Subscription } from 'rxjs/Rx';
 
 export class CvContainer implements OnInit, OnDestroy {
   private optionChangeSubscription: Subscription;
+  private curriculumLoadedSubscription: Subscription;
   private tabSelected: number;
+  private curriculum: Curriculum;
 
   private readonly DEFAULT_OPTION: number = 0;
 
   constructor(private _appState: AppState,
               private _notificationService: NotificationService,
+              private _curriculumService: CurriculumService,
               private _elementRef: ElementRef) {
   }
 
   ngOnInit(): void {
     this.updateTabSelection(this.DEFAULT_OPTION);
+    this.retrieveCurriculum();
 
     this.optionChangeSubscription = this._notificationService.triggerCVOptionChange.subscribe((option) => {
       this.updateTabSelection(option);
@@ -37,6 +44,7 @@ export class CvContainer implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.optionChangeSubscription.unsubscribe();
+    this.curriculumLoadedSubscription.unsubscribe();
   }
 
   /**
@@ -79,5 +87,17 @@ export class CvContainer implements OnInit, OnDestroy {
    */
   private updateTabSelected(option: number): void {
     this.tabSelected = option;
+  }
+
+  /**
+   * Retrieve the curriculum based on the observable
+   */
+  private retrieveCurriculum(): void {
+    if (this._curriculumService.curriculum) {
+      this.curriculum = this._curriculumService.curriculum
+    } else {
+      this.curriculumLoadedSubscription = this._curriculumService.updateCurriculumJSON()
+        .subscribe(() => this.curriculum = this._curriculumService.curriculum);
+    }
   }
 }

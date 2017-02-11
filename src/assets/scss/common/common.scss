@@ -17,9 +17,15 @@ html, body {
   @include sr-only;
 }
 
-@media (max-width: 600px) {
+@media ($md-xsmall-down) {
   .md-dialog-container {
     max-width: 100vw;
     height: 100vh;
+  }
+}
+
+@media ($md-small-down) {
+  .hidden-sm-down {
+    display: none;
   }
 }

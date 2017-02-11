@@ -1,1 +1,30 @@
-project-wrapper
+<h2>Projects</h2>
+
+<div class="flex-container"
+     fxLayout="row"
+     fxLayout.xs="column"
+     fxLayoutWrap="wrap">
+  <template ngFor let-project [ngForOf]="projects" let-i="index">
+    <div fxFlex="25%" fxFlex.md="33.3333%" fxFlex.sm="50%" class="padding" (click)="openModal(project)">
+      <md-card>
+        <md-card-title>{{ project.title }}</md-card-title>
+        <md-card-subtitle>{{ project.employer }}</md-card-subtitle>
+        <md-card-content>
+          <p>{{ project.start | date:'yM' }} {{ project.end ? (project.end | date:'yM') : 'currently' }}</p>
+          <p>{{ project.summary }}</p>
+          <!--<ul class="items">-->
+            <!--<li *ngFor="let highlight of project.highlights">-->
+              <!--{{ highlight }}-->
+            <!--</li>-->
+          <!--</ul>-->
+        </md-card-content>
+        <md-card-actions align="end" *ngIf="project.url">
+          <a href="{{ project.url }}" md-button>URL</a>
+        </md-card-actions>
+        <md-card-footer *ngIf="isLoadingView">
+          <md-progress-bar mode="indeterminate"></md-progress-bar>
+        </md-card-footer>
+      </md-card>
+    </div>
+  </template>
+</div>

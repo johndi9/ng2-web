@@ -16,6 +16,7 @@ import { AppState, InternalStateType } from './services/app.service';
 import { CurriculumService } from './services/curriculum.service';
 import { HttpService } from './services/http.service';
 import { NotificationService } from './services/notification.service';
+import { ResizeService } from './services/resize.service';
 
 // Components
 import { AppComponent } from './app.component';
@@ -89,7 +90,8 @@ type StoreType = {
     APP_PROVIDERS,
     CurriculumService,
     HttpService,
-    NotificationService
+    NotificationService,
+    ResizeService
   ],
   entryComponents: [ProjectDialog]
 })

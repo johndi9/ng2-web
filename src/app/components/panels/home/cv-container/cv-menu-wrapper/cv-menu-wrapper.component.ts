@@ -19,6 +19,7 @@ import { data } from '../../../../../data/data';
 
 export class CvMenuWrapper {
   @Input() tabSelected: number;
+  @Input() isMediumUpView: boolean;
 
   private tabs: Tab[];
 

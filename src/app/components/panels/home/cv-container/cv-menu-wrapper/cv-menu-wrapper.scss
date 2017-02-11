@@ -7,3 +7,9 @@
 .tabs-container {
   overflow-x: auto;
 }
+
+@media ($md-medium-down) {
+  nav {
+    min-width: 800px;
+  }
+}

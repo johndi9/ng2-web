@@ -9,26 +9,29 @@ import { Curriculum } from '../../../../models/Curriculum/Curriculum';
 import { STATE_KEYS } from '../../../../variables/variables';
 
 import { Subscription } from 'rxjs/Rx';
+import { ResizeService } from '../../../../services/resize.service';
 
 
 @Component({
   selector: 'cv-container',
   styleUrls: ['./cv-container.scss'],
-  templateUrl: './cv-container.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './cv-container.html'
 })
 
 export class CvContainer implements OnInit, OnDestroy {
   private optionChangeSubscription: Subscription;
   private curriculumLoadedSubscription: Subscription;
+  private resizeChangeSubscription: Subscription;
   private tabSelected: number;
   private curriculum: Curriculum;
+  private isMediumUpView: boolean;
 
   private readonly DEFAULT_OPTION: number = 0;
 
   constructor(private _appState: AppState,
               private _notificationService: NotificationService,
               private _curriculumService: CurriculumService,
+              private _resizeService: ResizeService,
               private _elementRef: ElementRef) {
   }
 
@@ -40,11 +43,15 @@ export class CvContainer implements OnInit, OnDestroy {
       this.updateTabSelection(option);
       this.updateSwiperSelection(option);
     });
+
+    this.resizeChangeSubscription = this._resizeService.resizeChange
+      .subscribe((data: boolean) => this.isMediumUpView = data);
   }
 
   ngOnDestroy(): void {
     this.optionChangeSubscription.unsubscribe();
     this.curriculumLoadedSubscription.unsubscribe();
+    this.resizeChangeSubscription.unsubscribe();
   }
 
   /**

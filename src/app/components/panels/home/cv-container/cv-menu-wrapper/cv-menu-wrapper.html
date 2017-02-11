@@ -1,6 +1,7 @@
-<div class="tabs-container">
-  <nav md-tab-nav-bar aria-label="curriculum navigation links"
-       [style.min-width.px]="TAB_WIDTH * tabs.length">
+<div *ngIf="!isMediumUpView"
+     class="tabs-container">
+  <nav md-tab-nav-bar
+       aria-label="curriculum navigation links">
     <a md-tab-link
        *ngFor="let tab of tabs"
        fxFlex
@@ -11,4 +12,15 @@
       <span fxFlex>{{ tab.text }}</span>
     </a>
   </nav>
+</div>
+
+<div *ngIf="isMediumUpView">
+  <md-nav-list>
+    <a md-list-item
+       *ngFor="let tab of tabs"
+       (click)="selectOption(tab.id)">
+      <md-icon md-list-icon>{{ tab.iconName }}</md-icon>
+      <span md-line>{{ tab.text }}</span>
+    </a>
+  </md-nav-list>
 </div>

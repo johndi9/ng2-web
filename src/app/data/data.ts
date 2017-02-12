@@ -12,7 +12,7 @@ export const data = {
     },
     {
       id: 2,
-      text: 'Employers',
+      text: 'Employs',
       iconName: 'business_center',
     },
     {

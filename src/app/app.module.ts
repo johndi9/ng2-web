@@ -23,7 +23,8 @@ import { AppComponent } from './app.component';
 import { CvContainer } from './components/panels/home/cv-container/cv-container.component';
 import { CvMenuWrapper } from './components/panels/home/cv-container/cv-menu-wrapper/cv-menu-wrapper.component';
 import { EducationWrapper } from './components/panels/home/cv-container/education-wrapper/education-wrapper.component';
-import { EmployerWrapper } from './components/panels/home/cv-container/employer-wrapper/employer-wrapper.component';
+import { EmployDialog } from './components/panels/home/dialogs/employ-dialog/employ-dialog.component';
+import { EmployWrapper } from './components/panels/home/cv-container/employ-wrapper/employ-wrapper.component';
 import { Home } from './components/pages/home/home.component';
 import { LoadingScreen } from './components/layers/loading-screen/loading-screen.component';
 import { Logo } from './components/panels/common/logo/logo.component';
@@ -70,11 +71,12 @@ type StoreType = {
     CvContainer,
     CvMenuWrapper,
     EducationWrapper,
-    EmployerWrapper,
+    EmployWrapper,
     OtherInfoWrapper,
     PersonalInfoWrapper,
     ProjectWrapper,
-    ProjectDialog
+    ProjectDialog,
+    EmployDialog
   ],
   imports: [ // import Angular's modules
     BrowserModule,
@@ -93,7 +95,10 @@ type StoreType = {
     NotificationService,
     ResizeService
   ],
-  entryComponents: [ProjectDialog]
+  entryComponents: [
+    ProjectDialog,
+    EmployDialog
+  ]
 })
 
 export class AppModule {

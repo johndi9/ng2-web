@@ -1,0 +1,23 @@
+<h2 md-dialog-title>{{ employ.employer }}</h2>
+
+<md-dialog-content>
+  <p>{{ employ.position }}</p>
+  <p>{{ employ.location }}</p>
+  <p>{{ employ.start }} - {{ employ.end ? employ.end : 'currently' }}</p>
+  <p>{{ employ.summary }}</p>
+  <ul class="items">
+    <li *ngFor="let highlight of employ.highlights">
+      {{ highlight }}
+    </li>
+  </ul>
+</md-dialog-content>
+
+<md-dialog-actions>
+  <a *ngIf="employ.url"
+     href="{{ employ.url }}"
+     md-raised-button
+     color="primary">URL</a>
+  <button
+    md-button
+    md-dialog-close>Close</button>
+</md-dialog-actions>

@@ -1,0 +1,22 @@
+<h2>Employs</h2>
+
+<div class="card-columns">
+  <template ngFor let-employ [ngForOf]="employs" let-i="index">
+    <div class="card padding" (click)="openModal(employ)">
+      <md-card>
+        <md-card-title>{{ employ.employer }}</md-card-title>
+        <md-card-subtitle>{{ employ.location }}</md-card-subtitle>
+        <md-card-content>
+          <p>{{ employ.start }} - {{ employ.end ? employ.end : 'currently' }}</p>
+          <p>{{ employ.summary }}</p>
+        </md-card-content>
+        <md-card-actions align="end" *ngIf="employ.url">
+          <a href="{{ employ.url }}" md-button>URL</a>
+        </md-card-actions>
+        <md-card-footer *ngIf="isLoadingView">
+          <md-progress-bar mode="indeterminate"></md-progress-bar>
+        </md-card-footer>
+      </md-card>
+    </div>
+  </template>
+</div>

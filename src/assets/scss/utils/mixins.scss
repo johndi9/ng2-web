@@ -8,3 +8,33 @@
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
+
+@mixin card-grid {
+  .card-columns {
+    column-count: 4;
+  }
+
+  @media ($md-medium-up) {
+    .card-columns {
+      column-count: 3;
+    }
+  }
+
+  @media ($md-small-down) {
+    .card-columns {
+      column-count: 2;
+    }
+  }
+
+  @media ($md-xsmall-down) {
+    .card-columns {
+      column-count: 1;
+    }
+  }
+
+  .card {
+    cursor: pointer;
+    display: inline-block;
+    width: 100%; // Don't let them exceed the column width
+  }
+}

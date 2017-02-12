@@ -1,11 +1,32 @@
 <h2>Projects</h2>
 
-<div class="flex-container"
-     fxLayout="row"
-     fxLayout.xs="column"
-     fxLayoutWrap="wrap">
+<!--<div class="flex-container"-->
+     <!--fxLayout="row"-->
+     <!--fxLayout.xs="column"-->
+     <!--fxLayoutWrap="wrap">-->
+  <!--<template ngFor let-project [ngForOf]="projects" let-i="index">-->
+    <!--<div fxFlex="25%" fxFlex.md="50" fxFlex.sm="50" class="padding" (click)="openModal(project)">-->
+      <!--<md-card>-->
+        <!--<md-card-title>{{ project.title }}</md-card-title>-->
+        <!--<md-card-subtitle>{{ project.employer }}</md-card-subtitle>-->
+        <!--<md-card-content>-->
+          <!--<p>{{ project.start }} - {{ project.end ? project.end : 'currently' }}</p>-->
+          <!--<p>{{ project.summary }}</p>-->
+        <!--</md-card-content>-->
+        <!--<md-card-actions align="end" *ngIf="project.url">-->
+          <!--<a href="{{ project.url }}" md-button>URL</a>-->
+        <!--</md-card-actions>-->
+        <!--<md-card-footer *ngIf="isLoadingView">-->
+          <!--<md-progress-bar mode="indeterminate"></md-progress-bar>-->
+        <!--</md-card-footer>-->
+      <!--</md-card>-->
+    <!--</div>-->
+  <!--</template>-->
+<!--</div>-->
+
+<div class="card-columns">
   <template ngFor let-project [ngForOf]="projects" let-i="index">
-    <div fxFlex="25%" fxFlex.md="50%" fxFlex.sm="50%" class="padding" (click)="openModal(project)">
+    <div class="card padding" (click)="openModal(project)">
       <md-card>
         <md-card-title>{{ project.title }}</md-card-title>
         <md-card-subtitle>{{ project.employer }}</md-card-subtitle>

@@ -2,26 +2,26 @@
      fxLayout="row"
      fxLayout.sm="column"
      fxLayoutWrap="wrap">
-  <div fxFlex="25%" fxFlex.sm="100%">
+  <div fxFlex="25" fxFlex.sm="100" fxFlex.xs="100">
     <cv-menu-wrapper [tabSelected]="tabSelected"
                      [isMediumUpView]="isMediumUpView"></cv-menu-wrapper>
   </div>
 
-  <div fxFlex="75%" fxFlex.sm="100%">
+  <div fxFlex="75" fxFlex.sm="100" fxFlex.xs="100">
     <swiper (indexChange)="onIndexSwiperChange($event)">
-      <div class="swiper-slide" fxLayout="column" fxLayoutAlign="center center">
+      <div class="swiper-slide" fxLayout="column">
         <personal-info-wrapper></personal-info-wrapper>
       </div>
-      <div class="swiper-slide" fxLayout="column" fxLayoutAlign="center center">
+      <div class="swiper-slide" fxLayout="column">
         <project-wrapper [projects]="curriculum?.projects"></project-wrapper>
       </div>
-      <div class="swiper-slide" fxLayout="column" fxLayoutAlign="center center">
-        <employer-wrapper></employer-wrapper>
+      <div class="swiper-slide" fxLayout="column">
+        <employ-wrapper [employs]="curriculum?.employment?.history"></employ-wrapper>
       </div>
-      <div class="swiper-slide" fxLayout="column" fxLayoutAlign="center center">
+      <div class="swiper-slide" fxLayout="column">
         <education-wrapper></education-wrapper>
       </div>
-      <div class="swiper-slide" fxLayout="column" fxLayoutAlign="center center">
+      <div class="swiper-slide" fxLayout="column">
         <other-info-wrapper></other-info-wrapper>
       </div>
     </swiper>

@@ -1,4 +1,6 @@
-$font-size-root: 14px !default;
+$font-size-root: 14px;
+$md-body-font-size-base: rem($font-size-root) !default;
+$md-font-family: 'Roboto-Light', sans-serif;
 
 $md-xsmall-down: 'max-width: 600px';
 $md-small-down: 'max-width: 960px';

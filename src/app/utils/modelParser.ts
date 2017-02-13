@@ -1,4 +1,12 @@
+import * as moment from 'moment';
+
 const jsonMetadataKey = 'jsonProperty';
+const DATE_SEPARATOR = '/';
+// Formats expected from json
+const FORMAT_YEAR_ONLY = 'YYYY';
+const FORMAT_YEAR_MONTH = 'YYYY' + DATE_SEPARATOR + 'MM';
+const FORMAT_YEAR_MONTH_DAY = 'YYYY' + DATE_SEPARATOR + 'MM' + DATE_SEPARATOR + 'DD';
+const attributesWithDateType: string[] = ['date', 'start', 'end', 'lastUpdate'];
 
 export interface JsonMetaData<T> {
   name?: string;
@@ -40,6 +48,44 @@ export default class MapUtils {
     }
     return !!(obj instanceof String || obj === String || obj instanceof Number ||
     obj === Number || obj instanceof Boolean || obj === Boolean);
+  }
+
+  static isDateType(key): boolean {
+    return !!attributesWithDateType.find(attr => attr === key);
+  }
+
+  /**
+   * Set the data on each json attribute based on the type
+   * @param jsonObject
+   * @param key
+   * @returns {any}
+   */
+  static parseData(jsonObject, key): any {
+    if (MapUtils.isDateType(key)) {
+      return jsonObject[key] instanceof Date ? jsonObject[key] : MapUtils.parseDate(jsonObject[key]);
+    }
+    return jsonObject[key];
+  }
+
+  static parseDate(dateNotParsed): Date {
+    if(dateNotParsed === '') return new Date();
+
+    const dateSplitted: string[] = dateNotParsed.split(DATE_SEPARATOR);
+    let format: string;
+
+    switch (dateSplitted.length) {
+      case 1:
+        format = FORMAT_YEAR_ONLY;
+        break;
+      case 2:
+        format = FORMAT_YEAR_MONTH;
+        break;
+      default:
+        format = FORMAT_YEAR_MONTH_DAY;
+        break;
+    }
+
+    return moment(dateNotParsed, format).toDate();
   }
 
   static isArray(object) {
@@ -95,7 +141,7 @@ export default class MapUtils {
         obj[key] = propertyMetadataFn(isDeepJsonArray ? {clazz: clazz} : propertyMetadata);
       } else {
         if (jsonObject && jsonObject[key] !== undefined) {
-          obj[key] = jsonObject[key];
+          obj[key] = MapUtils.parseData(jsonObject, key);
         }
       }
     });

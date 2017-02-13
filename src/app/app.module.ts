@@ -38,11 +38,15 @@ import { ProjectWrapper } from './components/panels/home/cv-container/project-wr
 import { VideoBg } from './components/panels/home/video-bg/video-bg.component';
 
 // External components
+import { MomentModule } from 'angular2-moment';
 import { SwiperModule } from 'angular2-swiper-wrapper';
 import { SWIPER_CONFIG } from './variables/variables';
 
 // Routes
 import { ROUTES } from './app.routes';
+
+// Pipes
+import { MonthsDurationPipe } from './pipes/months-duration.pipe';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -76,12 +80,14 @@ type StoreType = {
     PersonalInfoWrapper,
     ProjectWrapper,
     ProjectDialog,
-    EmployDialog
+    EmployDialog,
+    MonthsDurationPipe
   ],
   imports: [ // import Angular's modules
     BrowserModule,
     FormsModule,
     HttpModule,
+    MomentModule,
     RouterModule.forRoot(ROUTES, { useHash: false }),
     MaterialModule.forRoot(),
     FlexLayoutModule.forRoot(),

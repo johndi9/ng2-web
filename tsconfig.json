@@ -20,6 +20,7 @@
       "hammerjs",
       "jasmine",
       "node",
+      "moment",
       "protractor",
       "selenium-webdriver",
       "source-map",

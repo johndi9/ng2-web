@@ -19,6 +19,7 @@ import { Writing } from './Writing/Writing';
 export class Curriculum {
   name: string;
   aboutMe: string[];
+  lastUpdate: Date;
   @JsonProperty({clazz: Info})
   info: Info;
   @JsonProperty({clazz: Contact})
@@ -58,6 +59,7 @@ export class Curriculum {
   constructor() {
     this.name = undefined;
     this.aboutMe = undefined;
+    this.lastUpdate = undefined;
     this.info = undefined;
     this.contact = undefined;
     this.location = undefined;

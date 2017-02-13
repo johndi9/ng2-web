@@ -26,3 +26,10 @@ export const data = {
       iconName: 'description',
     }]
 };
+
+export const labels = {
+  year: 'year',
+  years: 'years',
+  month: 'month',
+  months: 'months'
+};

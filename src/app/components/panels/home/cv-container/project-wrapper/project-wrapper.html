@@ -31,7 +31,8 @@
         <md-card-title>{{ project.title }}</md-card-title>
         <md-card-subtitle>{{ project.employer }}</md-card-subtitle>
         <md-card-content>
-          <p>{{ project.start }} - {{ project.end ? project.end : 'currently' }}</p>
+          <p>{{ (project.start | date:'y/MM') }} - {{ project.end ? (project.end | date:'y/MM') : 'currently' }}</p>
+          <p>{{ ((project.end ? project.end : today) | amDifference: project.start : 'months' : true ) | monthsDuration}} </p>
           <p>{{ project.summary }}</p>
         </md-card-content>
         <md-card-actions align="end" *ngIf="project.url">

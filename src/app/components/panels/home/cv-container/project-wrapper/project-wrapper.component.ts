@@ -27,6 +27,7 @@ export class ProjectWrapper implements AfterViewInit{
     }
   };
   private isLoadingView: boolean = true;
+  private today = new Date();
 
   constructor(public dialog: MdDialog) {
   }

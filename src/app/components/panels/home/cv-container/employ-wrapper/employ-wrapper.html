@@ -7,7 +7,8 @@
         <md-card-title>{{ employ.employer }}</md-card-title>
         <md-card-subtitle>{{ employ.location }}</md-card-subtitle>
         <md-card-content>
-          <p>{{ employ.start }} - {{ employ.end ? employ.end : 'currently' }}</p>
+          <p>{{ (employ.start | date:'y/MM') }} - {{ employ.end ? (employ.end | date:'y/MM') : 'currently' }}</p>
+          <p>{{ ((employ.end ? employ.end : today) | amDifference: employ.start : 'months' : true ) | monthsDuration}} </p>
           <p>{{ employ.summary }}</p>
         </md-card-content>
         <md-card-actions align="end" *ngIf="employ.url">

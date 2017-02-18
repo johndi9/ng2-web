@@ -20,6 +20,7 @@ import { ResizeService } from './services/resize.service';
 
 // Components
 import { AppComponent } from './app.component';
+import { Card } from './components/panels/common/card/card.component';
 import { CvContainer } from './components/panels/home/cv-container/cv-container.component';
 import { CvMenuWrapper } from './components/panels/home/cv-container/cv-menu-wrapper/cv-menu-wrapper.component';
 import { EducationWrapper } from './components/panels/home/cv-container/education-wrapper/education-wrapper.component';
@@ -79,6 +80,7 @@ type StoreType = {
     OtherInfoWrapper,
     PersonalInfoWrapper,
     ProjectWrapper,
+    Card,
     ProjectDialog,
     EmployDialog,
     MonthsDurationPipe

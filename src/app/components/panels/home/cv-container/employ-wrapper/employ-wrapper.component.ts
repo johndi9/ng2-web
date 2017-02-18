@@ -13,6 +13,7 @@ import { EmployDialog } from '../../dialogs/employ-dialog/employ-dialog.componen
 
 export class EmployWrapper implements AfterViewInit {
   @Input() employs: Employ[];
+  @Input() isTabSelected: boolean;
 
   config: MdDialogConfig = {
     disableClose: false,

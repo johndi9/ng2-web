@@ -13,10 +13,12 @@
         <personal-info-wrapper></personal-info-wrapper>
       </div>
       <div class="swiper-slide" fxLayout="column">
-        <project-wrapper [projects]="curriculum?.projects"></project-wrapper>
+        <project-wrapper [isTabSelected]="tabSelected === cvTabSelected.PROJECTS"
+                         [projects]="curriculum?.projects"></project-wrapper>
       </div>
       <div class="swiper-slide" fxLayout="column">
-        <employ-wrapper [employs]="curriculum?.employment?.history"></employ-wrapper>
+        <employ-wrapper [isTabSelected]="tabSelected === cvTabSelected.EMPLOYS"
+                        [employs]="curriculum?.employment?.history"></employ-wrapper>
       </div>
       <div class="swiper-slide" fxLayout="column">
         <education-wrapper></education-wrapper>

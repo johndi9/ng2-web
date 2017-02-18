@@ -6,7 +6,7 @@ import { NotificationService } from '../../../../services/notification.service';
 
 import { Curriculum } from '../../../../models/Curriculum/Curriculum';
 
-import { STATE_KEYS } from '../../../../variables/variables';
+import { STATE_KEYS, CV_OPTION_TYPES } from '../../../../variables/variables';
 
 import { Subscription } from 'rxjs/Rx';
 import { ResizeService } from '../../../../services/resize.service';
@@ -25,6 +25,7 @@ export class CvContainer implements OnInit, OnDestroy {
   private tabSelected: number;
   private curriculum: Curriculum;
   private isMediumUpView: boolean;
+  public cvTabSelected = CV_OPTION_TYPES;
 
   private readonly DEFAULT_OPTION: number = 0;
 
@@ -107,4 +108,5 @@ export class CvContainer implements OnInit, OnDestroy {
         .subscribe(() => this.curriculum = this._curriculumService.curriculum);
     }
   }
+
 }

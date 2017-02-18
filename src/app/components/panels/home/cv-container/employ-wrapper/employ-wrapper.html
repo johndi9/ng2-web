@@ -2,22 +2,8 @@
 
 <div class="card-columns">
   <template ngFor let-employ [ngForOf]="employs" let-i="index">
-    <div class="card padding" (click)="openModal(employ)">
-      <md-card>
-        <md-card-title>{{ employ.employer }}</md-card-title>
-        <md-card-subtitle>{{ employ.location }}</md-card-subtitle>
-        <md-card-content>
-          <p>{{ (employ.start | date:'y/MM') }} - {{ employ.end ? (employ.end | date:'y/MM') : 'currently' }}</p>
-          <p>{{ ((employ.end ? employ.end : today) | amDifference: employ.start : 'months' : true ) | monthsDuration}} </p>
-          <p>{{ employ.summary }}</p>
-        </md-card-content>
-        <md-card-actions align="end" *ngIf="employ.url">
-          <a href="{{ employ.url }}" md-button>URL</a>
-        </md-card-actions>
-        <md-card-footer *ngIf="isLoadingView">
-          <md-progress-bar mode="indeterminate"></md-progress-bar>
-        </md-card-footer>
-      </md-card>
-    </div>
+    <card [element]="employ"
+          [isTabSelected]="isTabSelected"
+          [animationInMs]="500 + 50 * i"></card>
   </template>
 </div>

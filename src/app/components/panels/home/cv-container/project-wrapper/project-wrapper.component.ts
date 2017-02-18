@@ -14,6 +14,7 @@ import { ProjectDialog } from '../../dialogs/project-dialog/project-dialog.compo
 
 export class ProjectWrapper implements AfterViewInit{
   @Input() projects: Project[];
+  @Input() isTabSelected: boolean;
 
   config: MdDialogConfig = {
     disableClose: false,

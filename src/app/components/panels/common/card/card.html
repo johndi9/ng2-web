@@ -1,0 +1,20 @@
+<div class="card padding"
+     (click)="openModal()"
+     [ngClass]="{'animated bounceInRight': isTabSelected}">
+  <md-card>
+    <md-card-title>{{ element.title }}</md-card-title>
+    <md-card-subtitle>{{ element.employer }}</md-card-subtitle>
+    <md-card-content>
+      <p>{{ (element.start | date:'y/MM') }} - {{ element.end ? (element.end | date:'y/MM') : 'currently' }}</p>
+      <p>{{ ((element.end ? element.end : today) | amDifference: element.start : 'months' : true ) |
+        monthsDuration}} </p>
+      <p>{{ element.summary }}</p>
+    </md-card-content>
+    <md-card-actions align="end" *ngIf="element.url">
+      <a href="{{ element.url }}" md-button>URL</a>
+    </md-card-actions>
+    <md-card-footer *ngIf="isLoadingView">
+      <md-progress-bar mode="indeterminate"></md-progress-bar>
+    </md-card-footer>
+  </md-card>
+</div>

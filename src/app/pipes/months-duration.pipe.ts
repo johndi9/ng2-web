@@ -20,8 +20,6 @@ export class MonthsDurationPipe implements PipeTransform {
    * @return {string}
    */
   transform(numberOfMonths: number): string {
-    if (!numberOfMonths) return;
-
     return this.getYearsString(numberOfMonths) + this.getMonthsString(numberOfMonths);
   }
 
@@ -33,7 +31,7 @@ export class MonthsDurationPipe implements PipeTransform {
   }
 
   getMonthsString(numberOfMonths): string {
-    const months = Math.ceil(numberOfMonths % this.MONTH_IN_YEAR);
+    const months = Math.floor(numberOfMonths % this.MONTH_IN_YEAR) + 1;
 
     return months > 0 ?
       (months + ' ' + (months > 1 ? labels.months : labels.month) + ' ') : '';

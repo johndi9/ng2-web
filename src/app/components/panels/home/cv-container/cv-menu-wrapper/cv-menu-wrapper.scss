@@ -6,6 +6,10 @@
 
 .tabs-container {
   overflow-x: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 @media ($md-medium-down) {

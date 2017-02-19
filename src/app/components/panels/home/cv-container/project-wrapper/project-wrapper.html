@@ -5,7 +5,7 @@
     <card class="card padding"
           [element]="project"
           [isTabSelected]="isTabSelected"
-          [animationInMs]="300"
-          [animationDelay]="50 * i"></card>
+          [animationInMs]="animationSettings.duration"
+          [animationDelay]="animationSettings.delay * i"></card>
   </template>
 </div>

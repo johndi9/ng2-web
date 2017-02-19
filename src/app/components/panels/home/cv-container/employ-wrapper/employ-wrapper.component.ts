@@ -4,6 +4,8 @@ import { MdDialog, MdDialogConfig } from '@angular/material';
 import { Employ } from '../../../../../models/Curriculum/Employ/Employ';
 import { EmployDialog } from '../../dialogs/employ-dialog/employ-dialog.component';
 
+import { animationSettings } from '../../../../../animations/animations';
+
 
 @Component({
   selector: 'employ-wrapper',
@@ -28,6 +30,7 @@ export class EmployWrapper implements AfterViewInit {
   };
   private isLoadingView: boolean = true;
   private today = new Date();
+  private animationSettings = animationSettings;
 
   constructor(public dialog: MdDialog) {
   }

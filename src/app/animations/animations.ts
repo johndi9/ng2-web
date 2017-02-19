@@ -1,3 +1,8 @@
+export const animationSettings = {
+  duration: 500,
+  delay: 100
+};
+
 export const animationArray = {
   fadeIn: {
     startingStyles: {

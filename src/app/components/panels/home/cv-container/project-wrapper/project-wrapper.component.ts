@@ -4,6 +4,8 @@ import { MdDialog, MdDialogConfig } from '@angular/material';
 import { Project } from '../../../../../models/Curriculum/Project/Project';
 import { ProjectDialog } from '../../dialogs/project-dialog/project-dialog.component';
 
+import { animationSettings } from '../../../../../animations/animations';
+
 
 @Component({
   selector: 'project-wrapper',
@@ -29,6 +31,7 @@ export class ProjectWrapper implements AfterViewInit{
   };
   private isLoadingView: boolean = true;
   private today = new Date();
+  private animationSettings = animationSettings;
 
   constructor(public dialog: MdDialog) {
   }

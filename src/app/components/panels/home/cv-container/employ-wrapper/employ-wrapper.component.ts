@@ -1,8 +1,6 @@
-import { Component, Input, AfterViewInit } from '@angular/core';
-import { MdDialog, MdDialogConfig } from '@angular/material';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { Employ } from '../../../../../models/Curriculum/Employ/Employ';
-import { EmployDialog } from '../../dialogs/employ-dialog/employ-dialog.component';
 
 import { animationSettings } from '../../../../../animations/animations';
 
@@ -10,37 +8,17 @@ import { animationSettings } from '../../../../../animations/animations';
 @Component({
   selector: 'employ-wrapper',
   styleUrls: ['./employ-wrapper.scss'],
-  templateUrl: './employ-wrapper.html'
+  templateUrl: './employ-wrapper.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class EmployWrapper implements AfterViewInit {
+export class EmployWrapper {
   @Input() employs: Employ[];
   @Input() isTabSelected: boolean;
 
-  config: MdDialogConfig = {
-    disableClose: false,
-    width: '',
-    height: '',
-    position: {
-      top: '',
-      bottom: '',
-      left: '',
-      right: ''
-    }
-  };
-  private isLoadingView: boolean = true;
-  private today = new Date();
   private animationSettings = animationSettings;
 
-  constructor(public dialog: MdDialog) {
+  constructor() {
   }
 
-  ngAfterViewInit(): void {
-    this.isLoadingView = false;
-  }
-
-  private openModal(employ: Employ): void {
-    let dialogRef = this.dialog.open(EmployDialog, this.config);
-    dialogRef.componentInstance.employ = employ;
-  }
 }

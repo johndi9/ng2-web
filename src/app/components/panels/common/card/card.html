@@ -1,9 +1,13 @@
-<div class="card padding"
-     (click)="openModal()"
-     [ngClass]="{'animated bounceInRight': isTabSelected}">
+<div (click)="openModal()"
+     animation
+     [animation-delay]="animationDelay"
+     [animation-duration]="animationInMs"
+     [animation-animation]="'fadeIn'"
+     [animation-animation-leave]="'fadeOut'"
+     [animation-play]="isTabSelected">
   <md-card>
-    <md-card-title>{{ element.title }}</md-card-title>
-    <md-card-subtitle>{{ element.employer }}</md-card-subtitle>
+    <md-card-title>{{ isProject ? element.title : element.employer }}</md-card-title>
+    <md-card-subtitle>{{ isProject ? element.employer : element.location }}</md-card-subtitle>
     <md-card-content>
       <p>{{ (element.start | date:'y/MM') }} - {{ element.end ? (element.end | date:'y/MM') : 'currently' }}</p>
       <p>{{ ((element.end ? element.end : today) | amDifference: element.start : 'months' : true ) |

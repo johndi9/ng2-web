@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy, AfterViewInit } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, AfterViewInit, OnInit } from '@angular/core';
 import { MdDialog, MdDialogConfig } from '@angular/material';
 
 import { Employ } from '../../../../models/Curriculum/Employ/Employ';
@@ -14,10 +14,13 @@ import { ProjectDialog } from '../../home/dialogs/project-dialog/project-dialog.
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class Card implements AfterViewInit {
+export class Card implements AfterViewInit, OnInit {
   @Input() element: Project | Employ;
   @Input() isTabSelected: boolean;
   @Input() animationInMs: number;
+  @Input() animationDelay: number;
+
+  private isProject: boolean;
 
   config: MdDialogConfig = {
     disableClose: false,
@@ -36,6 +39,10 @@ export class Card implements AfterViewInit {
   constructor(public dialog: MdDialog) {
   }
 
+  ngOnInit(): void {
+    this.isProject = this.element instanceof Project;
+  }
+
   ngAfterViewInit(): void {
     this.isLoadingView = false;
   }
@@ -44,7 +51,7 @@ export class Card implements AfterViewInit {
     let dialogBodyComponent;
     let dialogVariable: string;
 
-    if (this.element instanceof Project) {
+    if (this.isProject) {
       dialogBodyComponent = ProjectDialog;
       dialogVariable = 'project';
     } else {

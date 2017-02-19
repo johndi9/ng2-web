@@ -5,6 +5,7 @@ import { HttpService } from './http.service';
 import { Curriculum } from '../models/Curriculum/Curriculum';
 
 import { Observable, Subscription } from 'rxjs/Rx';
+import MapUtils from '../utils/modelParser';
 
 
 @Injectable()
@@ -29,11 +30,11 @@ export class CurriculumService {
    * @returns {Subscription}
    */
   public updateCurriculumJSON(): Observable<Curriculum> {
-    const cvObservable: Observable<Curriculum> = this._httpService.getSingle(Curriculum, this.urlCVStored);
+    const cvObservable: Observable<Curriculum> = this._httpService.getSingle(this.urlCVStored);
 
     cvObservable.subscribe(
-        (response: Curriculum) => this._curriculum = response,
-        (error: any) => Observable.throw(error));
+      (data) => this._curriculum = MapUtils.deserialize(Curriculum, data),
+      (error: any) => Observable.throw(error));
 
     return cvObservable;
   }

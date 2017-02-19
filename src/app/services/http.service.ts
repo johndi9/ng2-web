@@ -11,21 +11,11 @@ export class HttpService {
   constructor(protected http: Http) {
   }
 
-  public getSingle<T>(clazz: { new(): T }, url: string, headers?: {}): Observable<T> {
+  public getSingle<T>(url: string, headers?: {}): Observable<T> {
     const observable: Observable<T> = this.createRequest(url, headers);
 
     observable.subscribe(
-      data => MapUtils.deserialize(clazz, data),
-      error => Observable.throw(error));
-
-    return observable;
-  }
-
-  public getAll<T>(clazz: { new(): T }, url: string, headers?: {}): Observable<T> {
-    const observable: Observable<T> = this.createRequest(url, headers);
-
-    observable.subscribe(
-      (data: any) => data.forEach(dataElem => MapUtils.deserialize(clazz, dataElem)),
+      data => data,
       error => Observable.throw(error));
 
     return observable;

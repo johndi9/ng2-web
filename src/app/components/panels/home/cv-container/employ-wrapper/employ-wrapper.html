@@ -2,8 +2,10 @@
 
 <div class="card-columns">
   <template ngFor let-employ [ngForOf]="employs" let-i="index">
-    <card [element]="employ"
+    <card class="card padding"
+          [element]="employ"
           [isTabSelected]="isTabSelected"
-          [animationInMs]="500 + 50 * i"></card>
+          [animationInMs]="300"
+          [animationDelay]="50 * i"></card>
   </template>
 </div>

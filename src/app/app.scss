@@ -3,14 +3,14 @@ a {
   display: flex;
 }
 
-.md-sidenav-side {
+.mat-sidenav-side {
   background: transparent;
   position: fixed;
 
-  &.md-sidenav-end {
-    &.md-sidenav-opened,
-    &.md-sidenav-opening,
-    &.md-sidenav-closing {
+  &.mat-sidenav-end {
+    &.mat-sidenav-opened,
+    &.mat-sidenav-opening,
+    &.mat-sidenav-closing {
       box-shadow: none;
     }
   }

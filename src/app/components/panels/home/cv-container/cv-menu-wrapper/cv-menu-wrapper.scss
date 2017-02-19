@@ -1,15 +1,15 @@
-[md-tab-link] {
-  background-color: $white;
-  height: 60px;
-  line-height: 18px;
-}
-
 .tabs-container {
   overflow-x: auto;
 
   &::-webkit-scrollbar {
     display: none;
   }
+}
+
+.mat-tab-link {
+  background-color: $white;
+  height: 60px;
+  line-height: 18px;
 }
 
 @media ($md-medium-down) {

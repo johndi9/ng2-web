@@ -96,7 +96,7 @@ type StoreType = {
     HttpModule,
     MomentModule,
     RouterModule.forRoot(ROUTES, { useHash: false }),
-    MaterialModule.forRoot(),
+    MaterialModule,
     FlexLayoutModule.forRoot(),
     SwiperModule.forRoot(SWIPER_CONFIG)
   ],

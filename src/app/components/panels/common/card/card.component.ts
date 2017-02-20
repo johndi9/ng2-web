@@ -1,5 +1,6 @@
 import { Component, Input, ChangeDetectionStrategy, AfterViewInit, OnInit } from '@angular/core';
-import { MdDialog, MdDialogConfig } from '@angular/material';
+
+import { DialogService } from '../../../../services/dialog.service';
 
 import { Employ } from '../../../../models/Curriculum/Employ/Employ';
 import { EmployDialog } from '../../home/dialogs/employ-dialog/employ-dialog.component';
@@ -21,22 +22,12 @@ export class Card implements AfterViewInit, OnInit {
   @Input() animationDelay: number;
 
   private isProject: boolean;
+  private isModalOpened: boolean = false;
 
-  config: MdDialogConfig = {
-    disableClose: false,
-    width: '',
-    height: '',
-    position: {
-      top: '',
-      bottom: '',
-      left: '',
-      right: ''
-    }
-  };
   private isLoadingView: boolean = true;
   private today = new Date();
 
-  constructor(public dialog: MdDialog) {
+  constructor(private _dialogService: DialogService) {
   }
 
   ngOnInit(): void {
@@ -58,8 +49,11 @@ export class Card implements AfterViewInit, OnInit {
       dialogBodyComponent = EmployDialog;
       dialogVariable = 'employ';
     }
-    
-    let dialogRef = this.dialog.open(dialogBodyComponent, this.config);
-    dialogRef.componentInstance[dialogVariable] = this.element;
+
+    this._dialogService.open(dialogBodyComponent, null, null, [dialogVariable], [this.element]).subscribe(() => {
+      this.isModalOpened = false;
+    });
+
+    this.isModalOpened = true;
   }
 }

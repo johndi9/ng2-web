@@ -15,6 +15,7 @@ import { AnimationService } from './services/animation.service';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './services/app.service';
 import { CurriculumService } from './services/curriculum.service';
+import { DialogService } from './services/dialog.service';
 import { HttpService } from './services/http.service';
 import { NotificationService } from './services/notification.service';
 import { ResizeService } from './services/resize.service';
@@ -107,7 +108,8 @@ type StoreType = {
     HttpService,
     NotificationService,
     ResizeService,
-    AnimationService
+    AnimationService,
+    DialogService
   ],
   entryComponents: [
     ProjectDialog,

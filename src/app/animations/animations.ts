@@ -1,10 +1,5 @@
-export const animationSettings = {
-  duration: 500,
-  delay: 100
-};
-
 export const animationArray = {
-  fadeIn: {
+  bounceInRight: {
     startingStyles: {
       styles: [{}]
     },
@@ -13,7 +8,178 @@ export const animationArray = {
         offset: 0,
         styles: {
           styles: [{
-            transform: 'translateX(100px)',
+            transform: 'translate3d(1000px, 0, 0)',
+            opacity: 0
+          }]
+        }
+      },
+      {
+        offset: 0.5,
+        styles: {
+          styles: [{
+            transform: 'translate3d(-20px, 0, 0)',
+            opacity: 1
+          }]
+        }
+      },
+      {
+        offset: 0.8,
+        styles: {
+          styles: [{
+            transform: 'translate3d(10px, 0, 0)',
+            opacity: 1
+          }]
+        }
+      },
+      {
+        offset: 1,
+        styles: {
+          styles: [{
+            transform: 'translate3d(0, 0, 0)',
+            opacity: 1
+          }]
+        }
+      }
+    ]
+  },
+  bounceOutRight: {
+    startingStyles: {
+      styles: [{}]
+    },
+    keyframes: [
+      {
+        offset: 0,
+        styles: {
+          styles: [{
+            transform: 'translate3d(0, 0, 0)',
+            opacity: 1
+          }]
+        }
+      },
+      {
+        offset: 0.2,
+        styles: {
+          styles: [{
+            transform: 'translate3d(10px, 0, 0)',
+            opacity: 1
+          }]
+        }
+      },
+      {
+        offset: 0.5,
+        styles: {
+          styles: [{
+            transform: 'translate3d(-20px, 0, 0)',
+            opacity: 1
+          }]
+        }
+      },
+      {
+        offset: 1,
+        styles: {
+          styles: [{
+            transform: 'translate3d(1000px, 0, 0)',
+            opacity: 0
+          }]
+        }
+      }
+    ]
+  },
+  bounceInDown: {
+    startingStyles: {
+      styles: [{}]
+    },
+    keyframes: [
+      {
+        offset: 0,
+        styles: {
+          styles: [{
+            transform: 'translate3d(0, -1000px, 0)',
+            opacity: 0
+          }]
+        }
+      },
+      {
+        offset: 0.5,
+        styles: {
+          styles: [{
+            transform: 'translate3d(0, 20px, 0)',
+            opacity: 1
+          }]
+        }
+      },
+      {
+        offset: 0.8,
+        styles: {
+          styles: [{
+            transform: 'translate3d(0, -10px, 0)',
+            opacity: 1
+          }]
+        }
+      },
+      {
+        offset: 1,
+        styles: {
+          styles: [{
+            transform: 'translate3d(0, 0, 0)',
+            opacity: 1
+          }]
+        }
+      }
+    ]
+  },
+  bounceOutDown: {
+    startingStyles: {
+      styles: [{}]
+    },
+    keyframes: [
+      {
+        offset: 0,
+        styles: {
+          styles: [{
+            transform: 'translate3d(0, 0, 0)',
+            opacity: 1
+          }]
+        }
+      },
+      {
+        offset: 0.2,
+        styles: {
+          styles: [{
+            transform: 'translate3d(0, 10px, 0)',
+            opacity: 1
+          }]
+        }
+      },
+      {
+        offset: 0.5,
+        styles: {
+          styles: [{
+            transform: 'translate3d(0, -20px, 0)',
+            opacity: 1
+          }]
+        }
+      },
+      {
+        offset: 1,
+        styles: {
+          styles: [{
+            transform: 'translate3d(0, 1000px, 0)',
+            opacity: 0
+          }]
+        }
+      }
+    ]
+  },
+  hideElement: {
+    startingStyles: {
+      styles: [{}]
+    },
+    keyframes: [
+      {
+        offset: 0,
+        styles: {
+          styles: [{
             opacity: 0
           }]
         }
@@ -22,32 +188,6 @@ export const animationArray = {
         offset: 1,
         styles: {
           styles: [{
-            transform: 'translateX(0)',
-            opacity: 1
-          }]
-        }
-      }
-    ]
-  },
-  fadeOut: {
-    startingStyles: {
-      styles: [{}]
-    },
-    keyframes: [
-      {
-        offset: 0,
-        styles: {
-          styles: [{
-            transform: 'translateX(0)',
-            opacity: 1
-          }]
-        }
-      },
-      {
-        offset: 1,
-        styles: {
-          styles: [{
-            transform: 'translateX(100px)',
             opacity: 0
           }]
         }

@@ -2,7 +2,7 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { Employ } from '../../../../../models/Curriculum/Employ/Employ';
 
-import { animationSettings } from '../../../../../animations/animations';
+import { animationSettings } from '../../../../../variables/variables';
 
 
 @Component({
@@ -15,6 +15,7 @@ import { animationSettings } from '../../../../../animations/animations';
 export class EmployWrapper {
   @Input() employs: Employ[];
   @Input() isTabSelected: boolean;
+  @Input() isModalOpened: boolean;
 
   private animationSettings = animationSettings;
 

@@ -22,10 +22,12 @@ export class CvContainer implements OnInit, OnDestroy {
   private optionChangeSubscription: Subscription;
   private curriculumLoadedSubscription: Subscription;
   private resizeChangeSubscription: Subscription;
+  private modalOpenedSubscription: Subscription;
   private tabSelected: number;
   private curriculum: Curriculum;
   private isMediumUpView: boolean;
-  public cvTabSelected = CV_OPTION_TYPES;
+  private typeModalOpened: CV_OPTION_TYPES;
+  private cvTabSelected = CV_OPTION_TYPES;
 
   private readonly DEFAULT_OPTION: number = 0;
 
@@ -47,12 +49,18 @@ export class CvContainer implements OnInit, OnDestroy {
 
     this.resizeChangeSubscription = this._resizeService.resizeChange
       .subscribe((data: boolean) => this.isMediumUpView = data);
+
+    this.modalOpenedSubscription = this._notificationService.modalOpened.subscribe((type) => {
+      this.updateModalOpenedState(type);
+      this.updateModalOpened(type);
+    });
   }
 
   ngOnDestroy(): void {
     this.optionChangeSubscription.unsubscribe();
     this.curriculumLoadedSubscription.unsubscribe();
     this.resizeChangeSubscription.unsubscribe();
+    this.modalOpenedSubscription.unsubscribe();
   }
 
   /**
@@ -95,6 +103,22 @@ export class CvContainer implements OnInit, OnDestroy {
    */
   private updateTabSelected(option: number): void {
     this.tabSelected = option;
+  }
+
+  /**
+   * Update modal opened state
+   * @param type
+   */
+  private updateModalOpenedState(type: number): void {
+    this._appState.set(STATE_KEYS[STATE_KEYS.MODAL_TYPE_OPENED], type);
+  }
+
+  /**
+   * Update the modal opened to render the container animations
+   * @param type
+   */
+  private updateModalOpened(type: number): void {
+    this.typeModalOpened = type
   }
 
   /**

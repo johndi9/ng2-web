@@ -2,7 +2,7 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { Project } from '../../../../../models/Curriculum/Project/Project';
 
-import { animationSettings } from '../../../../../animations/animations';
+import { animationSettings } from '../../../../../variables/variables';
 
 
 @Component({
@@ -15,6 +15,7 @@ import { animationSettings } from '../../../../../animations/animations';
 export class ProjectWrapper {
   @Input() projects: Project[];
   @Input() isTabSelected: boolean;
+  @Input() isModalOpened: boolean;
 
   private animationSettings = animationSettings;
 

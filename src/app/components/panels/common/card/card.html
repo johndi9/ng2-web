@@ -2,9 +2,9 @@
      animation
      [animation-delay]="animationDelay"
      [animation-duration]="animationInMs"
-     [animation-animation]="'fadeIn'"
-     [animation-animation-leave]="'fadeOut'"
-     [animation-play]="isTabSelected">
+     [animation-in]="animationIn"
+     [animation-out]="animationOut"
+     [animation-play]="isTabSelected && !isModalOpened">
   <md-card>
     <md-card-title>{{ isProject ? element.title : element.employer }}</md-card-title>
     <md-card-subtitle>{{ isProject ? element.employer : element.location }}</md-card-subtitle>

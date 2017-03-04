@@ -11,28 +11,12 @@
 
 @mixin card-grid {
   .padding {
-    padding-bottom: 15px;
+    padding: 5px;
   }
 
-  .card-columns {
-    column-count: 4;
-  }
-
-  @media ($md-medium-up) {
-    .card-columns {
-      column-count: 3;
-    }
-  }
-
-  @media ($md-small-down) {
-    .card-columns {
-      column-count: 2;
-    }
-  }
-
-  @media ($md-xsmall-down) {
-    .card-columns {
-      column-count: 1;
+  @media ($mat-small-down) {
+    .padding {
+      padding-bottom: 25px;
     }
   }
 

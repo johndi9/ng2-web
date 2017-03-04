@@ -4,6 +4,7 @@ export class Project {
   category: string;
   role: string;
   url: string;
+  logo: string;
   start: Date;
   end: Date;
   description: string;
@@ -17,6 +18,7 @@ export class Project {
     this.category = undefined;
     this.role = undefined;
     this.url = undefined;
+    this.logo = undefined;
     this.start = undefined;
     this.end = undefined;
     this.description = undefined;

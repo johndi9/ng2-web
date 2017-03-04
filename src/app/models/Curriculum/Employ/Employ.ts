@@ -2,6 +2,7 @@ export class Employ {
   employer: string;
   location: string;
   url: number;
+  logo: string;
   position: number;
   summary: string;
   start: Date;
@@ -13,6 +14,7 @@ export class Employ {
     this.employer = undefined;
     this.location = undefined;
     this.url = undefined;
+    this.logo = undefined;
     this.position = undefined;
     this.summary = undefined;
     this.start = undefined;

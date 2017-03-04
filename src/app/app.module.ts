@@ -44,6 +44,7 @@ import { VideoBg } from './components/panels/home/video-bg/video-bg.component';
 import { MomentModule } from 'angular2-moment';
 import { SwiperModule } from 'angular2-swiper-wrapper';
 import { SWIPER_CONFIG } from './variables/variables';
+import 'hammerjs';
 
 // Directives
 import { AnimationDirective } from './directives/animation.directive';
@@ -98,7 +99,7 @@ type StoreType = {
     MomentModule,
     RouterModule.forRoot(ROUTES, { useHash: false }),
     MaterialModule,
-    FlexLayoutModule.forRoot(),
+    FlexLayoutModule,
     SwiperModule.forRoot(SWIPER_CONFIG)
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection

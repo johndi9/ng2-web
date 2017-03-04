@@ -1,15 +1,15 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
 
 import { AppState } from '../../../../services/app.service';
 import { CurriculumService } from '../../../../services/curriculum.service';
 import { NotificationService } from '../../../../services/notification.service';
+import { ResizeService } from '../../../../services/resize.service';
 
 import { Curriculum } from '../../../../models/Curriculum/Curriculum';
 
-import { STATE_KEYS, CV_OPTION_TYPES } from '../../../../variables/variables';
+import { STATE_KEYS, CV_OPTION_TYPES, SCREEN_TYPES } from '../../../../variables/variables';
 
 import { Subscription } from 'rxjs/Rx';
-import { ResizeService } from '../../../../services/resize.service';
 
 
 @Component({
@@ -23,11 +23,14 @@ export class CvContainer implements OnInit, OnDestroy {
   private curriculumLoadedSubscription: Subscription;
   private resizeChangeSubscription: Subscription;
   private modalOpenedSubscription: Subscription;
+
   private tabSelected: number;
   private curriculum: Curriculum;
   private isMediumUpView: boolean;
   private typeModalOpened: CV_OPTION_TYPES;
   private cvTabSelected = CV_OPTION_TYPES;
+  private SCREEN_TYPES = SCREEN_TYPES;
+  private slideToLeft: boolean;
 
   private readonly DEFAULT_OPTION: number = 0;
 
@@ -85,8 +88,17 @@ export class CvContainer implements OnInit, OnDestroy {
    * @param option
    */
   private updateTabSelection(option: number): void {
+    this.updateIfSlideToLeft(option);
     this.updateTabSelectionState(option);
     this.updateTabSelected(option);
+  }
+
+  /**
+   * Identify if the user has selected a left or right option in order to show different animations
+   * @param option
+   */
+  private updateIfSlideToLeft(option: number): void {
+    this.slideToLeft = option < this._appState.get(STATE_KEYS[STATE_KEYS.CV_OPTION_SELECTED]);
   }
 
   /**

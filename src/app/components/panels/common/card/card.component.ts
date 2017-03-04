@@ -1,4 +1,6 @@
-import { Component, ComponentRef, Input, ChangeDetectionStrategy, AfterViewInit, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component, ComponentRef, Input, ChangeDetectionStrategy, AfterViewInit, OnInit, ElementRef
+} from '@angular/core';
 
 import { DialogService } from '../../../../services/dialog.service';
 import { NotificationService } from '../../../../services/notification.service';
@@ -17,22 +19,23 @@ import { EVENT_TYPES, CV_OPTION_TYPES, ANIMATION_TYPES } from '../../../../varia
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class Card implements AfterViewInit, OnInit, OnChanges {
+export class Card implements AfterViewInit, OnInit {
   @Input() element: ComponentRef<any>;
   @Input() isTabSelected: boolean = false;
   @Input() isModalOpened: boolean;
   @Input() animationInMs: number;
   @Input() animationDelay: number;
+  @Input() screenType: string;
+  @Input() slideToLeft: boolean;
 
   private isProject: boolean;
   private isLoadingView: boolean = true;
   private today: Date = new Date();
   private ANIMATION_TYPES = ANIMATION_TYPES;
-  private animationIn: string = <any>ANIMATION_TYPES.bounceInRight;
-  private animationOut: string =<any>ANIMATION_TYPES.hideElement;
 
   constructor(private _dialogService: DialogService,
-              private _notificationService: NotificationService) {
+              private _notificationService: NotificationService,
+              private _elementRef: ElementRef) {
   }
 
   ngOnInit(): void {
@@ -41,10 +44,6 @@ export class Card implements AfterViewInit, OnInit, OnChanges {
 
   ngAfterViewInit(): void {
     this.isLoadingView = false;
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.updateAnimation(changes);
   }
 
   private openModal(): void {
@@ -72,21 +71,5 @@ export class Card implements AfterViewInit, OnInit, OnChanges {
    */
   private notifyDialogChange(typeModalOpened?: CV_OPTION_TYPES) {
     this._notificationService.notifyListener(EVENT_TYPES.MODAL_OPENED, typeModalOpened);
-  }
-
-  /**
-   * Update the animation based on the input change
-   * @param changes
-   */
-  private updateAnimation(changes: SimpleChanges): void {
-    if (changes['isTabSelected'] && changes['isTabSelected'].previousValue !== changes['isTabSelected'].currentValue) {
-      this.animationIn = <any>ANIMATION_TYPES.bounceInRight;
-      this.animationOut = <any>ANIMATION_TYPES.hideElement;
-      return;
-    }
-    if (changes['isModalOpened'] && changes['isModalOpened'].previousValue !== changes['isModalOpened'].currentValue) {
-      this.animationIn = <any>ANIMATION_TYPES.bounceInDown;
-      this.animationOut = <any>ANIMATION_TYPES.bounceOutDown;
-    }
   }
 }

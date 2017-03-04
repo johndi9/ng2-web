@@ -2,21 +2,48 @@
      animation
      [animation-delay]="animationDelay"
      [animation-duration]="animationInMs"
-     [animation-in]="animationIn"
-     [animation-out]="animationOut"
-     [animation-play]="isTabSelected && !isModalOpened">
+     [animation-in]="slideToLeft ? ANIMATION_TYPES.bounceInRight : ANIMATION_TYPES.bounceInLeft"
+     [animation-out]="slideToLeft ? ANIMATION_TYPES.bounceOutRight : ANIMATION_TYPES.bounceOutLeft"
+     [animation-play]="isTabSelected"
+     [screenType]="screenType">
   <md-card>
-    <md-card-title>{{ isProject ? element.title : element.employer }}</md-card-title>
-    <md-card-subtitle>{{ isProject ? element.employer : element.location }}</md-card-subtitle>
+    <md-card-header fxLayout="row"
+                    fxLayout.sm="column"
+                    fxLayout.xs="column"
+                    fxLayoutAlign="center center">
+      <div md-card-avatar
+           fxFlex
+           fxFlex.gt-sm="70px">
+        <img class="mat-card-avatar"
+             src="{{ '/assets/images/' + element.logo }}">
+      </div>
+
+      <div class="mat-card-header-text" fxFlex>
+        <md-card-title>{{ isProject ? element.title : element.employer }}</md-card-title>
+        <md-card-subtitle>
+          <div>
+            <md-icon>place</md-icon>
+            {{ isProject ? element.employer : element.location }}
+          </div>
+          <div>
+            <md-icon>date_range</md-icon>
+            <span class="dot-separator">{{ (element.start | date:'y/MM') }} - {{ element.end ? (element.end | date:'y/MM') : 'currently' }}</span>
+            <span>{{ ((element.end ? element.end : today) | amDifference: element.start : 'months' : true ) |
+          monthsDuration}} </span>
+          </div>
+        </md-card-subtitle>
+      </div>
+    </md-card-header>
+
+
     <md-card-content>
-      <p>{{ (element.start | date:'y/MM') }} - {{ element.end ? (element.end | date:'y/MM') : 'currently' }}</p>
-      <p>{{ ((element.end ? element.end : today) | amDifference: element.start : 'months' : true ) |
-        monthsDuration}} </p>
       <p>{{ element.summary }}</p>
     </md-card-content>
-    <md-card-actions align="end" *ngIf="element.url">
-      <a href="{{ element.url }}" md-button>URL</a>
+
+    <md-card-actions>
+      <button md-button color="primary">More details</button>
     </md-card-actions>
+
     <md-card-footer *ngIf="isLoadingView">
       <md-progress-bar mode="indeterminate"></md-progress-bar>
     </md-card-footer>

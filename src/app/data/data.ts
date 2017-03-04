@@ -28,8 +28,8 @@ export const data = {
 };
 
 export const labels = {
-  year: 'year',
-  years: 'years',
-  month: 'month',
-  months: 'months'
+  year: 'yr',
+  years: 'yrs',
+  month: 'mo',
+  months: 'mo'
 };

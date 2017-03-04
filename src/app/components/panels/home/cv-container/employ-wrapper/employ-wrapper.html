@@ -1,12 +1,19 @@
 <h2>Employs</h2>
 
-<div class="card-columns">
+<div class="flex-container"
+     fxLayout="row"
+     fxLayout.xs="column"
+     fxLayoutWrap="wrap">
   <template ngFor let-employ [ngForOf]="employs" let-i="index">
-    <card class="card padding"
-          [element]="employ"
-          [isTabSelected]="isTabSelected"
-          [isModalOpened]="isModalOpened"
-          [animationInMs]="animationSettings.duration"
-          [animationDelay]="animationSettings.delay * i"></card>
+    <div fxFlex="33.3333%" fxFlex.md="50" fxFlex.sm="50" class="padding">
+      <card class="card"
+            [element]="employ"
+            [isTabSelected]="isTabSelected"
+            [isModalOpened]="isModalOpened"
+            [animationInMs]="animationSettings[screenType].duration"
+            [animationDelay]="animationSettings[screenType].delay * i"
+            [screenType]="screenType"
+            [slideToLeft]="slideToLeft"></card>
+    </div>
   </template>
 </div>

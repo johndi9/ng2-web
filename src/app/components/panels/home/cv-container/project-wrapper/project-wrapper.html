@@ -1,12 +1,19 @@
 <h2>Projects</h2>
 
-<div class="card-columns">
+<div class="flex-container"
+     fxLayout="row"
+     fxLayout.xs="column"
+     fxLayoutWrap="wrap">
   <template ngFor let-project [ngForOf]="projects" let-i="index">
-    <card class="card padding"
-          [element]="project"
-          [isTabSelected]="isTabSelected"
-          [isModalOpened]="isModalOpened"
-          [animationInMs]="animationSettings.duration"
-          [animationDelay]="animationSettings.delay * i"></card>
+    <div fxFlex.gt-md="33.3333%" fxFlex="50" fxFlex.xs="100" class="padding">
+      <card class="card"
+            [element]="project"
+            [isTabSelected]="isTabSelected"
+            [isModalOpened]="isModalOpened"
+            [animationInMs]="animationSettings[screenType].duration + 50 * i"
+            [animationDelay]="animationSettings[screenType].delay * i"
+            [screenType]="screenType"
+            [slideToLeft]="slideToLeft"></card>
+    </div>
   </template>
 </div>

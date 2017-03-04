@@ -15,11 +15,15 @@
       <div class="swiper-slide" fxLayout="column">
         <project-wrapper [isTabSelected]="tabSelected === cvTabSelected.PROJECTS"
                          [isModalOpened]="typeModalOpened === cvTabSelected.PROJECTS"
+                         [screenType]="isMediumUpView ? SCREEN_TYPES.DESKTOP_OR_BIGGER : SCREEN_TYPES.TABLET_OR_LOWER"
+                         [slideToLeft]="slideToLeft"
                          [projects]="curriculum?.projects"></project-wrapper>
       </div>
       <div class="swiper-slide" fxLayout="column">
         <employ-wrapper [isTabSelected]="tabSelected === cvTabSelected.EMPLOYS"
                         [isModalOpened]="typeModalOpened === cvTabSelected.EMPLOYS"
+                        [screenType]="isMediumUpView ? SCREEN_TYPES.DESKTOP_OR_BIGGER : SCREEN_TYPES.TABLET_OR_LOWER"
+                        [slideToLeft]="slideToLeft"
                         [employs]="curriculum?.employment?.history"></employ-wrapper>
       </div>
       <div class="swiper-slide" fxLayout="column">

@@ -5,20 +5,20 @@ import { AnimationKeyframe } from "@angular/core/src/animation/animation_keyfram
 import * as animations from '../animations/animations';
 
 
-class AnimationStructure {
+export class AnimationStructure {
   startingStyles: AnimationStyles;
   keyframes: AnimationKeyframe[];
 }
 
 @Injectable()
 export class AnimationService {
-  private animations: any = [];
+  private animations: (screenType: string) => {};
 
   constructor() {
     this.animations = animations.animationArray;
   }
 
-  getAnimation(name: string): AnimationStructure {
-    return this.animations[name];
+  getAnimation(screenType: string, name: string): AnimationStructure {
+    return this.animations(screenType)[name];
   }
 }

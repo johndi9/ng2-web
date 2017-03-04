@@ -25,15 +25,15 @@ export const SWIPER_CONFIG: SwiperConfigInterface = {
   pagination: '.swiper-pagination'
 };
 
+export enum SCREEN_TYPES {
+  TABLET_OR_LOWER = <any>'lt-md',
+  DESKTOP_OR_BIGGER = <any>'gt-md'
+};
+
 export enum ANIMATION_TYPES {
   bounceInRight = <any>'bounceInRight',
   bounceOutRight = <any>'bounceOutRight',
-  bounceInDown = <any>'bounceInDown',
-  bounceOutDown = <any>'bounceOutDown',
+  bounceInLeft = <any>'bounceInLeft',
+  bounceOutLeft = <any>'bounceOutLeft',
   hideElement = <any>'hideElement',
-};
-
-export const animationSettings = {
-  duration: 500,
-  delay: 100
 };

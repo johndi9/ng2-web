@@ -1,197 +1,150 @@
-export const animationArray = {
-  bounceInRight: {
-    startingStyles: {
-      styles: [{}]
-    },
-    keyframes: [
-      {
-        offset: 0,
-        styles: {
-          styles: [{
-            transform: 'translate3d(1000px, 0, 0)',
-            opacity: 0
-          }]
-        }
-      },
-      {
-        offset: 0.5,
-        styles: {
-          styles: [{
-            transform: 'translate3d(-20px, 0, 0)',
-            opacity: 1
-          }]
-        }
-      },
-      {
-        offset: 0.8,
-        styles: {
-          styles: [{
-            transform: 'translate3d(10px, 0, 0)',
-            opacity: 1
-          }]
-        }
-      },
-      {
-        offset: 1,
-        styles: {
-          styles: [{
-            transform: 'translate3d(0, 0, 0)',
-            opacity: 1
-          }]
-        }
-      }
-    ]
+export const animationSettings = {
+  'gt-md': {
+    duration: 2000,
+    delay: 30,
+    positionMinAbs: 0,
+    positionMaxAbs: 150
   },
-  bounceOutRight: {
-    startingStyles: {
-      styles: [{}]
+  'lt-md': {
+    duration: 500,
+    delay: 50,
+    positionMinAbs: 0,
+    positionMaxAbs: 50
+  }
+};
+
+export const easeTypes = {
+  bounceInRight: 'cubic-bezier(0.19, 1, 0.22, 1)'
+};
+
+export function animationArray(screenType: string) {
+  const minAbs: number = animationSettings[screenType].positionMinAbs;
+  const maxAbs: number = animationSettings[screenType].positionMaxAbs;
+
+  return {
+    bounceInRight: {
+      startingStyles: {
+        styles: [{}]
+      },
+      keyframes: [
+        {
+          offset: 0,
+          styles: {
+            styles: [{
+              transform: 'translateX(' + minAbs + 'px)',
+            }]
+          }
+        },
+        {
+          offset: 0.35,
+          styles: {
+            styles: [{
+              transform: 'translateX(-' + maxAbs + 'px)',
+            }]
+          }
+        },
+        {
+          offset: 1,
+          styles: {
+            styles: [{
+              transform: 'translateX(' + minAbs + 'px)',
+            }]
+          }
+        }
+      ]
     },
-    keyframes: [
-      {
-        offset: 0,
-        styles: {
-          styles: [{
-            transform: 'translate3d(0, 0, 0)',
-            opacity: 1
-          }]
-        }
+    bounceInLeft: {
+      startingStyles: {
+        styles: [{}]
       },
-      {
-        offset: 0.2,
-        styles: {
-          styles: [{
-            transform: 'translate3d(10px, 0, 0)',
-            opacity: 1
-          }]
+      keyframes: [
+        {
+          offset: 0,
+          styles: {
+            styles: [{
+              transform: 'translateX(' + minAbs + 'px)',
+            }]
+          }
+        },
+        {
+          offset: 0.35,
+          styles: {
+            styles: [{
+              transform: 'translateX(' + maxAbs + 'px)',
+            }]
+          }
+        },
+        {
+          offset: 1,
+          styles: {
+            styles: [{
+              transform: 'translateX(' + minAbs + 'px)',
+            }]
+          }
         }
-      },
-      {
-        offset: 0.5,
-        styles: {
-          styles: [{
-            transform: 'translate3d(-20px, 0, 0)',
-            opacity: 1
-          }]
-        }
-      },
-      {
-        offset: 1,
-        styles: {
-          styles: [{
-            transform: 'translate3d(1000px, 0, 0)',
-            opacity: 0
-          }]
-        }
-      }
-    ]
-  },
-  bounceInDown: {
-    startingStyles: {
-      styles: [{}]
+      ]
     },
-    keyframes: [
-      {
-        offset: 0,
-        styles: {
-          styles: [{
-            transform: 'translate3d(0, -1000px, 0)',
-            opacity: 0
-          }]
-        }
+    bounceOutRight: {
+      startingStyles: {
+        styles: [{}]
       },
-      {
-        offset: 0.5,
-        styles: {
-          styles: [{
-            transform: 'translate3d(0, 20px, 0)',
-            opacity: 1
-          }]
+      keyframes: [
+        {
+          offset: 0,
+          styles: {
+            styles: [{
+              transform: 'translateX(' + minAbs + 'px)',
+            }]
+          }
+        },
+        {
+          offset: 0.5,
+          styles: {
+            styles: [{
+              transform: 'translateX(' + maxAbs + 'px)',
+            }]
+          }
+        },
+        {
+          offset: 1,
+          styles: {
+            styles: [{
+              transform: 'translateX(' + minAbs + 'px)',
+            }]
+          }
         }
-      },
-      {
-        offset: 0.8,
-        styles: {
-          styles: [{
-            transform: 'translate3d(0, -10px, 0)',
-            opacity: 1
-          }]
-        }
-      },
-      {
-        offset: 1,
-        styles: {
-          styles: [{
-            transform: 'translate3d(0, 0, 0)',
-            opacity: 1
-          }]
-        }
-      }
-    ]
-  },
-  bounceOutDown: {
-    startingStyles: {
-      styles: [{}]
+      ]
     },
-    keyframes: [
-      {
-        offset: 0,
-        styles: {
-          styles: [{
-            transform: 'translate3d(0, 0, 0)',
-            opacity: 1
-          }]
-        }
+    bounceOutLeft: {
+      startingStyles: {
+        styles: [{}]
       },
-      {
-        offset: 0.2,
-        styles: {
-          styles: [{
-            transform: 'translate3d(0, 10px, 0)',
-            opacity: 1
-          }]
+      keyframes: [
+        {
+          offset: 0,
+          styles: {
+            styles: [{
+              transform: 'translateX(' + minAbs + 'px)',
+            }]
+          }
+        },
+        {
+          offset: 0.5,
+          styles: {
+            styles: [{
+              transform: 'translateX(-' + maxAbs + 'px)',
+            }]
+          }
+        },
+        {
+          offset: 1,
+          styles: {
+            styles: [{
+              transform: 'translateX(' + minAbs + 'px)',
+            }]
+          }
         }
-      },
-      {
-        offset: 0.5,
-        styles: {
-          styles: [{
-            transform: 'translate3d(0, -20px, 0)',
-            opacity: 1
-          }]
-        }
-      },
-      {
-        offset: 1,
-        styles: {
-          styles: [{
-            transform: 'translate3d(0, 1000px, 0)',
-            opacity: 0
-          }]
-        }
-      }
-    ]
-  },
-  hideElement: {
-    startingStyles: {
-      styles: [{}]
-    },
-    keyframes: [
-      {
-        offset: 0,
-        styles: {
-          styles: [{
-            opacity: 0
-          }]
-        }
-      },
-      {
-        offset: 1,
-        styles: {
-          styles: [{
-            opacity: 0
-          }]
-        }
-      }
-    ]
-  },
+      ]
+    }
+  };
 };

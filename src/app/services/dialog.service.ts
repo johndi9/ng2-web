@@ -1,4 +1,5 @@
-import { ComponentRef, Injectable, ViewContainerRef } from '@angular/core';
+import { Injectable, ViewContainerRef, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/platform-browser';
 import { ComponentType, MdDialogRef, MdDialog, MdDialogConfig } from '@angular/material';
 
 import { Observable } from 'rxjs/Rx';
@@ -19,7 +20,15 @@ export class DialogService {
     }
   };
 
-  constructor(private dialog: MdDialog) {
+  constructor(public dialog: MdDialog, @Inject(DOCUMENT) doc: any) {
+    dialog.afterOpen.subscribe((ref: MdDialogRef<any>) => {
+      if (!doc.body.classList.contains('no-scroll')) {
+        doc.body.classList.add('no-scroll');
+      }
+    });
+    dialog.afterAllClosed.subscribe(() => {
+      doc.body.classList.remove('no-scroll');
+    });
   }
 
   /**

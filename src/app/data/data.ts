@@ -24,6 +24,11 @@ export const data = {
       id: 4,
       text: 'Other information',
       iconName: 'description',
+    },
+    {
+      id: 5,
+      text: 'Contact',
+      iconName: 'email',
     }]
 };
 

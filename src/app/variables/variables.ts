@@ -15,7 +15,8 @@ export enum CV_OPTION_TYPES {
   PROJECTS,
   EMPLOYS,
   EDUCATION,
-  OTHER_INFO
+  OTHER_INFO,
+  CONTACT
 };
 
 export const SWIPER_CONFIG: SwiperConfigInterface = {

@@ -4,6 +4,7 @@
 }
 
 .video-bg {
+  @include mat-elevation(2);
   height: 100vh;
   object-fit: cover;
   width: 100vw;

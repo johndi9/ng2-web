@@ -12,6 +12,10 @@
   line-height: 18px;
 }
 
+.active {
+  background: $gray-lighter;
+}
+
 @media ($mat-medium-down) {
   nav {
     min-width: 800px;

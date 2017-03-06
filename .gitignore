@@ -6,6 +6,9 @@
 /node_modules
 /annotations
 /dist/
-/src/assets/video/
+/src/assets/video*/
 /dll/
 /compiled/
+/todo.txt
+/src/app/animations/
+/src/app/animationFactory.ts

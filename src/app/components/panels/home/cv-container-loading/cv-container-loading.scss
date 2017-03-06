@@ -1,0 +1,16 @@
+$total-height: 800px;
+
+.loading {
+  background: $gray-lighter;
+  height: $total-height;
+}
+
+.loading-sidebar {
+  background: $white;
+  height: $total-height / 2;
+}
+
+.loading-container {
+  background: $white;
+  height: $total-height - 40;
+}

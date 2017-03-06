@@ -27,7 +27,7 @@
           </div>
           <div>
             <md-icon>date_range</md-icon>
-            <span class="dot-separator">{{ (element.start | date:'y/MM') }} - {{ element.end ? (element.end | date:'y/MM') : 'currently' }}</span>
+            <span class="dot-separator">{{ (element.start | date:'y/MM') }} - {{ element.end ? (element.end | date:'y/MM') : ('labels.currently' | translate) }}</span>
             <span>{{ ((element.end ? element.end : today) | amDifference: element.start : 'months' : true ) |
           monthsDuration}} </span>
           </div>

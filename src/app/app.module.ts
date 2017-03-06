@@ -2,7 +2,7 @@ import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, Http } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
@@ -42,10 +42,12 @@ import { ProjectWrapper } from './components/panels/home/cv-container/project-wr
 import { VideoBg } from './components/panels/home/video-bg/video-bg.component';
 
 // External components
-import { MomentModule } from 'angular2-moment';
-import { SwiperModule } from 'angular2-swiper-wrapper';
-import { SWIPER_CONFIG } from './variables/variables';
 import 'hammerjs';
+import { MomentModule } from 'angular2-moment';
+import { SWIPER_CONFIG } from './variables/variables';
+import { SwiperModule } from 'angular2-swiper-wrapper';
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 // Directives
 import { AnimationDirective } from './directives/animation.directive';
@@ -67,6 +69,10 @@ type StoreType = {
   restoreInputValues: () => void,
   disposeOldHosts: () => void
 };
+
+export function createTranslateLoader(http: Http) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 
 @NgModule({
@@ -102,7 +108,14 @@ type StoreType = {
     RouterModule.forRoot(ROUTES, { useHash: false }),
     MaterialModule,
     FlexLayoutModule,
-    SwiperModule.forRoot(SWIPER_CONFIG)
+    SwiperModule.forRoot(SWIPER_CONFIG),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [Http]
+      }
+    })
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,

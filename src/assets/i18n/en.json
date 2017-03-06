@@ -1,0 +1,35 @@
+{
+  "app": {
+    "tabs": [
+      {
+        "text": "Personal Information"
+      },
+      {
+        "text": "Projects"
+      },
+      {
+        "text": "Employs"
+      },
+      {
+        "text": "Education"
+      },
+      {
+        "text": "Other information"
+      },
+      {
+        "text": "Contact"
+      }
+    ]
+  },
+  "labels": {
+    "year": "yr",
+    "years": "yrs",
+    "month": "mo",
+    "months": "mo",
+    "currently": "currently",
+    "personalInfo": "Personal Information",
+    "skills": "Skills",
+    "interests": "Interests",
+    "aboutMe": "About me"
+  }
+}

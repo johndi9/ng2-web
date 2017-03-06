@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { labels } from '../data/data';
+import {TranslateService} from '@ngx-translate/core';
 
 
 @Pipe({
@@ -10,8 +10,12 @@ import { labels } from '../data/data';
 export class MonthsDurationPipe implements PipeTransform {
 
   private readonly MONTH_IN_YEAR: number = 12;
+  private labels: Object = {};
 
-  constructor() {
+  constructor(private _translateService: TranslateService) {
+    _translateService.get('labels').subscribe((labels: Object) => {
+      this.labels = labels;
+    });
   }
 
   /**
@@ -27,14 +31,14 @@ export class MonthsDurationPipe implements PipeTransform {
     const years = Math.floor(numberOfMonths / this.MONTH_IN_YEAR);
 
     return years > 0 ?
-      (years + ' ' + (years > 1 ? labels.years : labels.year) + ' ') : '';
+      (years + ' ' + (years > 1 ? this.labels['years'] : this.labels['year']) + ' ') : '';
   }
 
   getMonthsString(numberOfMonths): string {
     const months = Math.floor(numberOfMonths % this.MONTH_IN_YEAR) + 1;
 
     return months > 0 ?
-      (months + ' ' + (months > 1 ? labels.months : labels.month) + ' ') : '';
+      (months + ' ' + (months > 1 ? this.labels['months'] : this.labels['month']) + ' ') : '';
   }
 
 }

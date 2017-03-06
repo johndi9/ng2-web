@@ -38,3 +38,30 @@ export enum ANIMATION_TYPES {
   bounceOutLeft = <any>'bounceOutLeft',
   hideElement = <any>'hideElement',
 };
+
+export const TABS = [
+  {
+    id: 0,
+    iconName: 'fingerprint'
+  },
+  {
+    id: 1,
+    iconName: 'important_devices',
+  },
+  {
+    id: 2,
+    iconName: 'business_center',
+  },
+  {
+    id: 3,
+    iconName: 'school',
+  },
+  {
+    id: 4,
+    iconName: 'description',
+  },
+  {
+    id: 5,
+    iconName: 'email',
+  }
+];

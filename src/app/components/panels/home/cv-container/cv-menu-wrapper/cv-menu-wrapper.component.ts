@@ -4,12 +4,11 @@ import {
 
 import { AppState } from '../../../../../services/app.service';
 import { NotificationService } from '../../../../../services/notification.service';
-
-import { STATE_KEYS, CV_OPTION_TYPES, EVENT_TYPES } from '../../../../../variables/variables';
-import { Tab } from '../../../../../models/Components/Tab/Tab';
 import MapUtils from '../../../../../utils/modelParser';
 
-import { data } from '../../../../../data/data';
+import { Tab } from '../../../../../models/Components/Tab/Tab';
+
+import { STATE_KEYS, CV_OPTION_TYPES, EVENT_TYPES, TABS } from '../../../../../variables/variables';
 
 
 @Component({
@@ -32,7 +31,7 @@ export class CvMenuWrapper implements AfterViewInit, OnChanges {
   constructor(private _appState: AppState,
               private _notificationService: NotificationService,
               private _elementRef: ElementRef) {
-    this.tabs = data.tabs.map((tab) => MapUtils.deserialize(Tab, tab));
+    this.tabs = TABS.map((tab) => MapUtils.deserialize(Tab, tab));
   }
 
   ngAfterViewInit(): void {

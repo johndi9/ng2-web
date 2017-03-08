@@ -7,6 +7,7 @@ const webpack = require('webpack');
  */
 // problem with copy-webpack-plugin
 const AssetsPlugin = require('assets-webpack-plugin');
+const Autoprefixer = require('autoprefixer');
 const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin');
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -247,28 +248,18 @@ module.exports = function (options) {
             'to-string-loader',
             {
               loader: 'css-loader',
-              // options: {
-              //     sourceMap: true
-              // }
+              options: {
+                importLoaders: 1
+              }
             },
             {
               loader: 'postcss-loader',
-              query: {
+              options: {
                 sourceMap: 'inline'
               }
             },
             {
-              loader: 'sass-loader',
-              query: {
-                // sourceMap: true,
-                plugins: () => [
-                  require('postcss-url')({}),
-                  require('postcss-import')({}),
-                  require('postcss-cssnext')({browsers: BROWSERS}),
-                  require('postcss-browser-reporter')({}),
-                  require('postcss-reporter')({})
-                ]
-              }
+              loader: 'sass-loader'
             },
             {
               loader: 'sass-resources-loader',
@@ -397,7 +388,19 @@ module.exports = function (options) {
        *
        * See: https://gist.github.com/sokra/27b24881210b56bbaff7
        */
-      new LoaderOptionsPlugin({}),
+      new LoaderOptionsPlugin({
+        debug: !isProd,
+        options: {
+          postcss: [
+            require('postcss-url')({}),
+            require('postcss-import')({}),
+            require('postcss-cssnext')({browsers: BROWSERS}),
+            require('postcss-browser-reporter')({}),
+            require('postcss-reporter')({}),
+            require('autoprefixer')({browsers: BROWSERS})
+          ]
+        }
+      }),
 
       // Fix Angular 2
       new NormalModuleReplacementPlugin(
@@ -432,7 +435,7 @@ module.exports = function (options) {
         context: ['./src/app'],
         failOnWarning: false,
         failOnError: false
-      })
+      }),
 
     ],
 

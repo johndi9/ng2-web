@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, Input } from '@angular/core';
 
 import { AppState } from '../../../../services/app.service';
 import { CurriculumService } from '../../../../services/curriculum.service';
@@ -19,14 +19,13 @@ import { Subscription } from 'rxjs/Rx';
 })
 
 export class CvContainer implements OnInit, OnDestroy {
+  @Input()  curriculum: Curriculum;
+  @Input() isMediumUpView: boolean;
+
   private optionChangeSubscription: Subscription;
-  private curriculumLoadedSubscription: Subscription;
-  private resizeChangeSubscription: Subscription;
   private modalOpenedSubscription: Subscription;
 
   private tabSelected: number;
-  private curriculum: Curriculum;
-  private isMediumUpView: boolean;
   private typeModalOpened: CV_OPTION_TYPES;
   private cvTabSelected = CV_OPTION_TYPES;
   private SCREEN_TYPES = SCREEN_TYPES;
@@ -43,15 +42,11 @@ export class CvContainer implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.updateTabSelection(this.DEFAULT_OPTION);
-    this.retrieveCurriculum();
 
     this.optionChangeSubscription = this._notificationService.triggerCVOptionChange.subscribe((option) => {
       this.updateTabSelection(option);
       this.updateSwiperSelection(option);
     });
-
-    this.resizeChangeSubscription = this._resizeService.resizeChange
-      .subscribe((data: boolean) => this.isMediumUpView = data);
 
     this.modalOpenedSubscription = this._notificationService.modalOpened.subscribe((type) => {
       this.updateModalOpenedState(type);
@@ -61,8 +56,6 @@ export class CvContainer implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.optionChangeSubscription.unsubscribe();
-    this.curriculumLoadedSubscription.unsubscribe();
-    this.resizeChangeSubscription.unsubscribe();
     this.modalOpenedSubscription.unsubscribe();
   }
 
@@ -131,18 +124,6 @@ export class CvContainer implements OnInit, OnDestroy {
    */
   private updateModalOpened(type: number): void {
     this.typeModalOpened = type
-  }
-
-  /**
-   * Retrieve the curriculum based on the observable
-   */
-  private retrieveCurriculum(): void {
-    if (this._curriculumService.curriculum) {
-      this.curriculum = this._curriculumService.curriculum
-    } else {
-      this.curriculumLoadedSubscription = this._curriculumService.updateCurriculumJSON()
-        .subscribe(() => this.curriculum = this._curriculumService.curriculum);
-    }
   }
 
 }

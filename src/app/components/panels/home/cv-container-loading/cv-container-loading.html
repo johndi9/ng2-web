@@ -4,7 +4,7 @@
      fxLayoutWrap="wrap">
   <div class="loading-sidebar" fxFlex="25" fxFlex.sm="100" fxFlex.xs="100">
 
-    <sidebar-wrapper [delay]="140"></sidebar-wrapper>
+    <sidebar-loading-wrapper [delay]="140"></sidebar-loading-wrapper>
 
   </div>
 
@@ -16,7 +16,7 @@
          fxLayoutWrap="wrap">
 
       <div *ngFor="let delay of delays" fxFlex.gt-md="33.3333%" fxFlex="50" fxFlex.xs="100">
-        <module-wrapper [delay]="delay"></module-wrapper>
+        <module-loading-wrapper [delay]="delay"></module-loading-wrapper>
       </div>
 
     </div>

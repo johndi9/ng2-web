@@ -25,6 +25,7 @@ import { AppComponent } from './app.component';
 import { Card } from './components/panels/common/card/card.component';
 import { ContactWrapper } from './components/panels/home/cv-container/contact-wrapper/contact-wrapper.component';
 import { CvContainer } from './components/panels/home/cv-container/cv-container.component';
+import { CvContainerLoading } from './components/panels/home/cv-container-loading/cv-container-loading.component';
 import { CvMenuWrapper } from './components/panels/home/cv-container/cv-menu-wrapper/cv-menu-wrapper.component';
 import { EducationWrapper } from './components/panels/home/cv-container/education-wrapper/education-wrapper.component';
 import { EmployDialog } from './components/panels/home/dialogs/employ-dialog/employ-dialog.component';
@@ -32,6 +33,7 @@ import { EmployWrapper } from './components/panels/home/cv-container/employ-wrap
 import { Home } from './components/pages/home/home.component';
 import { LoadingScreen } from './components/layers/loading-screen/loading-screen.component';
 import { Logo } from './components/panels/common/logo/logo.component';
+import { ModuleLoadingWrapper } from './components/panels/home/cv-container-loading/module-loading-wrapper/module-loading-wrapper.component';
 import { Ng2Footer } from './components/panels/common/ng2-footer/ng2-footer.component';
 import { Ng2Header } from './components/panels/common/ng2-header/ng2-header.component';
 import { NoContent } from './components/pages/no-content/no-content.component';
@@ -39,6 +41,7 @@ import { OtherInfoWrapper } from './components/panels/home/cv-container/other-in
 import { PersonalInfoWrapper } from './components/panels/home/cv-container/personal-info-wrapper/personal-info-wrapper.component';
 import { ProjectDialog } from './components/panels/home/dialogs/project-dialog/project-dialog.component';
 import { ProjectWrapper } from './components/panels/home/cv-container/project-wrapper/project-wrapper.component';
+import { SidebarLoadingWrapper } from './components/panels/home/cv-container-loading/sidebar-loading-wrapper/sidebar-loading-wrapper.component';
 import { VideoBg } from './components/panels/home/video-bg/video-bg.component';
 
 // External components
@@ -98,7 +101,10 @@ export function createTranslateLoader(http: Http) {
     ProjectDialog,
     EmployDialog,
     MonthsDurationPipe,
-    AnimationDirective
+    AnimationDirective,
+    CvContainerLoading,
+    ModuleLoadingWrapper,
+    SidebarLoadingWrapper
   ],
   imports: [ // import Angular's modules
     BrowserModule,

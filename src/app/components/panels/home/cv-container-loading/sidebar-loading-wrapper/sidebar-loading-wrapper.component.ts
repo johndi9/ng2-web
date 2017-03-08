@@ -2,13 +2,13 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 
 @Component({
-  selector: 'module-wrapper',
-  styleUrls: ['./module-wrapper.scss'],
-  templateUrl: './module-wrapper.html',
+  selector: 'sidebar-loading-wrapper',
+  styleUrls: ['./sidebar-loading-wrapper.scss'],
+  templateUrl: './sidebar-loading-wrapper.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class ModuleWrapper {
+export class SidebarLoadingWrapper {
   @Input() delay: number;
 
   constructor() {

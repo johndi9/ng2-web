@@ -12,6 +12,8 @@ import { Writing } from '../../../../../models/Curriculum/Writing/Writing';
 })
 
 export class CvContainerLoading {
+  private delays: number[] = [200, 250, 300, 350, 400];
+
   constructor() {
   }
 }

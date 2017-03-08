@@ -1,0 +1,7 @@
+@for $i from 1 through length($all-delays) {
+  $delay: nth($all-delays, $i);
+
+  .delay#{$delay} {
+    animation-delay: #{$delay}ms !important;
+  }
+}

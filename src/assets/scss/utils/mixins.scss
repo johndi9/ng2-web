@@ -26,3 +26,32 @@
     width: 100%; // Don't let them exceed the column width
   }
 }
+
+@mixin loading-modules {
+  .module {
+    background: $white;
+  }
+
+  .separation {
+    margin-bottom: 20px;
+  }
+
+  .line-wrapper {
+    padding-left: 20px;
+  }
+
+  .line {
+    background: $gray-lighter;
+    height: 10px;
+    margin: 10px 0;
+  }
+
+  .logo {
+    @include mat-elevation(2);
+    background: $gray-lighter;
+    border-radius: rem(5);
+    height: $logo-size;
+    width: $logo-size;
+  }
+
+}

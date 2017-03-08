@@ -1,0 +1,12 @@
+@keyframes infinite-pulse {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.infinite-pulse {
+  animation: infinite-pulse 650ms infinite alternate;
+}

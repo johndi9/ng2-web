@@ -9,9 +9,6 @@ html, body {
   font-family: $mat-font-family;
 }
 
-// Animation styles
-@import '../animations/animations';
-
 .no-scroll {
   overflow: hidden;
 }

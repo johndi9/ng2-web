@@ -1,6 +1,6 @@
 <h2 md-dialog-title class="fade-slide-in">{{ employ.employer }}</h2>
 
-<md-dialog-content>
+<md-dialog-content class="fade-slide-in delay100">
   <p>{{ employ.position }}</p>
   <p>{{ employ.location }}</p>
   <p>{{ employ.start }} - {{ employ.end ? employ.end : 'currently' }}</p>
@@ -12,7 +12,7 @@
   </ul>
 </md-dialog-content>
 
-<md-dialog-actions>
+<md-dialog-actions class="fade-slide-in delay200">
   <a *ngIf="employ.url"
      href="{{ employ.url }}"
      md-raised-button

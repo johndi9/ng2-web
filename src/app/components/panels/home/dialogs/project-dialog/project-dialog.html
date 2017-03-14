@@ -1,6 +1,6 @@
-<h2 md-dialog-title>{{ project.title }}</h2>
+<h2 md-dialog-title class="fade-slide-in">{{ project.title }}</h2>
 
-<md-dialog-content>
+<md-dialog-content class="fade-slide-in delay100">
   <p>{{ project.category }} {{ project.role }}</p>
   <p>{{ project.employer }}</p>
   <p>{{ project.start }} - {{ project.end ? project.end : 'currently' }}</p>
@@ -12,7 +12,7 @@
   </ul>
 </md-dialog-content>
 
-<md-dialog-actions>
+<md-dialog-actions class="fade-slide-in delay200">
   <a *ngIf="project.url"
      href="{{ project.url }}"
      md-raised-button

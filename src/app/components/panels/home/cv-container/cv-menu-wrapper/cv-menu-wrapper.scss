@@ -1,3 +1,22 @@
+$profile-pic-size: rem(90) !default;
+$profile-pic-size-sm: rem(50) !default;
+$profile-pic-overflow-y: -45px !default;
+$sidebar-container-overflow-y: -70px !default;
+$sidebar-container-overflow-y-sm: -75px !default;
+$tab-height: 60px !default;
+$tab-width: 160px !default;
+$container-tab-width: 960px !default;
+
+.sidebar-container {
+  @include mat-elevation(6);
+  background: $white;
+  margin: $sidebar-container-overflow-y 10px 10px 10px;
+
+  [md-list-item] {
+    color: $color-base;
+  }
+}
+
 .tabs-container {
   overflow-x: auto;
 
@@ -8,16 +27,67 @@
 
 .mat-tab-link {
   background-color: $white;
-  height: 60px;
-  line-height: 18px;
+  color: $color-base;
+  height: $tab-height;
+  line-height: normal;
+  width: $tab-width;
+}
+
+.md-tab-link-inner {
+  height: $tab-height;
 }
 
 .active {
   background: $gray-lighter;
 }
 
+.md-nav-list {
+  padding-top: 0;
+}
+
+.tab-link-icon {
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.profile-pic {
+  @include mat-elevation(2);
+  border-radius: 5px;
+  height: $profile-pic-size;
+  margin-top: $profile-pic-overflow-y;
+  margin-left: calc(50% - #{$profile-pic-size} / 2);
+  width: $profile-pic-size;
+}
+
+.profile-pic-sm {
+  @include mat-elevation(2);
+  border-radius: 50%;
+  height: $profile-pic-size-sm;
+  width: $profile-pic-size-sm;
+}
+
+.profile-info-wrapper-sm {
+  background: $white;
+  border-bottom: 1px solid $border-color;
+  margin-top: $sidebar-container-overflow-y-sm;
+  opacity: 0.95;
+  padding: rem(10);
+}
+
+.name-wrapper {
+  display: block;
+  font-size: rem(25);
+  padding: rem(20) rem(10);
+  text-align: center;
+}
+
+.name-wrapper-sm {
+  font-size: rem(20);
+  margin-left: rem(10);
+}
+
 @media ($mat-medium-down) {
   nav {
-    min-width: 800px;
+    min-width: $container-tab-width;
   }
 }

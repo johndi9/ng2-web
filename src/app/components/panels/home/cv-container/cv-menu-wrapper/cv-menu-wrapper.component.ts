@@ -4,9 +4,11 @@ import {
 
 import { AppState } from '../../../../../services/app.service';
 import { NotificationService } from '../../../../../services/notification.service';
-import MapUtils from '../../../../../utils/modelParser';
 
-import { Tab } from '../../../../../models/Components/Tab/Tab';
+import { Info } from '../../../../../models/Curriculum/Info/Info';
+import { Tab } from '../../../../../models/Components/Tab';
+
+import MapUtils from '../../../../../utils/modelParser';
 
 import { STATE_KEYS, CV_OPTION_TYPES, EVENT_TYPES, TABS } from '../../../../../variables/variables';
 
@@ -19,10 +21,14 @@ import { STATE_KEYS, CV_OPTION_TYPES, EVENT_TYPES, TABS } from '../../../../../v
 })
 
 export class CvMenuWrapper implements AfterViewInit, OnChanges {
+  @Input() name: string;
+  @Input() info: Info;
   @Input() tabSelected: number;
   @Input() isMediumUpView: boolean;
 
   private tabs: Tab[];
+  private tabKeys: string[] =
+    ['personalInfoTitle', 'projectsTitle', 'employsTitle', 'educationTitle', 'otherInfoTitle', 'contactTitle'];
   private scrollableContainer: HTMLElement;
 
   public CV_OPTION_TYPES = CV_OPTION_TYPES;

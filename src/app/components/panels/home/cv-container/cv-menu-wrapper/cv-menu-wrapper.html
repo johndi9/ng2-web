@@ -1,27 +1,45 @@
-<div *ngIf="!isMediumUpView"
-     class="tabs-container">
-  <nav md-tab-nav-bar
-       aria-label="curriculum navigation links">
-    <a md-tab-link
-       *ngFor="let tab of tabs; let i = index"
-       fxFlex
-       [active]="tab.id === tabSelected"
-       fxLayoutAlign="center center"
-       (click)="selectOption(tab.id)">
-      <md-icon class="mat-24">{{ tab.iconName }}</md-icon>
-      <span fxFlex>{{ 'app.tabs.' + i + '.text' | translate }}</span>
-    </a>
-  </nav>
+<div *ngIf="!isMediumUpView" class="fade-slide-in delay250">
+  <div class="profile-info-wrapper-sm"
+       fxLayout="row"
+       fxLayoutAlign="center center">
+    <div fxFlex="50px">
+      <img class="profile-pic-sm" src="{{ '/assets/images/' + info?.image }}">
+    </div>
+
+    <div class="name-wrapper-sm">
+      {{ name }}
+    </div>
+  </div>
+
+  <div class="tabs-container">
+    <nav md-tab-nav-bar
+         aria-label="curriculum navigation links">
+      <a md-tab-link
+         *ngFor="let tab of tabs; let i = index"
+         [active]="tab.id === tabSelected"
+         (click)="selectOption(tab.id)">
+        <div class="md-tab-link-inner" fxLayoutAlign="center center">
+          <md-icon class="tab-link-icon">{{ tab.iconName }}</md-icon>
+          <span fxFlex>{{ ('labels.' + tabKeys[i]) | translate }}</span>
+        </div>
+      </a>
+    </nav>
+  </div>
 </div>
 
-<div *ngIf="isMediumUpView">
+<div *ngIf="isMediumUpView" class="sidebar-container fade-slide-in delay250">
+  <div>
+    <img class="profile-pic" src="{{ '/assets/images/' + info?.image }}">
+    <span class="name-wrapper">{{ name }}</span>
+  </div>
+
   <md-nav-list>
     <a md-list-item
        [ngClass]="{'active': tab.id === tabSelected}"
        *ngFor="let tab of tabs; let i = index"
        (click)="selectOption(tab.id)">
       <md-icon md-list-icon>{{ tab.iconName }}</md-icon>
-      <span md-line>{{ 'app.tabs.' + i + '.text' | translate }}</span>
+      <span md-line>{{ ('labels.' + tabKeys[i]) | translate }}</span>
     </a>
   </md-nav-list>
 </div>

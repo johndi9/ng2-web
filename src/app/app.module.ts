@@ -16,6 +16,7 @@ import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './services/app.service';
 import { CurriculumService } from './services/curriculum.service';
 import { DialogService } from './services/dialog.service';
+import { InjectionService } from './services/injection.service';
 import { HttpService } from './services/http.service';
 import { NotificationService } from './services/notification.service';
 import { ResizeService } from './services/resize.service';
@@ -133,11 +134,13 @@ export function createTranslateLoader(http: Http) {
     NotificationService,
     ResizeService,
     AnimationService,
-    DialogService
+    DialogService,
+    InjectionService
   ],
   entryComponents: [
     ProjectDialog,
-    EmployDialog
+    EmployDialog,
+    Ng2Ripple
   ]
 })
 

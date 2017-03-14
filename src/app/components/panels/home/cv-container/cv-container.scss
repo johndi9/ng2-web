@@ -1,7 +1,13 @@
 .flex-container {
-  background: $bg-base;
+  margin-top: calc(100vh - #{$video-overflow-visible-y});
 }
 
 .swiper-slide {
   padding: 10px;
+}
+
+.menu-wrapper,
+.container-wrapper {
+  background: $bg-base;
+  z-index: 1;
 }

@@ -34,9 +34,9 @@ export class DialogService {
   private readonly RIPPLE_SPEED_DEVICE: number = 0.3;
   private readonly RIPPLE_SIZE_FACTOR: number = 1.3;
   /** Fade-in duration for the ripples. Can be modified with the speedFactor option. */
-  private readonly RIPPLE_FADE_IN_DURATION = 650;
+  private readonly RIPPLE_FADE_IN_DURATION = 450;
   /** Fade-out duration for the ripples in milliseconds. This can't be modified by the speedFactor. */
-  private readonly RIPPLE_FADE_OUT_DURATION = 600;
+  private readonly RIPPLE_FADE_OUT_DURATION = 400;
 
   constructor(public mdDialog: MdDialog,
               @Inject(DOCUMENT) doc: any,

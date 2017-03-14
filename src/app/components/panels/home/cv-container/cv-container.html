@@ -2,14 +2,14 @@
      fxLayout="column"
      fxLayout.gt-sm="row">
 
-  <div fxFlex fxFlex.gt-md="{{ SIDEBAR_MAX_WIDTH }}" fxFlex.md="25">
+  <div class="menu-wrapper" fxFlex fxFlex.gt-md="{{ SIDEBAR_MAX_WIDTH }}" fxFlex.md="25">
     <cv-menu-wrapper [name]="curriculum?.name"
                      [info]="curriculum?.info"
                      [tabSelected]="tabSelected"
                      [isMediumUpView]="isMediumUpView"></cv-menu-wrapper>
   </div>
 
-  <div fxFlex fxFlex.gt-md="calc(100vw - {{ SIDEBAR_MAX_WIDTH }})" fxFlex.md="75">
+  <div class="container-wrapper" fxFlex fxFlex.gt-md="calc(100vw - {{ SIDEBAR_MAX_WIDTH }})" fxFlex.md="75">
     <swiper (indexChange)="onIndexSwiperChange($event)" class="fade-slide-in delay350">
       <div class="swiper-slide" fxLayout="column">
         <personal-info-wrapper [info]="curriculum?.info"

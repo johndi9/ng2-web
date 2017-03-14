@@ -3,4 +3,5 @@ $total-height: 500px;
 .loading {
   background: $white;
   height: $total-height;
+  margin-top: calc(100vh - #{$video-overflow-visible-y})
 }

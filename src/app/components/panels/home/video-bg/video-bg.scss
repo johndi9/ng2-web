@@ -1,13 +1,12 @@
-$overflow-visible-y: 63px;
-
 .video-container {
   display: flex;
   overflow: hidden;
-  position: relative;
+  position: fixed;
+  top: 0;
 }
 
 .video-bg {
-  height: calc(100vh - #{$overflow-visible-y});
+  height: calc(100vh - #{$video-overflow-visible-y});
   object-fit: cover;
   width: 100vw;
   z-index: -1;

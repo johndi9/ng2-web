@@ -1,4 +1,4 @@
-<div (click)="openModal()"
+<div (click)="openModal($event)"
      animation
      [animation-delay]="animationDelay"
      [animation-duration]="animationInMs"
@@ -7,9 +7,8 @@
      [animation-play]="isTabSelected"
      [screenType]="screenType">
   <md-card>
-    <md-card-header fxLayout="row"
-                    fxLayout.sm="column"
-                    fxLayout.xs="column"
+    <md-card-header fxLayout="column"
+                    fxLayout.gt-sm="row"
                     fxLayoutAlign="center center">
       <div md-card-avatar
            fxFlex
@@ -19,7 +18,9 @@
       </div>
 
       <div class="mat-card-header-text" fxFlex>
-        <md-card-title>{{ isProject ? element.title : element.employer }}</md-card-title>
+        <md-card-title>
+          {{ isProject ? element.title : element.employer }}
+        </md-card-title>
         <md-card-subtitle>
           <div>
             <md-icon>place</md-icon>
@@ -43,9 +44,5 @@
     <md-card-actions>
       <button md-button color="primary">More details</button>
     </md-card-actions>
-
-    <md-card-footer *ngIf="isLoadingView">
-      <md-progress-bar mode="indeterminate"></md-progress-bar>
-    </md-card-footer>
   </md-card>
 </div>

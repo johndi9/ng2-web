@@ -1,5 +1,5 @@
 import {
-  Component, ComponentRef, Input, ChangeDetectionStrategy, AfterViewInit, OnInit, ElementRef
+  Component, ComponentRef, Input, ChangeDetectionStrategy, OnInit, ElementRef
 } from '@angular/core';
 
 import { DialogService } from '../../../../services/dialog.service';
@@ -9,7 +9,9 @@ import { EmployDialog } from '../../home/dialogs/employ-dialog/employ-dialog.com
 import { Project } from '../../../../models/Curriculum/Project/Project';
 import { ProjectDialog } from '../../home/dialogs/project-dialog/project-dialog.component';
 
-import { EVENT_TYPES, CV_OPTION_TYPES, ANIMATION_TYPES } from '../../../../variables/variables';
+import { Dialog } from '../../../../models/Components/Dialog';
+
+import { EVENT_TYPES, CV_OPTION_TYPES, ANIMATION_TYPES, SCREEN_TYPES } from '../../../../variables/variables';
 
 
 @Component({
@@ -19,17 +21,17 @@ import { EVENT_TYPES, CV_OPTION_TYPES, ANIMATION_TYPES } from '../../../../varia
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class Card implements AfterViewInit, OnInit {
+export class Card implements OnInit {
   @Input() element: ComponentRef<any>;
   @Input() isTabSelected: boolean = false;
   @Input() isModalOpened: boolean;
   @Input() animationInMs: number;
   @Input() animationDelay: number;
-  @Input() screenType: string;
+  @Input() isMediumUpView: boolean;
+  @Input() screenType;
   @Input() slideToLeft: boolean;
 
   private isProject: boolean;
-  private isLoadingView: boolean = true;
   private today: Date = new Date();
   private ANIMATION_TYPES = ANIMATION_TYPES;
 
@@ -42,34 +44,23 @@ export class Card implements AfterViewInit, OnInit {
     this.isProject = this.element instanceof Project;
   }
 
-  ngAfterViewInit(): void {
-    this.isLoadingView = false;
-  }
+  private openModal(event: MouseEvent): void {
+    const dialog: Dialog = this.isProject ? new Dialog(ProjectDialog, ['project'], [this.element]) :
+      new Dialog(EmployDialog, ['employ'], [this.element]);
 
-  private openModal(): void {
-    let dialogBodyComponent;
-    let dialogVariable: string;
+    this.notifyDialogChange(event, this.isProject ? CV_OPTION_TYPES.PROJECTS : CV_OPTION_TYPES.EMPLOYS);
 
-    if (this.isProject) {
-      dialogBodyComponent = ProjectDialog;
-      dialogVariable = 'project';
-    } else {
-      dialogBodyComponent = EmployDialog;
-      dialogVariable = 'employ';
-    }
+    this._dialogService.open(dialog, null, null, event, this.isMediumUpView);
 
-    this.notifyDialogChange(this.isProject ? CV_OPTION_TYPES.PROJECTS : CV_OPTION_TYPES.EMPLOYS);
-
-    this._dialogService.open(dialogBodyComponent, null, null, [dialogVariable], [this.element]).subscribe(() => {
-      this.notifyDialogChange();
-    });
+    this._dialogService.notifyDialogClosed.subscribe(() => this.notifyDialogChange(event))
   }
 
   /**
    * Update the central state with the new modal status
    * @param typeModalOpened
    */
-  private notifyDialogChange(typeModalOpened?: CV_OPTION_TYPES) {
-    this._notificationService.notifyListener(EVENT_TYPES.MODAL_OPENED, typeModalOpened);
+  private notifyDialogChange(event: Event, typeModalOpened?: CV_OPTION_TYPES) {
+    this._notificationService.notifyListener(EVENT_TYPES.MODAL_OPENED,
+      { 'event': event, 'type': typeModalOpened });
   }
 }

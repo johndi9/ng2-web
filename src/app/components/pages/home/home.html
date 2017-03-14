@@ -2,6 +2,7 @@
   <video-bg></video-bg>
   <cv-container *ngIf="curriculum"
                 [curriculum]="curriculum"
-                [isMediumUpView]="isMediumUpView"></cv-container>
+                [isMediumUpView]="isMediumUpView"
+                [typeModalOpened]="typeModalOpened"></cv-container>
   <cv-container-loading *ngIf="!curriculum"></cv-container-loading>
 </div>

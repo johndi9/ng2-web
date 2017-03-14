@@ -7,9 +7,9 @@ import { ResizeService } from '../../../../services/resize.service';
 
 import { Curriculum } from '../../../../models/Curriculum/Curriculum';
 
-import { STATE_KEYS, CV_OPTION_TYPES, SCREEN_TYPES } from '../../../../variables/variables';
-
 import { Subscription } from 'rxjs/Rx';
+
+import { STATE_KEYS, CV_OPTION_TYPES } from '../../../../variables/variables';
 
 
 @Component({
@@ -19,19 +19,18 @@ import { Subscription } from 'rxjs/Rx';
 })
 
 export class CvContainer implements OnInit, OnDestroy {
-  @Input()  curriculum: Curriculum;
+  @Input() curriculum: Curriculum;
   @Input() isMediumUpView: boolean;
+  @Input() typeModalOpened: CV_OPTION_TYPES;
 
   private optionChangeSubscription: Subscription;
-  private modalOpenedSubscription: Subscription;
 
   private tabSelected: number;
-  private typeModalOpened: CV_OPTION_TYPES;
   private cvTabSelected = CV_OPTION_TYPES;
-  private SCREEN_TYPES = SCREEN_TYPES;
   private slideToLeft: boolean;
 
   private readonly DEFAULT_OPTION: number = 0;
+  private readonly SIDEBAR_MAX_WIDTH: string = '320px';
 
   constructor(private _appState: AppState,
               private _notificationService: NotificationService,
@@ -47,16 +46,10 @@ export class CvContainer implements OnInit, OnDestroy {
       this.updateTabSelection(option);
       this.updateSwiperSelection(option);
     });
-
-    this.modalOpenedSubscription = this._notificationService.modalOpened.subscribe((type) => {
-      this.updateModalOpenedState(type);
-      this.updateModalOpened(type);
-    });
   }
 
   ngOnDestroy(): void {
     this.optionChangeSubscription.unsubscribe();
-    this.modalOpenedSubscription.unsubscribe();
   }
 
   /**
@@ -108,22 +101,6 @@ export class CvContainer implements OnInit, OnDestroy {
    */
   private updateTabSelected(option: number): void {
     this.tabSelected = option;
-  }
-
-  /**
-   * Update modal opened state
-   * @param type
-   */
-  private updateModalOpenedState(type: number): void {
-    this._appState.set(STATE_KEYS[STATE_KEYS.MODAL_TYPE_OPENED], type);
-  }
-
-  /**
-   * Update the modal opened to render the container animations
-   * @param type
-   */
-  private updateModalOpened(type: number): void {
-    this.typeModalOpened = type
   }
 
 }

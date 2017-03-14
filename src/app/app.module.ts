@@ -36,6 +36,7 @@ import { Logo } from './components/panels/common/logo/logo.component';
 import { ModuleLoadingWrapper } from './components/panels/home/cv-container-loading/module-loading-wrapper/module-loading-wrapper.component';
 import { Ng2Footer } from './components/panels/common/ng2-footer/ng2-footer.component';
 import { Ng2Header } from './components/panels/common/ng2-header/ng2-header.component';
+import { Ng2Ripple } from './components/panels/common/ng2-ripple/ng2-ripple.component';
 import { NoContent } from './components/pages/no-content/no-content.component';
 import { OtherInfoWrapper } from './components/panels/home/cv-container/other-info-wrapper/other-info-wrapper.component';
 import { PersonalInfoWrapper } from './components/panels/home/cv-container/personal-info-wrapper/personal-info-wrapper.component';
@@ -104,7 +105,8 @@ export function createTranslateLoader(http: Http) {
     AnimationDirective,
     CvContainerLoading,
     ModuleLoadingWrapper,
-    SidebarLoadingWrapper
+    SidebarLoadingWrapper,
+    Ng2Ripple
   ],
   imports: [ // import Angular's modules
     BrowserModule,

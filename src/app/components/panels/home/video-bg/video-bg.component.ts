@@ -11,8 +11,7 @@ import { Observable, Subscription } from 'rxjs/Rx';
 
 export class VideoBg implements OnInit {
   public videoLoaded: boolean;
-  private numVideosStored: number = 4;
-  private videoPath: string = '/assets/video/bg_' + Math.floor(Math.random() * this.numVideosStored) + '.mp4';
+  private videoPath: string = '/assets/video/bg.mp4';
   private subscription: Subscription;
 
   constructor() {
@@ -27,18 +26,17 @@ export class VideoBg implements OnInit {
   }
 
   private loadVideo(): Observable<HTMLVideoElement> {
-    return Observable
-      .create(observer => {
-        const video: HTMLVideoElement = document.createElement('video');
-        video.src = this.videoPath;
+    return Observable.create(observer => {
+      const video: HTMLVideoElement = document.createElement('video');
 
-        video.load();
-        video.addEventListener('loadeddata', () => {
-          observer.next();
-          observer.complete();
-        });
-        video.onerror = err => observer.error(err);
+      video.src = this.videoPath;
+      video.load();
+      video.addEventListener('loadeddata', () => {
+        observer.next();
+        observer.complete();
       });
+      video.onerror = err => observer.error(err);
+    });
   }
 
 }

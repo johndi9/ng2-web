@@ -68,7 +68,7 @@ export default class MapUtils {
   }
 
   static parseDate(dateNotParsed): Date {
-    if(dateNotParsed === '') return new Date();
+    if(dateNotParsed === '') return null;
 
     const dateSplitted: string[] = dateNotParsed.split(DATE_SEPARATOR);
     let format: string;

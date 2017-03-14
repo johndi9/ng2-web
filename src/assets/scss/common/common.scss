@@ -1,12 +1,16 @@
-/* Common styles */
+// Common styles
+// ––––––––––––––––––––––––––––––––––––––––––––––––––
+
+// Common styles
 
 html, body {
-  width: 100%;
+  color: $color-base;
+  font-family: $font-family-root;
+  font-size: $font-size-root;
   height: 100%;
   margin: 0;
   padding: 0;
-  font-size: $font-size-root;
-  font-family: $mat-font-family;
+  width: 100%;
 }
 
 .no-scroll {
@@ -14,29 +18,60 @@ html, body {
 }
 
 // WCAG
+
 .sr-only {
   @include sr-only;
 }
 
-// Swiper
+// Overwrite Swiper styles
+
 .swiper-pagination {
   @include sr-only;
 }
 
-@media ($mat-xsmall-down) {
-  .mat-dialog-container {
-    max-width: 100vw;
-    height: 100vh;
+// Overwrite Material styles
+
+// TODO: to remove when material fixes the issue
+.mat-card .mat-card-header-text {
+  height: 20px;
+}
+
+.mat-tab-links .mat-tab-link {
+  opacity: 1;
+}
+
+.mat-nav-list .mat-list-item div.mat-list-text {
+  padding: 0 5px;
+
+  .mat-line {
+    font-size: 14px;
   }
 }
+
+.sidebar-container .mat-nav-list {
+  padding-top: 0;
+}
+
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+  background: $white;
+  opacity: 1;
+}
+
+.cdk-overlay-container .mat-dialog-container {
+  box-shadow: none;
+}
+
+// Full screen dialogs
+div.cdk-overlay-container, .cdk-overlay-pane .mat-dialog-container {
+  height: 100vh;
+  width: 100vw;
+  max-width: 100vw;
+}
+
+// Media common styles
 
 @media ($mat-small-down) {
   .hidden-sm-down {
     display: none;
   }
-}
-
-// TODO: to remove when material fixes the issue
-.mat-card .mat-card-header-text {
-  height: 20px;
 }

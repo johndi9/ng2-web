@@ -15,8 +15,12 @@
   }
 
   @media ($mat-small-down) {
+    .flex-container {
+      padding-top: 20px;
+    }
+
     .padding {
-      padding-bottom: 25px;
+      padding-bottom: 35px;
     }
   }
 
@@ -53,5 +57,12 @@
     height: $logo-size;
     width: $logo-size;
   }
+}
 
+@mixin sub-heading-styles {
+  .sub-heading-styles {
+    margin-bottom: 30px;
+    margin-top: 10px;
+    text-align: center;
+  }
 }

@@ -1,7 +1,8 @@
+// Common variables
 $font-size-root: 14px;
-$mat-body-font-size-base: rem($font-size-root) !default;
-$mat-font-family: 'Roboto-Light', sans-serif;
+$font-family-root: 'Roboto-Light', sans-serif;
 
+// Resize utility variables
 $mat-xsmall-down: 'max-width: 600px';
 $mat-small-down: 'max-width: 960px';
 $mat-medium-down: 'max-width: 1280px';
@@ -15,3 +16,5 @@ $mat-large-up: 'max-width: 1960px';
 $total-delays: 50;
 $interval-delay: 25;
 
+// Company logos
+$logo-size: 70px;

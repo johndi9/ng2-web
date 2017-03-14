@@ -2,14 +2,11 @@
      fxLayout="row"
      fxLayout.sm="column"
      fxLayoutWrap="wrap">
-  <div class="loading-sidebar" fxFlex="25" fxFlex.sm="100" fxFlex.xs="100">
-
+  <div class="loading-sidebar" fxFlex="300px" fxFlex.md="25" fxFlex.sm="100" fxFlex.xs="100">
     <sidebar-loading-wrapper [delay]="140"></sidebar-loading-wrapper>
-
   </div>
 
-  <div class="loading-container" fxFlex="75" fxFlex.sm="100" fxFlex.xs="100">
-
+  <div class="loading-container" fxFlex fxFlex.md="75" fxFlex.sm="100" fxFlex.xs="100">
     <div class="flex-container"
          fxLayout="row"
          fxLayout.xs="column"
@@ -20,6 +17,5 @@
       </div>
 
     </div>
-
   </div>
 </div>

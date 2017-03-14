@@ -1,39 +1,50 @@
 <div class="flex-container"
-     fxLayout="row"
-     fxLayout.sm="column"
-     fxLayoutWrap="wrap">
-  <div fxFlex="25" fxFlex.sm="100" fxFlex.xs="100">
-    <cv-menu-wrapper [tabSelected]="tabSelected"
+     fxLayout="column"
+     fxLayout.gt-sm="row">
+
+  <div fxFlex fxFlex.gt-md="{{ SIDEBAR_MAX_WIDTH }}" fxFlex.md="25">
+    <cv-menu-wrapper [name]="curriculum?.name"
+                     [info]="curriculum?.info"
+                     [tabSelected]="tabSelected"
                      [isMediumUpView]="isMediumUpView"></cv-menu-wrapper>
   </div>
 
-  <div fxFlex="75" fxFlex.sm="100" fxFlex.xs="100">
-    <swiper (indexChange)="onIndexSwiperChange($event)">
+  <div fxFlex fxFlex.gt-md="calc(100vw - {{ SIDEBAR_MAX_WIDTH }})" fxFlex.md="75">
+    <swiper (indexChange)="onIndexSwiperChange($event)" class="fade-slide-in delay350">
       <div class="swiper-slide" fxLayout="column">
-        <personal-info-wrapper></personal-info-wrapper>
+        <personal-info-wrapper [info]="curriculum?.info"
+                               [skillSets]="curriculum?.skills?.sets"
+                               [interests]="curriculum?.interests"
+                               [aboutMe]="curriculum?.aboutMe"></personal-info-wrapper>
       </div>
       <div class="swiper-slide" fxLayout="column">
         <project-wrapper [isTabSelected]="tabSelected === cvTabSelected.PROJECTS"
                          [isModalOpened]="typeModalOpened === cvTabSelected.PROJECTS"
-                         [screenType]="isMediumUpView ? SCREEN_TYPES.DESKTOP_OR_BIGGER : SCREEN_TYPES.TABLET_OR_LOWER"
+                         [isMediumUpView]="isMediumUpView"
                          [slideToLeft]="slideToLeft"
                          [projects]="curriculum?.projects"></project-wrapper>
       </div>
       <div class="swiper-slide" fxLayout="column">
         <employ-wrapper [isTabSelected]="tabSelected === cvTabSelected.EMPLOYS"
                         [isModalOpened]="typeModalOpened === cvTabSelected.EMPLOYS"
-                        [screenType]="isMediumUpView ? SCREEN_TYPES.DESKTOP_OR_BIGGER : SCREEN_TYPES.TABLET_OR_LOWER"
+                        [isMediumUpView]="isMediumUpView"
                         [slideToLeft]="slideToLeft"
                         [employs]="curriculum?.employment?.history"></employ-wrapper>
       </div>
       <div class="swiper-slide" fxLayout="column">
-        <education-wrapper></education-wrapper>
+        <education-wrapper [educations]="curriculum?.education?.history"
+                           [certificates]="curriculum?.certificates"
+                           [seminars]="curriculum?.seminars"
+                           [languages]="curriculum?.languages"></education-wrapper>
       </div>
       <div class="swiper-slide" fxLayout="column">
-        <other-info-wrapper></other-info-wrapper>
+        <other-info-wrapper [writing]="curriculum?.writing"
+                            [speaking]="curriculum?.speaking"></other-info-wrapper>
       </div>
       <div class="swiper-slide" fxLayout="column">
-        <contact-wrapper></contact-wrapper>
+        <contact-wrapper [contact]="curriculum?.contact"
+                         [location]="curriculum?.location"
+                         [social]="curriculum?.social"></contact-wrapper>
       </div>
     </swiper>
   </div>

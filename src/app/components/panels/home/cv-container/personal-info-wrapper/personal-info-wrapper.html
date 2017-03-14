@@ -1,1 +1,35 @@
-personal-info-wrapper
+<h2 class="sub-heading-styles">{{ 'labels.personalInfoTitle' | translate }}</h2>
+
+<div>
+  <div>{{ info?.label }}</div>
+  <div>{{ info?.brief }}</div>
+  <div>{{ info?.quote }}</div>
+</div>
+
+<h3>{{ 'labels.skills' | translate }}</h3>
+
+<md-chip-list>
+  <template ngFor let-skillSet [ngForOf]="skillSets" let-i="index">
+    <div>{{ skillSet.name }}</div>
+
+    <md-chip *ngFor="let skill of skillSet.skills" [color]="color" class="custom-chip">
+      {{ skill }}
+    </md-chip>
+  </template>
+</md-chip-list>
+
+<h3>{{ 'labels.interests' | translate }}</h3>
+
+<ul>
+  <li *ngFor="let interest of interests">
+    {{ interest.name }}
+  </li>
+</ul>
+
+<h3>{{ 'labels.aboutMe' | translate }}</h3>
+
+<ul>
+  <li *ngFor="let phrase of aboutMe">
+    {{ phrase }}
+  </li>
+</ul>

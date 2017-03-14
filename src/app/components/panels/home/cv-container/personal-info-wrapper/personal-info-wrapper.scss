@@ -1,0 +1,14 @@
+$profile-pic-size: rem(70) !default;
+
+@include sub-heading-styles;
+
+.profile-pic {
+  @include mat-elevation(2);
+  border-radius: 50%;
+  height: $profile-pic-size;
+  width: $profile-pic-size;
+}
+
+.custom-chip {
+  margin: 5px;
+}

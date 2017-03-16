@@ -6,3 +6,5 @@
                 [typeModalOpened]="typeModalOpened"></cv-container>
   <cv-container-loading *ngIf="!curriculum"></cv-container-loading>
 </div>
+
+<ng2-footer [name]="curriculum?.name"></ng2-footer>

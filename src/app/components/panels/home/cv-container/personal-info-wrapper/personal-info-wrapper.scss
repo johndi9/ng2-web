@@ -2,6 +2,17 @@ $profile-pic-size: rem(70) !default;
 
 @include sub-heading-styles;
 
+%list-icon-style {
+  font-size: 2.2rem;
+  height: auto;
+  margin-right: 10px;
+  width: auto;
+}
+
+.block {
+  margin-bottom: 4rem;
+}
+
 .profile-pic {
   @include mat-elevation(2);
   border-radius: 50%;
@@ -9,6 +20,65 @@ $profile-pic-size: rem(70) !default;
   width: $profile-pic-size;
 }
 
-.custom-chip {
-  margin: 5px;
+blockquote {
+  border-left: 5px solid;
+  color: $color-quote;
+  font-family: $font-family-quote;
+  font-size: 1.4rem;
+  line-height: 1.5;
+  margin: 3em 0;
+  padding-left: 1.5rem;
+
+  div {
+    margin-bottom: .7rem;
+  }
+}
+
+.chip-wrapper {
+  padding: 0 20px;
+}
+
+.skill-title {
+  margin-bottom: 1.4rem;
+  width: 100%;
+
+  .mat-icon {
+    @extend %list-icon-style;
+  }
+
+  .mat-icon,
+  span {
+    vertical-align: middle;
+  }
+}
+
+.skill-container {
+  margin-bottom: 1.8rem;
+  width: 100%;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+ul {
+  font-size: 1.2rem;
+
+  li {
+    margin-bottom: 1.2rem;
+  }
+}
+
+.interest-list {
+  list-style-type: none;
+  padding: 0 20px;
+
+  .mat-icon {
+    @extend %list-icon-style;
+  }
+
+  .mat-icon,
+  span {
+    vertical-align: middle;
+  }
 }

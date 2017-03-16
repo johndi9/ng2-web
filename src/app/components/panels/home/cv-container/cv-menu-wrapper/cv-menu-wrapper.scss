@@ -10,7 +10,7 @@ $container-tab-width: 960px !default;
 .sidebar-container {
   @include mat-elevation(6);
   background: $white;
-  margin: $sidebar-container-overflow-y 10px 10px 10px;
+  margin: $sidebar-container-overflow-y 10px 10px;
 
   [md-list-item] {
     color: $color-base;
@@ -55,8 +55,8 @@ $container-tab-width: 960px !default;
   @include mat-elevation(2);
   border-radius: 5px;
   height: $profile-pic-size;
-  margin-top: $profile-pic-overflow-y;
   margin-left: calc(50% - #{$profile-pic-size} / 2);
+  margin-top: $profile-pic-overflow-y;
   width: $profile-pic-size;
 }
 
@@ -71,7 +71,7 @@ $container-tab-width: 960px !default;
   background: $white;
   border-bottom: 1px solid $border-color;
   margin-top: $sidebar-container-overflow-y-sm;
-  opacity: 0.95;
+  opacity: .95;
   padding: rem(10);
 }
 

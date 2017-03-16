@@ -93,7 +93,7 @@ rules:
   no-transition-all: 0
   no-url-protocols: 2
   no-vendor-prefixes:
-    - 2
+    - 0
     - additional-identifiers: []
       excluded-identifiers:
        - ms

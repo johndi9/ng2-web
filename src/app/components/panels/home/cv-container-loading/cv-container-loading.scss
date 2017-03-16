@@ -3,5 +3,12 @@ $total-height: 500px;
 .loading {
   background: $white;
   height: $total-height;
-  margin-top: calc(100vh - #{$video-overflow-visible-y})
+  margin-top: calc(100vh - #{$video-overflow-visible-y});
+}
+
+.loading-sidebar,
+.loading-container {
+  background: $white;
+  padding-top: 25px;
+  z-index: 1;
 }

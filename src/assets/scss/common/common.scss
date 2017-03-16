@@ -7,7 +7,6 @@ html, body {
   color: $color-base;
   font-family: $font-family-root;
   font-size: $font-size-root;
-  height: 100%;
   margin: 0;
   padding: 0;
   width: 100%;
@@ -59,6 +58,19 @@ html, body {
 
 .cdk-overlay-container .mat-dialog-container {
   box-shadow: none;
+}
+
+div.mat-chip-list-wrapper .mat-chip:not(.mat-basic-chip) {
+  background: transparent;
+  border: 3px solid $color-base;
+  margin: 0 7px 7px 0;
+  font-size: 1.3rem;
+}
+
+div.mat-chip-list-wrapper .mat-chip:not(.mat-basic-chip),
+div.mat-chip-list-wrapper .mat-chip:not(.mat-basic-chip):first-child,
+div.mat-chip-list-wrapper .mat-chip:not(.mat-basic-chip):last-child {
+  margin: 0 7px 7px 0;
 }
 
 // Full screen dialogs

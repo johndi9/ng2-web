@@ -1,35 +1,51 @@
-<h2 class="sub-heading-styles">{{ 'labels.personalInfoTitle' | translate }}</h2>
+<div class="block">
+  <h2 class="sub-heading-styles">{{ 'labels.personalInfoTitle' | translate }}</h2>
 
-<div>
-  <div>{{ info?.label }}</div>
-  <div>{{ info?.brief }}</div>
-  <div>{{ info?.quote }}</div>
+  <blockquote>
+    <div>{{ info?.label }}</div>
+    <div>{{ info?.brief }}</div>
+    <div>{{ info?.quote }}</div>
+  </blockquote>
 </div>
 
-<h3>{{ 'labels.skills' | translate }}</h3>
+<div class="block">
+  <h3>{{ 'labels.aboutMe' | translate }}</h3>
 
-<md-chip-list>
-  <template ngFor let-skillSet [ngForOf]="skillSets" let-i="index">
-    <div>{{ skillSet.name }}</div>
+  <ul>
+    <li *ngFor="let phrase of aboutMe">
+      {{ phrase }}
+    </li>
+  </ul>
+</div>
 
-    <md-chip *ngFor="let skill of skillSet.skills" [color]="color" class="custom-chip">
-      {{ skill }}
-    </md-chip>
-  </template>
-</md-chip-list>
+<div class="block">
+  <h3>{{ 'labels.skills' | translate }}</h3>
 
-<h3>{{ 'labels.interests' | translate }}</h3>
+  <div class="chip-wrapper">
+    <md-chip-list>
+      <template ngFor let-skillSet [ngForOf]="skillSets" let-i="index">
+        <h4 class="skill-title">
+          <md-icon>{{ skillSet.icon }}</md-icon>
+          <span>{{ skillSet.name }}</span>
+        </h4>
 
-<ul>
-  <li *ngFor="let interest of interests">
-    {{ interest.name }}
-  </li>
-</ul>
+        <div class="skill-container">
+          <md-chip *ngFor="let skill of skillSet.skills" [color]="color">
+            {{ skill }}
+          </md-chip>
+        </div>
+      </template>
+    </md-chip-list>
+  </div>
+</div>
 
-<h3>{{ 'labels.aboutMe' | translate }}</h3>
+<div class="block">
+  <h3>{{ 'labels.interests' | translate }}</h3>
 
-<ul>
-  <li *ngFor="let phrase of aboutMe">
-    {{ phrase }}
-  </li>
-</ul>
+  <ul class="interest-list">
+    <li *ngFor="let interest of interests">
+      <md-icon>{{ interest.icon }}</md-icon>
+      <span>{{ interest.name }}</span>
+    </li>
+  </ul>
+</div>

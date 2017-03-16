@@ -1,10 +1,9 @@
 $mat-card-header-size: auto !default;
-$mat-card-header-title-font-size: rem(18) !default;
+$mat-card-header-title-font-size: 1.8rem !default;
 $logo-pic-overflow-y-sm: -25px !default;
 
-
 .mat-card {
-  color: $gray-dark;
+  color: $color-base;
 }
 
 .mat-card-subtitle {
@@ -26,7 +25,10 @@ $logo-pic-overflow-y-sm: -25px !default;
 }
 
 .mat-card-content {
-  color: $black-054;
+  p {
+    color: $black-054;
+    font-size: 1rem;
+  }
 }
 
 .mat-card-avatar {
@@ -36,10 +38,12 @@ $logo-pic-overflow-y-sm: -25px !default;
   width: $logo-size;
 }
 
-.dot-separator:after {
-  content: ' \00b7';
-  font-size: rem(25);
-  vertical-align: middle;
+.dot-separator {
+  &:after {
+    content: ' \00b7';
+    font-size: rem(25);
+    vertical-align: middle;
+  }
 }
 
 .mat-icon {

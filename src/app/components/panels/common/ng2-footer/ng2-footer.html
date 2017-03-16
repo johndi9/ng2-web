@@ -1,5 +1,12 @@
-<footer id="footer" role="contentinfo" class="mam-footer">
-  <h2 class="sr-only">Footer links</h2>
+<footer fxLayout="row"
+        fxLayoutAlign="center center"
+        id="footer"
+        role="contentinfo">
+  <h2 class="sr-only">Footer</h2>
 
-  This is the footer
+  <template [ngIf]="name">
+    <span>{{ name }}</span>
+    <md-icon>copyright</md-icon>
+    <span>{{ today | date:'y' }}</span>
+  </template>
 </footer>

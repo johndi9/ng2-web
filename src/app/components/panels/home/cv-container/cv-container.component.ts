@@ -28,6 +28,7 @@ export class CvContainer implements OnInit, OnDestroy {
   private tabSelected: number;
   private cvTabSelected = CV_OPTION_TYPES;
   private slideToLeft: boolean;
+  private bgClass: string;
 
   private readonly DEFAULT_OPTION: number = 0;
   private readonly SIDEBAR_MAX_WIDTH: string = '320px';
@@ -77,6 +78,7 @@ export class CvContainer implements OnInit, OnDestroy {
     this.updateIfSlideToLeft(option);
     this.updateTabSelectionState(option);
     this.updateTabSelected(option);
+    this.updateBgColor(option);
   }
 
   /**
@@ -101,6 +103,21 @@ export class CvContainer implements OnInit, OnDestroy {
    */
   private updateTabSelected(option: number): void {
     this.tabSelected = option;
+  }
+
+  /**
+   * Update background color for the tab containers + sidebar
+   * @param option
+   */
+  private updateBgColor(option: number): void {
+    switch (option) {
+      case CV_OPTION_TYPES.PROJECTS:
+      case CV_OPTION_TYPES.EMPLOYS:
+        this.bgClass = 'grey';
+        break;
+      default:
+        this.bgClass = 'white';
+    }
   }
 
 }

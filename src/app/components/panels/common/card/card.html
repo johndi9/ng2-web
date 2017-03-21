@@ -24,7 +24,11 @@
         <md-card-subtitle>
           <div>
             <md-icon>place</md-icon>
-            {{ isProject ? element.employer : element.location }}
+            {{ isProject ? employFromProject?.location : element.location }}
+          </div>
+          <div *ngIf="isProject">
+            <md-icon>business</md-icon>
+            {{ employFromProject?.employer }}
           </div>
           <div>
             <md-icon>date_range</md-icon>

@@ -2,6 +2,7 @@ import {
   Component, ComponentRef, Input, ChangeDetectionStrategy, OnInit, ElementRef
 } from '@angular/core';
 
+import { CurriculumService } from '../../../../services/curriculum.service';
 import { DialogService } from '../../../../services/dialog.service';
 import { NotificationService } from '../../../../services/notification.service';
 
@@ -12,6 +13,7 @@ import { ProjectDialog } from '../../home/dialogs/project-dialog/project-dialog.
 import { Dialog } from '../../../../models/Components/Dialog';
 
 import { EVENT_TYPES, CV_OPTION_TYPES, ANIMATION_TYPES, SCREEN_TYPES } from '../../../../variables/variables';
+import { Employ } from '../../../../models/Curriculum/Employ/Employ';
 
 
 @Component({
@@ -22,7 +24,7 @@ import { EVENT_TYPES, CV_OPTION_TYPES, ANIMATION_TYPES, SCREEN_TYPES } from '../
 })
 
 export class Card implements OnInit {
-  @Input() element: ComponentRef<any>;
+  @Input() element: Project | Employ;
   @Input() isTabSelected: boolean = false;
   @Input() isModalOpened: boolean;
   @Input() animationInMs: number;
@@ -31,17 +33,20 @@ export class Card implements OnInit {
   @Input() screenType;
   @Input() slideToLeft: boolean;
 
+  private employFromProject: Employ;
   private isProject: boolean;
   private today: Date = new Date();
   private ANIMATION_TYPES = ANIMATION_TYPES;
 
   constructor(private _dialogService: DialogService,
+              private _curriculumService: CurriculumService,
               private _notificationService: NotificationService,
               private _elementRef: ElementRef) {
   }
 
   ngOnInit(): void {
     this.isProject = this.element instanceof Project;
+    this.employFromProject = this.isProject ? this._curriculumService.getEmployerFromProject(this.element.id) : null;
   }
 
   private openModal(event: MouseEvent): void {

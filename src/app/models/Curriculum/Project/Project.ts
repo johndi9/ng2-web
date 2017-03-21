@@ -1,5 +1,6 @@
 export class Project {
-  employer: string;
+  id: number;
+  employerId: number;
   title: string;
   category: string;
   role: string;
@@ -13,7 +14,8 @@ export class Project {
   highlights: string[];
 
   constructor() {
-    this.employer = undefined;
+    this.id = undefined;
+    this.employerId = undefined;
     this.title = undefined;
     this.category = undefined;
     this.role = undefined;

@@ -6,6 +6,8 @@ import { Curriculum } from '../models/Curriculum/Curriculum';
 
 import { Observable, Subscription } from 'rxjs/Rx';
 import MapUtils from '../utils/modelParser';
+import { Employ } from '../models/Curriculum/Employ/Employ';
+import { Project } from '../models/Curriculum/Project/Project';
 
 
 @Injectable()
@@ -37,5 +39,16 @@ export class CurriculumService {
       (error: any) => Observable.throw(error));
 
     return cvObservable;
+  }
+
+  public getEmployerFromProject(idProject: number): any {
+    const project: Project = this.getProject(idProject);
+
+    return this.curriculum && project ?
+      this.curriculum.employment.history.find((employ: Employ) => employ.id === project.employerId) : null;
+  }
+
+  public getProject(idProject: number): Project {
+    return this.curriculum && this.curriculum.projects.find((project: Project) => project.id === idProject);
   }
 }

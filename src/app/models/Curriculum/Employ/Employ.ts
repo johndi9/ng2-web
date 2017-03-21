@@ -1,4 +1,5 @@
 export class Employ {
+  id: number;
   employer: string;
   location: string;
   url: number;
@@ -11,6 +12,7 @@ export class Employ {
   highlights: string[];
 
   constructor() {
+    this.id = undefined;
     this.employer = undefined;
     this.location = undefined;
     this.url = undefined;

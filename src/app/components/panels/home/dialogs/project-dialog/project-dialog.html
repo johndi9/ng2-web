@@ -1,4 +1,14 @@
-<h2 md-dialog-title class="fade-slide-in">{{ project.title }}</h2>
+<div fxLayout="row"
+     fxLayoutAlign="center center">
+  <h2 fxFlex class="fade-slide-in">{{ project.title }}</h2>
+
+  <div fxFlex="50px">
+    <button md-icon-button
+            md-dialog-close>
+      <md-icon class="md-24">highlight_off</md-icon>
+    </button>
+  </div>
+</div>
 
 <md-dialog-content class="fade-slide-in delay100">
   <p>{{ project.category }} {{ project.role }}</p>
@@ -19,5 +29,6 @@
      color="primary">URL</a>
   <button
     md-button
-    md-dialog-close>Close</button>
+    md-dialog-close>Close
+  </button>
 </md-dialog-actions>

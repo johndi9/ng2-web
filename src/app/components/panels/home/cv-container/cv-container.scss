@@ -8,6 +8,7 @@
 
 .menu-wrapper,
 .container-wrapper {
+  box-shadow: 10px 0px 14px 0px $black-02;
   z-index: 1;
 
   &.grey {

@@ -24,6 +24,7 @@ import { ResizeService } from './services/resize.service';
 // Components
 import { AppComponent } from './app.component';
 import { Card } from './components/panels/common/card/card.component';
+import { CardDateRange } from './components/panels/common/card/card-date-range/card-date-range.component';
 import { ContactWrapper } from './components/panels/home/cv-container/contact-wrapper/contact-wrapper.component';
 import { CvContainer } from './components/panels/home/cv-container/cv-container.component';
 import { CvContainerLoading } from './components/panels/home/cv-container-loading/cv-container-loading.component';
@@ -107,7 +108,8 @@ export function createTranslateLoader(http: Http) {
     CvContainerLoading,
     ModuleLoadingWrapper,
     SidebarLoadingWrapper,
-    Ng2Ripple
+    Ng2Ripple,
+    CardDateRange
   ],
   imports: [ // import Angular's modules
     BrowserModule,

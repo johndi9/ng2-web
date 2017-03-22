@@ -1,0 +1,6 @@
+<span [ngClass]="{ 'dot-separator': calculateDuration }">
+  {{ (startDate | date:'y/MM') }} - {{ endDate ? (endDate | date:'y/MM') : ('labels.currently' | translate) }}
+</span>
+<span *ngIf="calculateDuration">
+  {{ ((endDate ? endDate : today) | amDifference: startDate : 'months' : true ) | monthsDuration }}
+</span>

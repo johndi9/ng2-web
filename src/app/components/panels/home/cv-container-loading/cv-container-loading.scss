@@ -9,6 +9,7 @@ $total-height: 500px;
 .loading-sidebar,
 .loading-container {
   background: $white;
+  box-shadow: 10px 0px 14px 0px $black-02;
   padding-top: 25px;
   z-index: 1;
 }

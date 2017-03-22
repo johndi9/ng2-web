@@ -1,0 +1,11 @@
+span {
+  line-height: 0;
+}
+
+.dot-separator {
+  &:after {
+    content: ' \00b7';
+    font-size: rem(25);
+    vertical-align: middle;
+  }
+}

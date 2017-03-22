@@ -1,6 +1,9 @@
 export class Education {
   institution: string;
   title: string;
+  location: string;
+  url: string;
+  logo: string;
   start: number;
   end: number;
   grade: string;
@@ -10,6 +13,9 @@ export class Education {
   constructor() {
     this.institution = undefined;
     this.title = undefined;
+    this.location = undefined;
+    this.url = undefined;
+    this.logo = undefined;
     this.start = undefined;
     this.end = undefined;
     this.grade = undefined;

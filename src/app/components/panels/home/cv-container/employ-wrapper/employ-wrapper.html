@@ -7,14 +7,25 @@
   <template ngFor let-employ [ngForOf]="employs" let-i="index">
     <div fxFlex="33.3333%" fxFlex.md="50" fxFlex.sm="50" class="padding">
       <card class="card"
-            [element]="employ"
-            [isTabSelected]="isTabSelected"
-            [isModalOpened]="isModalOpened"
-            [animationInMs]="animationSettings[screenType].duration"
-            [animationDelay]="animationSettings[screenType].delay * i"
+            [location]="employ?.location"
+            [dialog]="getDialog(employ)"
+            [type]="CV_OPTION_TYPES.EMPLOYS"
+            [logo]="employ.logo"
             [isMediumUpView]="isMediumUpView"
-            [screenType]="screenType"
-            [slideToLeft]="slideToLeft"></card>
+            [willTriggerModal]="true">
+        <div class="card-title">
+          {{ employ?.employer }}
+        </div>
+        <card-date-range [startDate]="employ.start"
+                         [endDate]="employ.end"
+                         [calculateDuration]="true"></card-date-range>
+        <div class="card-content">
+          {{ employ?.summary }}
+        </div>
+        <div class="card-actions">
+          <button md-button color="primary">{{ 'labels.moreDetails' | translate }}</button>
+        </div>
+      </card>
     </div>
   </template>
 </div>

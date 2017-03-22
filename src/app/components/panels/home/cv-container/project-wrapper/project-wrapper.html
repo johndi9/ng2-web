@@ -7,14 +7,26 @@
   <template ngFor let-project [ngForOf]="projects" let-i="index">
     <div fxFlex.gt-md="33.3333%" fxFlex="50" fxFlex.xs="100" class="padding">
       <card class="card"
-            [element]="project"
-            [isTabSelected]="isTabSelected"
-            [isModalOpened]="isModalOpened"
-            [animationInMs]="animationSettings[screenType].duration + 50 * i"
-            [animationDelay]="animationSettings[screenType].delay * i"
+            [location]="getEmployerFromProject(project?.id)?.location"
+            [employer]="getEmployerFromProject(project?.id)?.employer"
+            [dialog]="getDialog(project)"
+            [type]="CV_OPTION_TYPES.PROJECTS"
+            [logo]="project.logo"
             [isMediumUpView]="isMediumUpView"
-            [screenType]="screenType"
-            [slideToLeft]="slideToLeft"></card>
+            [willTriggerModal]="true">
+        <div class="card-title">
+          {{ project?.title }}
+        </div>
+        <card-date-range [startDate]="project.start"
+                         [endDate]="project.end"
+                         [calculateDuration]="true"></card-date-range>
+        <div class="card-content">
+          {{ project?.summary }}
+        </div>
+        <div class="card-actions">
+          <button md-button color="primary">{{ 'labels.moreDetails' | translate }}</button>
+        </div>
+      </card>
     </div>
   </template>
 </div>

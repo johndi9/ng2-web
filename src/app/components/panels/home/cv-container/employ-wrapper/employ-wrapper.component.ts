@@ -1,10 +1,11 @@
-import { Component, Input, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
+import { EmployDialog } from '../../dialogs/employ-dialog/employ-dialog.component';
+
+import { Dialog } from '../../../../../models/Components/Dialog';
 import { Employ } from '../../../../../models/Curriculum/Employ/Employ';
 
-import { animationSettings } from '../../../../../animations/animations';
-
-import { SCREEN_TYPES } from '../../../../../variables/variables';
+import { CV_OPTION_TYPES } from '../../../../../variables/variables';
 
 
 @Component({
@@ -14,22 +15,17 @@ import { SCREEN_TYPES } from '../../../../../variables/variables';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class EmployWrapper implements OnInit{
+export class EmployWrapper {
   @Input() employs: Employ[];
-  @Input() isTabSelected: boolean;
-  @Input() isModalOpened: boolean;
   @Input() isMediumUpView: boolean;
-  @Input() slideToLeft: boolean;
 
-  private SCREEN_TYPES = SCREEN_TYPES;
-  private animationSettings = animationSettings;
-  private screenType;
+  private CV_OPTION_TYPES = CV_OPTION_TYPES;
 
   constructor() {
   }
 
-  ngOnInit(): void {
-    this.screenType = this.isMediumUpView ? SCREEN_TYPES.DESKTOP_OR_BIGGER : SCREEN_TYPES.TABLET_OR_LOWER;
+  private getDialog(employ: Employ) {
+    return new Dialog(EmployDialog, ['employ'], [employ]);
   }
 
 }

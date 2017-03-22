@@ -1,16 +1,13 @@
 $profile-pic-size: rem(70) !default;
 
 @include sub-heading-styles;
+@include shared-common-styles;
 
 %list-icon-style {
   font-size: 2.2rem;
   height: auto;
   margin-right: 10px;
   width: auto;
-}
-
-.block {
-  margin-bottom: 4rem;
 }
 
 .profile-pic {

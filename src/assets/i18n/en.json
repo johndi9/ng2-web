@@ -1,19 +1,22 @@
 {
   "labels": {
-    "year": "yr",
-    "years": "yrs",
+    "aboutMe": "About me",
+    "close": "Close",
+    "contactTitle": "Contact",
+    "currently": "currently",
+    "educationTitle": "Education",
+    "employsTitle": "Employs",
+    "interests": "Interests",
     "month": "mo",
     "months": "mo",
-    "currently": "currently",
+    "moreDetails": "More details",
+    "otherInfoTitle": "Other Information",
     "personalInfo": "Personal Information",
-    "skills": "Skills",
-    "interests": "Interests",
-    "aboutMe": "About me",
     "personalInfoTitle": "Personal Information",
     "projectsTitle": "Projects",
-    "employsTitle": "Employs",
-    "educationTitle": "Education",
-    "otherInfoTitle": "Other Information",
-    "contactTitle": "Contact"
+    "skills": "Skills",
+    "url": "Url",
+    "year": "yr",
+    "years": "yrs"
   }
 }

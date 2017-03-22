@@ -1,10 +1,14 @@
-import { Component, Input, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
+import { CurriculumService } from '../../../../../services/curriculum.service';
+
+import { ProjectDialog } from '../../dialogs/project-dialog/project-dialog.component';
+
+import { Dialog } from '../../../../../models/Components/Dialog';
+import { Employ } from '../../../../../models/Curriculum/Employ/Employ';
 import { Project } from '../../../../../models/Curriculum/Project/Project';
 
-import { animationSettings } from '../../../../../animations/animations';
-
-import { SCREEN_TYPES } from '../../../../../variables/variables';
+import { CV_OPTION_TYPES } from '../../../../../variables/variables';
 
 
 @Component({
@@ -14,21 +18,20 @@ import { SCREEN_TYPES } from '../../../../../variables/variables';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class ProjectWrapper implements OnInit {
+export class ProjectWrapper {
   @Input() projects: Project[];
-  @Input() isTabSelected: boolean;
-  @Input() isModalOpened: boolean;
   @Input() isMediumUpView: boolean;
-  @Input() slideToLeft: boolean;
 
-  private SCREEN_TYPES = SCREEN_TYPES;
-  private animationSettings = animationSettings;
-  private screenType;
+  private CV_OPTION_TYPES = CV_OPTION_TYPES;
 
-  constructor() {
+  constructor(private _curriculumService: CurriculumService) {
   }
 
-  ngOnInit(): void {
-    this.screenType = this.isMediumUpView ? SCREEN_TYPES.DESKTOP_OR_BIGGER : SCREEN_TYPES.TABLET_OR_LOWER;
+  private getEmployerFromProject(projectId: number): Employ {
+    return this._curriculumService.getEmployerFromProject(projectId);
+  }
+
+  private getDialog(project: Project) {
+    return new Dialog(ProjectDialog, ['project'], [project]);
   }
 }

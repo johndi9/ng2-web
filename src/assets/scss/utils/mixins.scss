@@ -66,3 +66,16 @@
     text-align: center;
   }
 }
+
+@mixin shared-common-styles {
+  .block {
+    margin-bottom: 4rem;
+  }
+}
+
+@mixin card-vertical-icon {
+  .mat-icon {
+    font-size: rem(20);
+    vertical-align: middle;
+  }
+}

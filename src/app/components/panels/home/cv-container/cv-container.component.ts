@@ -21,13 +21,10 @@ import { STATE_KEYS, CV_OPTION_TYPES } from '../../../../variables/variables';
 export class CvContainer implements OnInit, OnDestroy {
   @Input() curriculum: Curriculum;
   @Input() isMediumUpView: boolean;
-  @Input() typeModalOpened: CV_OPTION_TYPES;
 
   private optionChangeSubscription: Subscription;
 
   private tabSelected: number;
-  private cvTabSelected = CV_OPTION_TYPES;
-  private slideToLeft: boolean;
   private bgClass: string;
 
   private readonly DEFAULT_OPTION: number = 0;
@@ -75,18 +72,9 @@ export class CvContainer implements OnInit, OnDestroy {
    * @param option
    */
   private updateTabSelection(option: number): void {
-    this.updateIfSlideToLeft(option);
     this.updateTabSelectionState(option);
     this.updateTabSelected(option);
     this.updateBgColor(option);
-  }
-
-  /**
-   * Identify if the user has selected a left or right option in order to show different animations
-   * @param option
-   */
-  private updateIfSlideToLeft(option: number): void {
-    this.slideToLeft = option < this._appState.get(STATE_KEYS[STATE_KEYS.CV_OPTION_SELECTED]);
   }
 
   /**
@@ -113,6 +101,7 @@ export class CvContainer implements OnInit, OnDestroy {
     switch (option) {
       case CV_OPTION_TYPES.PROJECTS:
       case CV_OPTION_TYPES.EMPLOYS:
+      case CV_OPTION_TYPES.EDUCATION:
         this.bgClass = 'grey';
         break;
       default:

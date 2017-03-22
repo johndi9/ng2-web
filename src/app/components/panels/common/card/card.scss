@@ -2,6 +2,8 @@ $mat-card-header-size: auto !default;
 $mat-card-header-title-font-size: 1.6rem !default;
 $logo-pic-overflow-y-sm: -25px !default;
 
+@include card-vertical-icon;
+
 .mat-card {
   color: $color-base;
 }
@@ -36,19 +38,6 @@ $logo-pic-overflow-y-sm: -25px !default;
   border-radius: rem(5);
   height: $logo-size;
   width: $logo-size;
-}
-
-.dot-separator {
-  &:after {
-    content: ' \00b7';
-    font-size: rem(25);
-    vertical-align: middle;
-  }
-}
-
-.mat-icon {
-  font-size: rem(20);
-  vertical-align: middle;
 }
 
 .mat-card-actions {

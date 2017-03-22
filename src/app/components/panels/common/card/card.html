@@ -1,11 +1,4 @@
-<div (click)="openModal($event)"
-     animation
-     [animation-delay]="animationDelay"
-     [animation-duration]="animationInMs"
-     [animation-in]="slideToLeft ? ANIMATION_TYPES.bounceInRight : ANIMATION_TYPES.bounceInLeft"
-     [animation-out]="slideToLeft ? ANIMATION_TYPES.bounceOutRight : ANIMATION_TYPES.bounceOutLeft"
-     [animation-play]="isTabSelected"
-     [screenType]="screenType">
+<div (click)="willTriggerModal ? openModal($event) : null">
   <md-card>
     <md-card-header fxLayout="column"
                     fxLayout.gt-sm="row"
@@ -14,27 +7,30 @@
            fxFlex
            fxFlex.gt-sm="70px">
         <img class="mat-card-avatar"
-             src="{{ '/assets/images/' + element.logo }}">
+             src="{{ '/assets/images/' + logo }}">
       </div>
 
       <div class="mat-card-header-text" fxFlex>
         <md-card-title>
-          {{ isProject ? element.title : element.employer }}
+          <ng-content select=".card-title"></ng-content>
         </md-card-title>
+
         <md-card-subtitle>
-          <div>
-            <md-icon>place</md-icon>
-            {{ isProject ? employFromProject?.location : element.location }}
+          <div *ngIf="location" class="card-location" fxLayout="row" fxLayoutAlign="center center">
+            <md-icon fxFlex="30px">place</md-icon>
+            <span fxFlex>{{ location }}</span>
           </div>
-          <div *ngIf="isProject">
-            <md-icon>business</md-icon>
-            {{ employFromProject?.employer }}
+          <div *ngIf="employer" class="card-employer" fxLayout="row" fxLayoutAlign="center center">
+            <md-icon fxFlex="30px">business</md-icon>
+            <span fxFlex>{{ employer }}</span>
           </div>
-          <div>
-            <md-icon>date_range</md-icon>
-            <span class="dot-separator">{{ (element.start | date:'y/MM') }} - {{ element.end ? (element.end | date:'y/MM') : ('labels.currently' | translate) }}</span>
-            <span>{{ ((element.end ? element.end : today) | amDifference: element.start : 'months' : true ) |
-          monthsDuration}} </span>
+          <div *ngIf="institution" class="card-institution" fxLayout="row" fxLayoutAlign="center center">
+            <md-icon fxFlex="30px">account_balance</md-icon>
+            <span fxFlex>{{ institution }}</span>
+          </div>
+          <div class="card-date-range" fxLayout="row" fxLayoutAlign="center center">
+            <md-icon fxFlex="30px">date_range</md-icon>
+            <span fxFlex><ng-content select="card-date-range"></ng-content></span>
           </div>
         </md-card-subtitle>
       </div>
@@ -42,11 +38,11 @@
 
 
     <md-card-content>
-      <p>{{ element.summary }}</p>
+      <ng-content select=".card-content"></ng-content>
     </md-card-content>
 
     <md-card-actions>
-      <button md-button color="primary">More details</button>
+      <ng-content select=".card-actions"></ng-content>
     </md-card-actions>
   </md-card>
 </div>

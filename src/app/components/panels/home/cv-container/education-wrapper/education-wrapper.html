@@ -1,1 +1,37 @@
-<h2 class="sub-heading-styles">{{ 'labels.educationTitle' | translate }}</h2>
+<div class="block">
+  <h2 class="sub-heading-styles">{{ 'labels.educationTitle' | translate }}</h2>
+
+
+  <div class="flex-container"
+       fxLayout="row"
+       fxLayout.xs="column"
+       fxLayoutWrap="wrap">
+    <template ngFor let-education [ngForOf]="educations" let-i="index">
+      <div fxFlex.gt-md="33.3333%" fxFlex="50" fxFlex.xs="100" class="padding">
+        <card class="card"
+              [institution]="education?.institution"
+              [logo]="education.logo"
+              [isMediumUpView]="isMediumUpView">
+          <div class="card-title">
+            {{ education?.title }}
+          </div>
+          <card-date-range [startDate]="education.start"
+                           [endDate]="education.end"
+                           [calculateDuration]="false"></card-date-range>
+          <div class="card-content">
+            <p *ngFor="let curriculum of education?.curriculum">
+              {{ curriculum }}
+            </p>
+          </div>
+          <div class="card-actions">
+            <a *ngIf="education.url"
+               href="{{ education.url }}"
+               md-raised-button
+               color="primary">{{ 'labels.url' | translate }}</a>
+          </div>
+        </card>
+      </div>
+    </template>
+  </div>
+
+</div>

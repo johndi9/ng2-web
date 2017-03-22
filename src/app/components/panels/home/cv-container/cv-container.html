@@ -18,17 +18,11 @@
                                [aboutMe]="curriculum?.aboutMe"></personal-info-wrapper>
       </div>
       <div class="swiper-slide" fxLayout="column">
-        <project-wrapper [isTabSelected]="tabSelected === cvTabSelected.PROJECTS"
-                         [isModalOpened]="typeModalOpened === cvTabSelected.PROJECTS"
-                         [isMediumUpView]="isMediumUpView"
-                         [slideToLeft]="slideToLeft"
+        <project-wrapper [isMediumUpView]="isMediumUpView"
                          [projects]="curriculum?.projects"></project-wrapper>
       </div>
       <div class="swiper-slide" fxLayout="column">
-        <employ-wrapper [isTabSelected]="tabSelected === cvTabSelected.EMPLOYS"
-                        [isModalOpened]="typeModalOpened === cvTabSelected.EMPLOYS"
-                        [isMediumUpView]="isMediumUpView"
-                        [slideToLeft]="slideToLeft"
+        <employ-wrapper [isMediumUpView]="isMediumUpView"
                         [employs]="curriculum?.employment?.history"></employ-wrapper>
       </div>
       <div class="swiper-slide" fxLayout="column">

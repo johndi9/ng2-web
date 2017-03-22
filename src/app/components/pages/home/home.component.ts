@@ -11,7 +11,7 @@ import { ModalOpened } from '../../../models/Components/Events';
 
 import { Subscription } from 'rxjs/Rx';
 
-import { CV_OPTION_TYPES, STATE_KEYS } from '../../../variables/variables';
+import { STATE_KEYS } from '../../../variables/variables';
 
 
 @Component({
@@ -29,7 +29,6 @@ export class Home implements OnInit, OnDestroy, AfterViewInit {
 
   private curriculum: Curriculum;
   private isMediumUpView: boolean;
-  private typeModalOpened: CV_OPTION_TYPES;
   private rippleContainer: HTMLElement;
 
   constructor(private _appState: AppState,
@@ -47,7 +46,6 @@ export class Home implements OnInit, OnDestroy, AfterViewInit {
 
     this.modalOpenedSubscription = this._notificationService.modalOpened.subscribe((modalOpened: ModalOpened) => {
       this.updateModalOpenedState(modalOpened.type);
-      this.updateModalOpened(modalOpened.type);
     });
   }
 
@@ -79,14 +77,6 @@ export class Home implements OnInit, OnDestroy, AfterViewInit {
    */
   private updateModalOpenedState(type: number): void {
     this._appState.set(STATE_KEYS[STATE_KEYS.MODAL_TYPE_OPENED], type);
-  }
-
-  /**
-   * Update the modal opened to render the container animations
-   * @param type
-   */
-  private updateModalOpened(type: number): void {
-    this.typeModalOpened = type
   }
 
 }

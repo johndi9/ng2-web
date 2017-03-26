@@ -30,8 +30,8 @@ export class DialogService {
       right: ''
     }
   };
-  private readonly RIPPLE_SPEED_DESKTOP: number = 0.3;
-  private readonly RIPPLE_SPEED_DEVICE: number = 0.3;
+  private readonly RIPPLE_SPEED_DESKTOP: number = 0.5;
+  private readonly RIPPLE_SPEED_DEVICE: number = 0.7;
   private readonly RIPPLE_SIZE_FACTOR: number = 1.3;
   /** Fade-in duration for the ripples. Can be modified with the speedFactor option. */
   private readonly RIPPLE_FADE_IN_DURATION = 450;
@@ -99,21 +99,41 @@ export class DialogService {
    * @param isMediumUpView
    */
   private triggerRipple(event: MouseEvent, isMediumUpView: boolean): Observable<boolean> {
-    const radius: number = this.RIPPLE_SIZE_FACTOR * Math.max(window.innerHeight, window.innerWidth);
+    const radius: number = this.RIPPLE_SIZE_FACTOR * this.getMaximumSquareSide(event);
     const speedFactor: number = this.getSpeedFactor(isMediumUpView);
 
     if (!this.rippleContainer) {
       this.appendRipple();
     }
 
-    this.rippleContainer.location.nativeElement.style.top = event.pageY + 'px';
-    this.rippleContainer.location.nativeElement.style.left = event.pageX + 'px';
+    this.setInitialCoordinatesRipple(event);
 
     // Trigger ripple
     (<Ng2Ripple>this.rippleContainer.instance).launch(event.pageX, event.pageY,
       { centered: false, persistent: true, radius: radius, color: 'white', speedFactor: speedFactor });
 
     return this.blockModalOpenAnimation(isMediumUpView, true);
+  }
+
+  /**
+   * Get the maximum axis side in order to create from there the ripple radius
+   * @param event
+   * @returns {number}
+   */
+  private getMaximumSquareSide(event: MouseEvent): number {
+    const maxXAxis: number = Math.max(Math.abs(window.innerWidth - event.clientX), event.clientX);
+    const maxYAxis: number = Math.max(Math.abs(window.innerHeight - event.clientY), event.clientY);
+
+    return Math.max(maxXAxis, maxYAxis);
+  }
+
+  /**
+   * Center the ripple element based on the event coordinates
+   * @param event
+   */
+  private setInitialCoordinatesRipple(event: MouseEvent): void {
+    this.rippleContainer.location.nativeElement.style.top = event.pageY + 'px';
+    this.rippleContainer.location.nativeElement.style.left = event.pageX + 'px';
   }
 
   /**

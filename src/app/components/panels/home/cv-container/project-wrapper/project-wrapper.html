@@ -11,20 +11,25 @@
             [employer]="getEmployerFromProject(project?.id)?.employer"
             [dialog]="getDialog(project)"
             [type]="CV_OPTION_TYPES.PROJECTS"
-            [logo]="project.logo"
+            [logo]="project?.logo"
             [isMediumUpView]="isMediumUpView"
             [willTriggerModal]="true">
         <div class="card-title">
           {{ project?.title }}
         </div>
-        <card-date-range [startDate]="project.start"
-                         [endDate]="project.end"
+        <card-date-range [startDate]="project?.start"
+                         [endDate]="project?.end"
                          [calculateDuration]="true"></card-date-range>
         <div class="card-content">
           {{ project?.summary }}
         </div>
         <div class="card-actions">
-          <button md-button color="primary">{{ 'labels.moreDetails' | translate }}</button>
+          <button md-button
+                  color="primary">{{ 'labels.moreDetails' | translate }}</button>
+          <a *ngIf="project?.url"
+             md-raised-button
+             href="{{ project?.url }}"
+             color="primary">{{ 'labels.url' | translate }}</a>
         </div>
       </card>
     </div>

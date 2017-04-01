@@ -4,15 +4,17 @@
      fxLayout="row"
      fxLayout.xs="column"
      fxLayoutWrap="wrap">
-  <template ngFor let-project [ngForOf]="projects" let-i="index">
-    <div fxFlex.gt-md="33.3333%" fxFlex="50" fxFlex.xs="100" class="padding">
-      <card class="card"
+  <div *ngFor="let columnIndex of getColumnsNumber()" fxFlex.gt-md="33.3333%" fxFlex.md="50" fxFlex="100"
+       class="padding-column">
+    <template ngFor let-project [ngForOf]="projects" let-i="index">
+      <card *ngIf="((i + 1) - columnIndex) % numberOfColumns === 0"
+            class="card padding-card"
             [location]="getEmployerFromProject(project?.id)?.location"
             [employer]="getEmployerFromProject(project?.id)?.employer"
             [dialog]="getDialog(project)"
             [type]="CV_OPTION_TYPES.PROJECTS"
             [logo]="project?.logo"
-            [isMediumUpView]="isMediumUpView"
+            [typeScreen]="typeScreen"
             [willTriggerModal]="true">
         <div class="card-title">
           {{ project?.title }}
@@ -25,13 +27,14 @@
         </div>
         <div class="card-actions">
           <button md-button
-                  color="primary">{{ 'labels.moreDetails' | translate }}</button>
+                  color="primary">{{ 'labels.moreDetails' | translate }}
+          </button>
           <a *ngIf="project?.url"
              md-raised-button
              href="{{ project?.url }}"
              color="primary">{{ 'labels.url' | translate }}</a>
         </div>
       </card>
-    </div>
-  </template>
+    </template>
+  </div>
 </div>

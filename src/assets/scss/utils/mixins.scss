@@ -10,18 +10,17 @@
 }
 
 @mixin card-grid {
-  .padding {
-    padding: 10px;
+  .padding-column {
+    padding-left: 10px;
+    padding-right: 10px;
+
+    @media ($mat-xsmall-down) {
+      padding: 0;
+    }
   }
 
-  @media ($mat-small-down) {
-    .flex-container {
-      padding-top: 20px;
-    }
-
-    .padding {
-      padding-bottom: 35px;
-    }
+  .padding-card {
+    padding-bottom: 20px;
   }
 
   .card {
@@ -78,4 +77,11 @@
     font-size: rem(20);
     vertical-align: middle;
   }
+}
+
+@mixin expand-card-section {
+  margin-left: -16px;
+  margin-right: -16px;
+  padding-left: 16px;
+  padding-right: 16px;
 }

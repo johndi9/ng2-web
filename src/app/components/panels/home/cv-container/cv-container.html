@@ -6,7 +6,7 @@
     <cv-menu-wrapper [name]="curriculum?.name"
                      [info]="curriculum?.info"
                      [tabSelected]="tabSelected"
-                     [isMediumUpView]="isMediumUpView"></cv-menu-wrapper>
+                     [typeScreen]="typeScreen"></cv-menu-wrapper>
   </div>
 
   <div class="container-wrapper {{bgClass}}" fxFlex fxFlex.gt-md="calc(100vw - {{ SIDEBAR_MAX_WIDTH }})" fxFlex.md="75">
@@ -18,22 +18,23 @@
                                [aboutMe]="curriculum?.aboutMe"></personal-info-wrapper>
       </div>
       <div class="swiper-slide" fxLayout="column">
-        <project-wrapper [isMediumUpView]="isMediumUpView"
+        <project-wrapper [typeScreen]="typeScreen"
                          [projects]="curriculum?.projects"></project-wrapper>
       </div>
       <div class="swiper-slide" fxLayout="column">
-        <employ-wrapper [isMediumUpView]="isMediumUpView"
+        <employ-wrapper [typeScreen]="typeScreen"
                         [employs]="curriculum?.employment?.history"></employ-wrapper>
       </div>
       <div class="swiper-slide" fxLayout="column">
-        <education-wrapper [educations]="curriculum?.education?.history"
+        <education-wrapper [typeScreen]="typeScreen"
+                           [educations]="curriculum?.education?.history"
                            [certificates]="curriculum?.certificates"
                            [seminars]="curriculum?.seminars"
                            [languages]="curriculum?.languages"></education-wrapper>
       </div>
       <div class="swiper-slide" fxLayout="column">
-        <other-info-wrapper [writing]="curriculum?.writing"
-                            [speaking]="curriculum?.speaking"></other-info-wrapper>
+        <other-info-wrapper [writings]="curriculum?.writing"
+                            [speakings]="curriculum?.speaking"></other-info-wrapper>
       </div>
       <div class="swiper-slide" fxLayout="column">
         <contact-wrapper [contact]="curriculum?.contact"

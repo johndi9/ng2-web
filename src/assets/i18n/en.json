@@ -2,11 +2,14 @@
   "labels": {
     "aboutMe": "About me",
     "close": "Close",
+    "certificateTitle": "Certificates",
     "contactTitle": "Contact",
     "currently": "currently",
     "educationTitle": "Education",
     "employsTitle": "Employs",
     "interests": "Interests",
+    "languageTitle": "Languages",
+    "locationTitle": "Location",
     "month": "mo",
     "months": "mo",
     "moreDetails": "More details",
@@ -14,8 +17,12 @@
     "personalInfo": "Personal Information",
     "personalInfoTitle": "Personal Information",
     "projectsTitle": "Projects",
+    "seminarTitle": "Seminars",
     "skills": "Skills",
+    "socialTitle": "Social networks",
+    "speakingTitle": "Speakings",
     "url": "Url",
+    "writingTitle": "Writings",
     "year": "yr",
     "years": "yrs"
   }

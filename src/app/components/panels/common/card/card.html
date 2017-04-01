@@ -1,12 +1,11 @@
-<div (click)="willTriggerModal ? openModal($event) : null">
+<div (click)="willTriggerModal ? openModal($event) : null" class="card-container">
   <md-card>
-    <md-card-header fxLayout="column"
-                    fxLayout.gt-sm="row"
+    <md-card-header fxLayout="row"
                     fxLayoutAlign="center center">
       <div md-card-avatar
-           fxFlex
-           fxFlex.gt-sm="70px">
+           fxFlex="{{ logoWidth }}">
         <img class="mat-card-avatar"
+             [ngStyle]="{ 'width': logoWidth, 'height': logoHeight }"
              src="{{ '/assets/images/' + logo }}">
       </div>
 
@@ -14,27 +13,27 @@
         <md-card-title>
           <ng-content select=".card-title"></ng-content>
         </md-card-title>
-
-        <md-card-subtitle>
-          <div *ngIf="location" class="card-location" fxLayout="row" fxLayoutAlign="center center">
-            <md-icon fxFlex="30px">place</md-icon>
-            <span fxFlex>{{ location }}</span>
-          </div>
-          <div *ngIf="employer" class="card-employer" fxLayout="row" fxLayoutAlign="center center">
-            <md-icon fxFlex="30px">business</md-icon>
-            <span fxFlex>{{ employer }}</span>
-          </div>
-          <div *ngIf="institution" class="card-institution" fxLayout="row" fxLayoutAlign="center center">
-            <md-icon fxFlex="30px">account_balance</md-icon>
-            <span fxFlex>{{ institution }}</span>
-          </div>
-          <div class="card-date-range" fxLayout="row" fxLayoutAlign="center center">
-            <md-icon fxFlex="30px">date_range</md-icon>
-            <span fxFlex><ng-content select="card-date-range"></ng-content></span>
-          </div>
-        </md-card-subtitle>
       </div>
     </md-card-header>
+
+    <md-card-subtitle>
+      <div *ngIf="location" class="card-location" fxLayout="row" fxLayoutAlign="center center">
+        <md-icon fxFlex="30px">place</md-icon>
+        <span fxFlex>{{ location }}</span>
+      </div>
+      <div *ngIf="employer" class="card-employer" fxLayout="row" fxLayoutAlign="center center">
+        <md-icon fxFlex="30px">business</md-icon>
+        <span fxFlex>{{ employer }}</span>
+      </div>
+      <div *ngIf="institution" class="card-institution" fxLayout="row" fxLayoutAlign="center center">
+        <md-icon fxFlex="30px">account_balance</md-icon>
+        <span fxFlex>{{ institution }}</span>
+      </div>
+      <div class="card-date-range" fxLayout="row" fxLayoutAlign="center center">
+        <md-icon fxFlex="30px">date_range</md-icon>
+        <span fxFlex><ng-content select="card-date-range"></ng-content></span>
+      </div>
+    </md-card-subtitle>
 
 
     <md-card-content>

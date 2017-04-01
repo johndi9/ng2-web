@@ -12,8 +12,8 @@ import { Writing } from '../../../../../models/Curriculum/Writing/Writing';
 })
 
 export class OtherInfoWrapper {
-  @Input() writing: Writing[];
-  @Input() speaking: Speaking[];
+  @Input() writings: Writing[];
+  @Input() speakings: Speaking[];
 
   constructor() {
   }

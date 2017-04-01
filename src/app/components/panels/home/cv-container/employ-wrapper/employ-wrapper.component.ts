@@ -1,11 +1,11 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, SimpleChanges, OnChanges } from '@angular/core';
 
 import { EmployDialog } from '../../dialogs/employ-dialog/employ-dialog.component';
 
 import { Dialog } from '../../../../../models/Components/Dialog';
 import { Employ } from '../../../../../models/Curriculum/Employ/Employ';
 
-import { CV_OPTION_TYPES } from '../../../../../variables/variables';
+import { CV_OPTION_TYPES, SCREEN_TYPES } from '../../../../../variables/variables';
 
 
 @Component({
@@ -15,17 +15,28 @@ import { CV_OPTION_TYPES } from '../../../../../variables/variables';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class EmployWrapper {
+export class EmployWrapper implements OnChanges {
   @Input() employs: Employ[];
-  @Input() isMediumUpView: boolean;
+  @Input() typeScreen: number;
+
+  private numberOfColumns: number;
 
   private CV_OPTION_TYPES = CV_OPTION_TYPES;
+  private SCREEN_TYPES: SCREEN_TYPES;
 
   constructor() {
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    this.numberOfColumns = this.typeScreen + 1;
+  }
+
   private getDialog(employ: Employ) {
     return new Dialog(EmployDialog, ['employ'], [employ]);
+  }
+
+  private getColumnsNumber(): Array<number> {
+    return Array(this.numberOfColumns).fill(0).map((x, i) => i + 1);
   }
 
 }

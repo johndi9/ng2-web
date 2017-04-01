@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { RippleConfig, RippleRef, MdRipple } from '@angular/material';
+import { MdRipple } from '@angular/material';
 
 
 @Component({
@@ -14,7 +14,7 @@ export class Ng2Ripple {
   constructor() {
   }
 
-  public launch(pageX: number, pageY: number, config?: RippleConfig): RippleRef {
+  public launch(pageX: number, pageY: number, config?: any) {
     if (this.ripple) {
       return this.ripple.launch(pageX, pageY, config);
     }

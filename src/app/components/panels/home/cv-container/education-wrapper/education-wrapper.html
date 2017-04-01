@@ -6,32 +6,64 @@
        fxLayout="row"
        fxLayout.xs="column"
        fxLayoutWrap="wrap">
-    <template ngFor let-education [ngForOf]="educations" let-i="index">
-      <div fxFlex.gt-md="33.3333%" fxFlex="50" fxFlex.xs="100" class="padding">
-        <card class="card"
+    <div *ngFor="let columnIndex of getColumnsNumber()" fxFlex.gt-md="33.3333%" fxFlex.md="50" fxFlex="100"
+         class="padding-column">
+      <template ngFor let-education [ngForOf]="educations" let-i="index">
+        <card *ngIf="((i + 1) - columnIndex) % numberOfColumns === 0"
+              class="card padding-card"
               [institution]="education?.institution"
-              [logo]="education.logo"
-              [isMediumUpView]="isMediumUpView">
+              [logo]="education.logo">
           <div class="card-title">
             {{ education?.title }}
           </div>
           <card-date-range [startDate]="education.start"
                            [endDate]="education.end"
-                           [calculateDuration]="false"></card-date-range>
+                           [calculateDuration]="false"
+                           [showOnlyYear]="true"></card-date-range>
           <div class="card-content">
             <p *ngFor="let curriculum of education?.curriculum">
               {{ curriculum }}
             </p>
           </div>
           <div class="card-actions">
-            <a *ngIf="education.url"
-               href="{{ education.url }}"
+            <a *ngIf="education?.url"
                md-raised-button
+               href="{{ education?.url }}"
                color="primary">{{ 'labels.url' | translate }}</a>
           </div>
         </card>
-      </div>
-    </template>
+      </template>
+    </div>
   </div>
 
+</div>
+
+<div class="block">
+  <h3>{{ 'labels.languageTitle' | translate }}</h3>
+
+  <div *ngFor="let language of languages">
+    {{ language.language }}
+    {{ language.level }}
+  </div>
+</div>
+
+<div class="block">
+  <h3>{{ 'labels.certificateTitle' | translate }}</h3>
+
+  <div *ngFor="let certificate of certificates">
+    {{ certificate.date }}
+    {{ certificate.location }}
+    {{ certificate.title }}
+  </div>
+</div>
+
+<div class="block">
+  <h3>{{ 'labels.seminarTitle' | translate }}</h3>
+
+  <div *ngFor="let seminar of seminars">
+    {{ seminar.title }}
+    {{ seminar.organism }}
+    {{ seminar.location }}
+    {{ seminar.date }}
+  </div>
 </div>

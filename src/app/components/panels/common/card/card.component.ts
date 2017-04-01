@@ -5,7 +5,7 @@ import { NotificationService } from '../../../../services/notification.service';
 
 import { Dialog } from '../../../../models/Components/Dialog';
 
-import { EVENT_TYPES, CV_OPTION_TYPES } from '../../../../variables/variables';
+import { EVENT_TYPES, CV_OPTION_TYPES, SCREEN_TYPES } from '../../../../variables/variables';
 
 
 @Component({
@@ -22,11 +22,18 @@ export class Card implements OnInit {
   @Input() dialog: Dialog;
   @Input() type: CV_OPTION_TYPES;
   @Input() logo: string;
-  @Input() isMediumUpView: boolean;
+  @Input() typeScreen: number;
   @Input() willTriggerModal: boolean;
+
+  private logoWidth: string;
+  private logoHeight: string;
+
+  private LOGO_SIZE: string = '50px';
 
   constructor(private _dialogService: DialogService,
               private _notificationService: NotificationService) {
+    this.logoWidth = this.LOGO_SIZE;
+    this.logoHeight = this.LOGO_SIZE;
   }
 
   ngOnInit(): void {
@@ -35,7 +42,7 @@ export class Card implements OnInit {
   private openModal(event: MouseEvent): void {
     this.notifyDialogChange(event, this.type);
 
-    this._dialogService.open(this.dialog, null, null, event, this.isMediumUpView);
+    this._dialogService.open(this.dialog, null, null, event, this.typeScreen !== SCREEN_TYPES.MOBILE);
 
     this._dialogService.notifyDialogClosed.subscribe(() => this.notifyDialogChange(event))
   }

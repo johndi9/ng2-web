@@ -10,7 +10,7 @@ import { Tab } from '../../../../../models/Components/Tab';
 
 import MapUtils from '../../../../../utils/modelParser';
 
-import { STATE_KEYS, CV_OPTION_TYPES, EVENT_TYPES, TABS } from '../../../../../variables/variables';
+import { STATE_KEYS, CV_OPTION_TYPES, EVENT_TYPES, TABS, SCREEN_TYPES } from '../../../../../variables/variables';
 
 
 @Component({
@@ -24,14 +24,14 @@ export class CvMenuWrapper implements AfterViewInit, OnChanges {
   @Input() name: string;
   @Input() info: Info;
   @Input() tabSelected: number;
-  @Input() isMediumUpView: boolean;
+  @Input() typeScreen: number;
 
   private tabs: Tab[];
   private tabKeys: string[] =
     ['personalInfoTitle', 'projectsTitle', 'employsTitle', 'educationTitle', 'otherInfoTitle', 'contactTitle'];
   private scrollableContainer: HTMLElement;
 
-  public CV_OPTION_TYPES = CV_OPTION_TYPES;
+  private SCREEN_TYPES = SCREEN_TYPES;
   private readonly TAB_WIDTH: number = 160;
 
   constructor(private _appState: AppState,
@@ -60,9 +60,10 @@ export class CvMenuWrapper implements AfterViewInit, OnChanges {
 
   /**
    * For every input update, the central tab position gets updated
+   * This is only managed for mobile view
    */
   private updateCentralTabPosition(): void {
-    if (!this.isMediumUpView) {
+    if (this.typeScreen === SCREEN_TYPES.MOBILE) {
       const totalVisibleWidth: number = window.innerWidth || document.documentElement.clientWidth;
 
       // Reload the element if scrollLeft is not writable anymore

@@ -4,28 +4,36 @@
      fxLayout="row"
      fxLayout.xs="column"
      fxLayoutWrap="wrap">
-  <template ngFor let-employ [ngForOf]="employs" let-i="index">
-    <div fxFlex="33.3333%" fxFlex.md="50" fxFlex.sm="50" class="padding">
-      <card class="card"
+  <div *ngFor="let columnIndex of getColumnsNumber()" fxFlex.gt-md="33.3333%" fxFlex.md="50" fxFlex="100"
+       class="padding-column">
+    <template ngFor let-employ [ngForOf]="employs" let-i="index">
+      <card *ngIf="((i + 1) - columnIndex) % numberOfColumns === 0"
+            class="card padding-card"
             [location]="employ?.location"
             [dialog]="getDialog(employ)"
             [type]="CV_OPTION_TYPES.EMPLOYS"
-            [logo]="employ.logo"
-            [isMediumUpView]="isMediumUpView"
+            [logo]="employ?.logo"
+            [typeScreen]="typeScreen"
             [willTriggerModal]="true">
         <div class="card-title">
           {{ employ?.employer }}
         </div>
-        <card-date-range [startDate]="employ.start"
-                         [endDate]="employ.end"
+        <card-date-range [startDate]="employ?.start"
+                         [endDate]="employ?.end"
                          [calculateDuration]="true"></card-date-range>
         <div class="card-content">
           {{ employ?.summary }}
         </div>
         <div class="card-actions">
-          <button md-button color="primary">{{ 'labels.moreDetails' | translate }}</button>
+          <button md-button
+                  color="primary">{{ 'labels.moreDetails' | translate }}
+          </button>
+          <a *ngIf="employ?.url"
+             md-raised-button
+             href="{{ employ?.url }}"
+             color="primary">{{ 'labels.url' | translate }}</a>
         </div>
       </card>
-    </div>
-  </template>
+    </template>
+  </div>
 </div>

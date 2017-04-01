@@ -10,8 +10,8 @@ $mat-medium-down: 'max-width: 1280px';
 $mat-large-down: 'max-width: 1960px';
 $mat-xsmall-up: 'min-width: 600px';
 $mat-small-up: 'min-width: 960px';
-$mat-medium-up: 'max-width: 1280px';
-$mat-large-up: 'max-width: 1960px';
+$mat-medium-up: 'min-width: 1280px';
+$mat-large-up: 'min-width: 1960px';
 
 // Delay classes
 $total-delays: 50;

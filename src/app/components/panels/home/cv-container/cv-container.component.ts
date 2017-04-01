@@ -20,7 +20,7 @@ import { STATE_KEYS, CV_OPTION_TYPES } from '../../../../variables/variables';
 
 export class CvContainer implements OnInit, OnDestroy {
   @Input() curriculum: Curriculum;
-  @Input() isMediumUpView: boolean;
+  @Input() typeScreen: number;
 
   private optionChangeSubscription: Subscription;
 

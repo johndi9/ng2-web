@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, SimpleChanges, OnChanges } from '@angular/core';
 
 import { CurriculumService } from '../../../../../services/curriculum.service';
 
@@ -8,7 +8,7 @@ import { Dialog } from '../../../../../models/Components/Dialog';
 import { Employ } from '../../../../../models/Curriculum/Employ/Employ';
 import { Project } from '../../../../../models/Curriculum/Project/Project';
 
-import { CV_OPTION_TYPES } from '../../../../../variables/variables';
+import { CV_OPTION_TYPES, SCREEN_TYPES } from '../../../../../variables/variables';
 
 
 @Component({
@@ -18,13 +18,20 @@ import { CV_OPTION_TYPES } from '../../../../../variables/variables';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class ProjectWrapper {
+export class ProjectWrapper implements OnChanges{
   @Input() projects: Project[];
-  @Input() isMediumUpView: boolean;
+  @Input() typeScreen: number;
+
+  private numberOfColumns: number;
 
   private CV_OPTION_TYPES = CV_OPTION_TYPES;
+  private SCREEN_TYPES: SCREEN_TYPES;
 
   constructor(private _curriculumService: CurriculumService) {
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.numberOfColumns = this.typeScreen + 1;
   }
 
   private getEmployerFromProject(projectId: number): Employ {
@@ -33,5 +40,9 @@ export class ProjectWrapper {
 
   private getDialog(project: Project) {
     return new Dialog(ProjectDialog, ['project'], [project]);
+  }
+
+  private getColumnsNumber(): Array<number> {
+    return Array(this.numberOfColumns).fill(0).map((x, i) => i + 1);
   }
 }

@@ -28,7 +28,7 @@ export class Home implements OnInit, OnDestroy, AfterViewInit {
   private modalOpenedSubscription: Subscription;
 
   private curriculum: Curriculum;
-  private isMediumUpView: boolean;
+  private typeScreen: number;
   private rippleContainer: HTMLElement;
 
   constructor(private _appState: AppState,
@@ -42,7 +42,7 @@ export class Home implements OnInit, OnDestroy, AfterViewInit {
     this.retrieveCurriculum();
 
     this.resizeChangeSubscription = this._resizeService.resizeChange
-      .subscribe((data: boolean) => this.isMediumUpView = data);
+      .subscribe((typeScreen: number) => this.typeScreen = typeScreen);
 
     this.modalOpenedSubscription = this._notificationService.modalOpened.subscribe((modalOpened: ModalOpened) => {
       this.updateModalOpenedState(modalOpened.type);

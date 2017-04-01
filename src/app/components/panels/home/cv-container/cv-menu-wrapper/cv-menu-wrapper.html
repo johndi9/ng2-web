@@ -1,4 +1,4 @@
-<div *ngIf="!isMediumUpView" class="fade-slide-in delay250">
+<div *ngIf="typeScreen === SCREEN_TYPES.MOBILE" class="fade-slide-in delay250">
   <div class="profile-info-wrapper-sm"
        fxLayout="row"
        fxLayoutAlign="center center">
@@ -27,7 +27,7 @@
   </div>
 </div>
 
-<div *ngIf="isMediumUpView" class="sidebar-container fade-slide-in delay250">
+<div *ngIf="typeScreen !== SCREEN_TYPES.MOBILE" class="sidebar-container fade-slide-in delay250">
   <div>
     <img class="profile-pic" src="{{ '/assets/images/' + info?.image }}">
     <span class="name-wrapper">{{ name }}</span>

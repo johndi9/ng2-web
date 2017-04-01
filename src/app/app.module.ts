@@ -16,6 +16,7 @@ import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './services/app.service';
 import { CurriculumService } from './services/curriculum.service';
 import { DialogService } from './services/dialog.service';
+import { GoogleMapsService } from './services/googleMaps.service';
 import { InjectionService } from './services/injection.service';
 import { HttpService } from './services/http.service';
 import { NotificationService } from './services/notification.service';
@@ -137,7 +138,8 @@ export function createTranslateLoader(http: Http) {
     ResizeService,
     AnimationService,
     DialogService,
-    InjectionService
+    InjectionService,
+    GoogleMapsService
   ],
   entryComponents: [
     ProjectDialog,

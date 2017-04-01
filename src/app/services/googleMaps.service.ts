@@ -17,6 +17,10 @@ export class GoogleMapsService {
     });
   }
 
+  public getGoogleMapsUrl(): string {
+    return `http://maps.googleapis.com/maps/api/js?key=${KEYS.googleMaps}&v=3&sensor=false&callback=googleMapsReady`;
+  }
+
   public createMap(mapDiv: Element, address: string): void {
     this.geocodeAddress(address).then((response) => {
       const position: google.maps.LatLng = response[0].geometry.location;

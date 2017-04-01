@@ -87,3 +87,15 @@ div.cdk-overlay-container, .cdk-overlay-pane .mat-dialog-container {
     display: none;
   }
 }
+
+// Google maps
+
+.gmnoprint a, .gmnoprint span, .gm-style-cc {
+  display:none;
+}
+.gmnoprint div {
+  background:none;
+}
+.map div > a {
+  display: none;
+}

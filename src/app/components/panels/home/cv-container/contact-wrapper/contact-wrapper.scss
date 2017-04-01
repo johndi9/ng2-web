@@ -1,1 +1,7 @@
 @include sub-heading-styles;
+@include shared-common-styles;
+
+.map {
+  height: $google-maps-height;
+  margin: 0 -10px;
+}

@@ -1,1 +1,33 @@
-<h2 class="sub-heading-styles">{{ 'labels.contactTitle' | translate }}</h2>
+<div class="block">
+  <h2 class="sub-heading-styles">{{ 'labels.contactTitle' | translate }}</h2>
+
+  <div>
+    {{ contact.website }}
+    {{ contact.phone }}
+    {{ contact.email }}
+
+    <span *ngFor="let other of contact.other">
+    {{ other.label }}
+    {{ other.flavor }}
+    {{ other.value }}
+  </span>
+  </div>
+</div>
+
+<div class="block">
+  <h2 class="sub-heading-styles">{{ 'labels.socialTitle' | translate }}</h2>
+
+  <div *ngFor="let soc of social">
+    {{ soc.label }}
+    {{ soc.network }}
+    {{ soc.user }}
+    {{ soc.url }}
+  </div>
+</div>
+
+<div class="block">
+  <h2 class="sub-heading-styles">{{ 'labels.locationTitle' | translate }}</h2>
+
+  <div class="map">
+  </div>
+</div>

@@ -3,9 +3,6 @@
 // at the entry point of the async loaded file. Also see custom-typings.d.ts as you also need to
 // run `typings install x` where `x` is your module
 
-// Allow to avoid linter issues on Reflect API
-///<reference path="../node_modules/reflect-metadata/reflect-metadata.d.ts"/>"
-
 // TODO(gdi2290): switch to DLLs
 
 // Angular 2

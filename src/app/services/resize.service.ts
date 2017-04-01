@@ -1,25 +1,38 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs/Rx';
 
+import { SCREEN_TYPES } from '../variables/variables';
+
+
 @Injectable()
 export class ResizeService {
-  resizeChange: Observable<boolean>;
+  resizeChange: Observable<number>;
 
   constructor() {
-    const screenHasResized = new BehaviorSubject(this.isMediumUpVisibleFn());
+    const screenHasResized = new BehaviorSubject(this.typeScreenVisibleFn());
 
-    this.resizeChange = <Observable<boolean>>screenHasResized.pluck('isMediumUpVisible').distinctUntilChanged();
-    Observable.fromEvent(window, 'resize').map(this.isMediumUpVisibleFn).subscribe(screenHasResized);
+    this.resizeChange = <Observable<number>>screenHasResized.pluck('typeScreenVisible').distinctUntilChanged();
+    Observable.fromEvent(window, 'resize').map(this.typeScreenVisibleFn.bind(this)).subscribe(screenHasResized);
   }
 
   /**
-   * Detect when we pass from SM -> MD & MD -> SM
-   * @returns {{isMediumUpVisible: boolean}}
+   * Detect when we pass between SM, MD & LG screens
+   * @returns {{typeScreenVisible: boolean}}
    */
-  private isMediumUpVisibleFn(): { isMediumUpVisible: boolean } {
+  private typeScreenVisibleFn(): { typeScreenVisible: number } {
     return {
-      isMediumUpVisible: window.getComputedStyle(window.document.getElementById('visible-md-up')).display !== 'none'
+      typeScreenVisible: this.getTypeScreenVisible()
     };
+  }
+  
+  private getTypeScreenVisible(): number {
+    if (window.getComputedStyle(window.document.getElementById('sm-visible')).display !== 'none') {
+      return SCREEN_TYPES.MOBILE;
+    } else if (window.getComputedStyle(window.document.getElementById('md-visible')).display !== 'none') {
+      return SCREEN_TYPES.TABLET;
+    } else if (window.getComputedStyle(window.document.getElementById('lg-visible')).display !== 'none') {
+      return SCREEN_TYPES.DESKTOP;
+    }
   }
 }
 

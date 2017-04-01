@@ -27,8 +27,9 @@ export const SWIPER_CONFIG: SwiperConfigInterface = {
 };
 
 export enum SCREEN_TYPES {
-  TABLET_OR_LOWER = <any>'lt-md',
-  DESKTOP_OR_BIGGER = <any>'gt-md'
+  MOBILE,
+  TABLET,
+  DESKTOP
 };
 
 export enum ANIMATION_TYPES {

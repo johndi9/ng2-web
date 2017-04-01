@@ -1,5 +1,5 @@
 import { Injectable, ViewContainerRef, Inject, ComponentRef } from '@angular/core';
-import { ComponentType, MdDialogRef, MdDialog, MdDialogConfig, MdRipple } from '@angular/material';
+import { ComponentType, MdDialogRef, MdDialog, MdDialogConfig } from '@angular/material';
 import { DOCUMENT } from '@angular/platform-browser';
 
 import { InjectionService } from './injection.service';

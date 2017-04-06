@@ -17,6 +17,10 @@
     </md-card-header>
 
     <md-card-subtitle>
+      <div *ngIf="event" class="event-location" fxLayout="row" fxLayoutAlign="center center">
+        <md-icon fxFlex="30px">chat_bubble_outline</md-icon>
+        <span fxFlex>{{ event }}</span>
+      </div>
       <div *ngIf="location" class="card-location" fxLayout="row" fxLayoutAlign="center center">
         <md-icon fxFlex="30px">place</md-icon>
         <span fxFlex>{{ location }}</span>
@@ -31,7 +35,14 @@
       </div>
       <div class="card-date-range" fxLayout="row" fxLayoutAlign="center center">
         <md-icon fxFlex="30px">date_range</md-icon>
-        <span fxFlex><ng-content select="card-date-range"></ng-content></span>
+        <span fxFlex>
+          <ng-content select=".card-date"></ng-content>
+          <ng-content select="card-date-range"></ng-content>
+        </span>
+      </div>
+      <div *ngIf="author" class="card-author" fxLayout="row" fxLayoutAlign="center center">
+        <md-icon fxFlex="30px">supervisor_account</md-icon>
+        <span fxFlex>{{ author }}</span>
       </div>
     </md-card-subtitle>
 
@@ -40,7 +51,7 @@
       <ng-content select=".card-content"></ng-content>
     </md-card-content>
 
-    <md-card-actions>
+    <md-card-actions *ngIf="!hideCardActions">
       <ng-content select=".card-actions"></ng-content>
     </md-card-actions>
   </md-card>

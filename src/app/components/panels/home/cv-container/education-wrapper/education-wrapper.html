@@ -12,7 +12,8 @@
         <card *ngIf="((i + 1) - columnIndex) % numberOfColumns === 0"
               class="card padding-card"
               [institution]="education?.institution"
-              [logo]="education.logo">
+              [logo]="education?.logo"
+              [hideCardActions]="!education?.url">
           <div class="card-title">
             {{ education?.title }}
           </div>
@@ -25,10 +26,11 @@
               {{ curriculum }}
             </p>
           </div>
-          <div class="card-actions">
-            <a *ngIf="education?.url"
-               md-raised-button
+          <div *ngIf="education?.url"
+               class="card-actions">
+            <a md-raised-button
                href="{{ education?.url }}"
+               target="_blank"
                color="primary">{{ 'labels.url' | translate }}</a>
           </div>
         </card>
@@ -41,29 +43,29 @@
 <div class="block">
   <h3>{{ 'labels.languageTitle' | translate }}</h3>
 
-  <div *ngFor="let language of languages">
-    {{ language.language }}
-    {{ language.level }}
+  <div *ngFor="let language of languages" class="sub-block">
+    <div class="highlight">{{ language?.language }}</div>
+    <div>{{ language?.level }}</div>
   </div>
 </div>
 
 <div class="block">
   <h3>{{ 'labels.certificateTitle' | translate }}</h3>
 
-  <div *ngFor="let certificate of certificates">
-    {{ certificate.date }}
-    {{ certificate.location }}
-    {{ certificate.title }}
+  <div *ngFor="let certificate of certificates" class="sub-block">
+    <div class="highlight">{{ certificate?.date | date: 'y' }}</div>
+    <div>{{ certificate?.title }}</div>
+    <div>{{ certificate?.location }}</div>
   </div>
 </div>
 
 <div class="block">
   <h3>{{ 'labels.seminarTitle' | translate }}</h3>
 
-  <div *ngFor="let seminar of seminars">
-    {{ seminar.title }}
-    {{ seminar.organism }}
-    {{ seminar.location }}
-    {{ seminar.date }}
+  <div *ngFor="let seminar of seminars" class="sub-block">
+    <div class="highlight">{{ seminar?.date | date: 'y' }}</div>
+    <div>{{ seminar?.title }}</div>
+    <div>{{ seminar?.organism }}</div>
+    <div>{{ seminar?.location }}</div>
   </div>
 </div>

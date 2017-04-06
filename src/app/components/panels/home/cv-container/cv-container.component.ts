@@ -1,9 +1,7 @@
 import { Component, OnInit, OnDestroy, ElementRef, Input } from '@angular/core';
 
 import { AppState } from '../../../../services/app.service';
-import { CurriculumService } from '../../../../services/curriculum.service';
 import { NotificationService } from '../../../../services/notification.service';
-import { ResizeService } from '../../../../services/resize.service';
 
 import { Curriculum } from '../../../../models/Curriculum/Curriculum';
 
@@ -32,8 +30,6 @@ export class CvContainer implements OnInit, OnDestroy {
 
   constructor(private _appState: AppState,
               private _notificationService: NotificationService,
-              private _curriculumService: CurriculumService,
-              private _resizeService: ResizeService,
               private _elementRef: ElementRef) {
   }
 
@@ -75,6 +71,7 @@ export class CvContainer implements OnInit, OnDestroy {
     this.updateTabSelectionState(option);
     this.updateTabSelected(option);
     this.updateBgColor(option);
+    this.resetScroll();
   }
 
   /**
@@ -102,11 +99,16 @@ export class CvContainer implements OnInit, OnDestroy {
       case CV_OPTION_TYPES.PROJECTS:
       case CV_OPTION_TYPES.EMPLOYS:
       case CV_OPTION_TYPES.EDUCATION:
+      case CV_OPTION_TYPES.OTHER_INFO:
         this.bgClass = 'grey';
         break;
       default:
         this.bgClass = 'white';
     }
+  }
+
+  private resetScroll(): void {
+    this._elementRef.nativeElement.querySelector('.swiper-container').scrollTop = 0;
   }
 
 }

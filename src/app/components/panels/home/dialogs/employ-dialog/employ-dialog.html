@@ -14,8 +14,9 @@
 
 <md-dialog-actions class="fade-slide-in delay200">
   <a *ngIf="employ.url"
-     href="{{ employ.url }}"
      md-raised-button
+     href="{{ employ.url }}"
+     target="_blank"
      color="primary">{{ 'labels.url' | translate }}</a>
   <button
     md-button

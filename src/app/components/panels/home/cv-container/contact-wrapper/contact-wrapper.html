@@ -1,32 +1,39 @@
 <div class="block">
   <h2 class="sub-heading-styles">{{ 'labels.contactTitle' | translate }}</h2>
 
-  <div>
-    {{ contact.website }}
-    {{ contact.phone }}
-    {{ contact.email }}
-
-    <span *ngFor="let other of contact.other">
-    {{ other.label }}
-    {{ other.flavor }}
-    {{ other.value }}
-  </span>
+  <div class="contact-wrapper">
+    <div class="separator">
+      <md-icon class="contact-icon">desktop_windows</md-icon>
+      <a md-button
+         href="{{ contact?.website }}"
+         target="_blank">{{ contact?.website }}</a>
+    </div>
+    <div class="separator">
+      <md-icon class="contact-icon">stay_primary_portrait</md-icon>
+      {{ contact.phone }}
+    </div>
+    <div>
+      <md-icon class="contact-icon">email</md-icon>
+      {{ contact.email }}
+    </div>
   </div>
 </div>
 
 <div class="block">
-  <h2 class="sub-heading-styles">{{ 'labels.socialTitle' | translate }}</h2>
+  <h3>{{ 'labels.socialTitle' | translate }}</h3>
 
-  <div *ngFor="let soc of social">
-    {{ soc.label }}
-    {{ soc.network }}
-    {{ soc.user }}
-    {{ soc.url }}
+  <div class="social-wrapper">
+    <div *ngFor="let soc of social" class="separator">
+      <i class="fa fa-{{ soc.icon }} contact-icon" aria-hidden="true"></i>
+      <a md-button
+         href="{{ soc?.url }}"
+         target="_blank">{{ soc?.url }}</a>
+    </div>
   </div>
 </div>
 
 <div class="block">
-  <h2 class="sub-heading-styles">{{ 'labels.locationTitle' | translate }}</h2>
+  <h3>{{ 'labels.locationTitle' | translate }}</h3>
 
   <div class="map">
   </div>

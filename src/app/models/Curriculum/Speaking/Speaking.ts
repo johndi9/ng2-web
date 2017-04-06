@@ -4,6 +4,8 @@ export class Speaking {
   event: string;
   location: string;
   date: Date;
+  url: string;
+  logo: string;
   highlights: string[];
 
   constructor() {
@@ -12,6 +14,8 @@ export class Speaking {
     this.event = undefined;
     this.location = undefined;
     this.date = undefined;
+    this.url = undefined;
+    this.logo = undefined;
     this.highlights = undefined;
   }
 }

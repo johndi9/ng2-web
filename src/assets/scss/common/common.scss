@@ -28,6 +28,11 @@ html, body {
   @include sr-only;
 }
 
+.swiper .swiper-container {
+  max-height: 100vh;
+  overflow-y: scroll;
+}
+
 // Overwrite Material styles
 
 // TODO: to remove when material fixes the issue

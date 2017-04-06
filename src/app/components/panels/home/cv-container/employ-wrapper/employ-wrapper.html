@@ -31,6 +31,8 @@
           <a *ngIf="employ?.url"
              md-raised-button
              href="{{ employ?.url }}"
+             target="_blank"
+             (click)="$event.stopPropagation()"
              color="primary">{{ 'labels.url' | translate }}</a>
         </div>
       </card>

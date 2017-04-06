@@ -1,28 +1,79 @@
-<div class="block">
-  <h2 class="sub-heading-styles">{{ 'labels.writingTitle' | translate }}</h2>
+<h2 class="sub-heading-styles">{{ 'labels.writingTitle' | translate }} / {{ 'labels.speakingTitle' | translate }}</h2>
 
-  <div *ngFor="let writing of writings">
-    {{ writing.title }}
-    {{ writing.flavor }}
-    {{ writing.date }}
-    {{ writing.publisher.name }}
-    {{ writing.publisher.url }}
-    {{ writing.author }}
-    {{ writing.summary }}
+<div class="block">
+  <h3>{{ 'labels.writingTitle' | translate }}</h3>
+
+  <div class="flex-container"
+       fxLayout="row"
+       fxLayout.xs="column"
+       fxLayoutWrap="wrap">
+    <div *ngFor="let columnIndex of getColumnsNumber()" fxFlex.gt-md="33.3333%" fxFlex.md="50" fxFlex="100"
+         class="padding-column">
+      <template ngFor let-writing [ngForOf]="writings" let-i="index">
+        <card *ngIf="((i + 1) - columnIndex) % numberOfColumns === 0"
+              class="card padding-card"
+              [institution]="writing?.publisher?.name"
+              [logo]="writing?.logo"
+              [author]="writing?.author"
+              [hideCardActions]="!writing?.url">
+          <div class="card-title">
+            {{ writing?.title }}
+          </div>
+          <div class="card-date">
+            {{ writing?.date | date: 'y' }}
+          </div>
+          <div class="card-content">
+            {{ writing?.summary }}
+          </div>
+          <div *ngIf="writing?.url"
+               class="card-actions">
+            <a md-raised-button
+               href="{{ writing?.url }}"
+               target="_blank"
+               color="primary">{{ 'labels.url' | translate }}</a>
+          </div>
+        </card>
+      </template>
+    </div>
   </div>
+
 </div>
 
 <div class="block">
-  <h2 class="sub-heading-styles">{{ 'labels.speakingTitle' | translate }}</h2>
+  <h3>{{ 'labels.speakingTitle' | translate }}</h3>
 
-  <div *ngFor="let speaking of speakings">
-    {{ speaking.title }}
-    {{ speaking.role }}
-    {{ speaking.event }}
-    {{ speaking.location }}
-    {{ speaking.date }}
-    <span *ngFor="let highlight of speaking.highlights">
-      {{ highlight }}
-    </span>
-  </div>
+  <div class="flex-container"
+       fxLayout="row"
+       fxLayout.xs="column"
+       fxLayoutWrap="wrap">
+    <div *ngFor="let columnIndex of getColumnsNumber()" fxFlex.gt-md="33.3333%" fxFlex.md="50" fxFlex="100"
+         class="padding-column">
+      <template ngFor let-speaking [ngForOf]="speakings" let-i="index">
+        <card *ngIf="((i + 1) - columnIndex) % numberOfColumns === 0"
+              class="card padding-card"
+              [location]="speaking?.location"
+              [logo]="speaking?.logo"
+              [event]="speaking?.event"
+              [hideCardActions]="!speaking?.url">
+          <div class="card-title">
+            {{ speaking?.title }}
+          </div>
+          <div class="card-date">
+            {{ speaking?.date | date: 'y' }}
+          </div>
+          <div class="card-content">
+            <p *ngFor="let highlight of speaking?.highlights">
+              {{ highlight }}
+            </p>
+          </div>
+          <div *ngIf="speaking?.url"
+               class="card-actions">
+            <a md-raised-button
+               href="{{ speaking?.url }}"
+               target="_blank"
+               color="primary">{{ 'labels.url' | translate }}</a>
+          </div>
+        </card>
+      </template>
+    </div>
 </div>

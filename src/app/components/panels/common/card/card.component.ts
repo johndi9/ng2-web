@@ -19,10 +19,13 @@ export class Card implements OnInit {
   @Input() location: string;
   @Input() employer: string;
   @Input() institution: string;
+  @Input() event: string;
+  @Input() author: string;
   @Input() dialog: Dialog;
   @Input() type: CV_OPTION_TYPES;
   @Input() logo: string;
   @Input() typeScreen: number;
+  @Input() hideCardActions: boolean;
   @Input() willTriggerModal: boolean;
 
   private logoWidth: string;

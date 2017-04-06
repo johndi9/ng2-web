@@ -68,7 +68,18 @@
 
 @mixin shared-common-styles {
   .block {
+    font-size: 1.2rem;
+    line-height: 2rem;
     margin-bottom: 4rem;
+  }
+
+  .sub-block {
+    margin-bottom: rem(10);
+  }
+
+  .highlight {
+    font-size: 1.4rem;
+    font-weight: bold;
   }
 }
 

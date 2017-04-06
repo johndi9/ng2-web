@@ -11,7 +11,6 @@ import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularcla
 import { ENV_PROVIDERS } from './environment';
 
 // Services
-import { AnimationService } from './services/animation.service';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './services/app.service';
 import { CurriculumService } from './services/curriculum.service';
@@ -55,9 +54,6 @@ import { SWIPER_CONFIG } from './variables/variables';
 import { SwiperModule } from 'angular2-swiper-wrapper';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-
-// Directives
-import { AnimationDirective } from './directives/animation.directive';
 
 // Routes
 import { ROUTES } from './app.routes';
@@ -105,7 +101,6 @@ export function createTranslateLoader(http: Http) {
     ProjectDialog,
     EmployDialog,
     MonthsDurationPipe,
-    AnimationDirective,
     CvContainerLoading,
     ModuleLoadingWrapper,
     SidebarLoadingWrapper,
@@ -136,7 +131,6 @@ export function createTranslateLoader(http: Http) {
     HttpService,
     NotificationService,
     ResizeService,
-    AnimationService,
     DialogService,
     InjectionService,
     GoogleMapsService

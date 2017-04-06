@@ -26,6 +26,7 @@ import { AppComponent } from './app.component';
 import { Card } from './components/panels/common/card/card.component';
 import { CardDateRange } from './components/panels/common/card/card-date-range/card-date-range.component';
 import { ContactWrapper } from './components/panels/home/cv-container/contact-wrapper/contact-wrapper.component';
+import { CommonWrapper } from './components/panels/home/cv-container/common-wrapper/common-wrapper.component';
 import { CvContainer } from './components/panels/home/cv-container/cv-container.component';
 import { CvContainerLoading } from './components/panels/home/cv-container-loading/cv-container-loading.component';
 import { CvMenuWrapper } from './components/panels/home/cv-container/cv-menu-wrapper/cv-menu-wrapper.component';
@@ -102,6 +103,7 @@ export function createTranslateLoader(http: Http) {
     EmployDialog,
     MonthsDurationPipe,
     CvContainerLoading,
+    CommonWrapper,
     ModuleLoadingWrapper,
     SidebarLoadingWrapper,
     Ng2Ripple,

@@ -6,6 +6,7 @@
 // TODO(gdi2290): switch to DLLs
 
 // Angular 2
+import '@angular/animations';
 import '@angular/platform-browser';
 import '@angular/platform-browser-dynamic';
 import '@angular/core';

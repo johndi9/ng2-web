@@ -7,9 +7,9 @@
        fxLayout="row"
        fxLayout.xs="column"
        fxLayoutWrap="wrap">
-    <div *ngFor="let columnIndex of getColumnsNumber()" fxFlex.gt-md="33.3333%" fxFlex.md="50" fxFlex="100"
+    <div *ngFor="let columnIndex of getColumnsNumber()" fxFlex.gt-md="33" fxFlex.md="50" fxFlex="100"
          class="padding-column">
-      <template ngFor let-writing [ngForOf]="writings" let-i="index">
+      <ng-template ngFor let-writing [ngForOf]="writings" let-i="index">
         <card *ngIf="((i + 1) - columnIndex) % numberOfColumns === 0"
               class="card padding-card"
               [institution]="writing?.publisher?.name"
@@ -33,7 +33,7 @@
                color="primary">{{ 'labels.url' | translate }}</a>
           </div>
         </card>
-      </template>
+      </ng-template>
     </div>
   </div>
 
@@ -46,9 +46,9 @@
        fxLayout="row"
        fxLayout.xs="column"
        fxLayoutWrap="wrap">
-    <div *ngFor="let columnIndex of getColumnsNumber()" fxFlex.gt-md="33.3333%" fxFlex.md="50" fxFlex="100"
+    <div *ngFor="let columnIndex of getColumnsNumber()" fxFlex.gt-md="33" fxFlex.md="50" fxFlex="100"
          class="padding-column">
-      <template ngFor let-speaking [ngForOf]="speakings" let-i="index">
+      <ng-template ngFor let-speaking [ngForOf]="speakings" let-i="index">
         <card *ngIf="((i + 1) - columnIndex) % numberOfColumns === 0"
               class="card padding-card"
               [location]="speaking?.location"
@@ -74,6 +74,6 @@
                color="primary">{{ 'labels.url' | translate }}</a>
           </div>
         </card>
-      </template>
+      </ng-template>
     </div>
 </div>

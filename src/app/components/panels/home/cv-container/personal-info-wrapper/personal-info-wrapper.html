@@ -23,7 +23,7 @@
 
   <div class="chip-wrapper">
     <md-chip-list>
-      <template ngFor let-skillSet [ngForOf]="skillSets" let-i="index">
+      <ng-template ngFor let-skillSet [ngForOf]="skillSets" let-i="index">
         <h4 class="skill-title">
           <md-icon>{{ skillSet.icon }}</md-icon>
           <span>{{ skillSet.name }}</span>
@@ -34,7 +34,7 @@
             {{ skill }}
           </md-chip>
         </div>
-      </template>
+      </ng-template>
     </md-chip-list>
   </div>
 </div>

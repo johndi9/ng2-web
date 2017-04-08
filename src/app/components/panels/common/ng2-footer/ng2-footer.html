@@ -4,9 +4,9 @@
         role="contentinfo">
   <h2 class="sr-only">Footer</h2>
 
-  <template [ngIf]="name">
+  <ng-template [ngIf]="name">
     <span>{{ name }}</span>
     <md-icon>copyright</md-icon>
     <span>{{ today | date:'y' }}</span>
-  </template>
+  </ng-template>
 </footer>

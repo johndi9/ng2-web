@@ -202,7 +202,21 @@ module.exports = function (options) {
          */
         {
           test: /\.css$/,
-          use: ['to-string-loader', 'css-loader'],
+          use: [
+            'to-string-loader',
+            {
+              loader: 'css-loader',
+              options: {
+                importLoaders: 1
+              }
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                sourceMap: 'inline'
+              }
+            }
+          ],
           exclude: [helpers.root('src', 'styles')]
         },
 

@@ -64,7 +64,7 @@ export class DialogService {
 
     this.triggerRipple(event, isMediumUpView).subscribe(() => {
       this.disableBodyScroll();
-      dialogRef = this.mdDialog.open(<ComponentType<T>>dialog.bodyComponent, config);
+      dialogRef = this.mdDialog.open(dialog.bodyComponent as ComponentType<T>, config);
       dialog.dialogInstance.forEach((singleInstance, i) => dialogRef.componentInstance[singleInstance] = dialog.dialogInstanceValue[i]);
 
       this.rippleContainer.location.nativeElement.querySelector('.mat-ripple-element').style.transition = `transform ${this.RIPPLE_FADE_IN_DURATION}ms ease`;
@@ -75,6 +75,7 @@ export class DialogService {
         this.blockModalOpenAnimation(isMediumUpView, false).subscribe(() => {
           this.enableBodyScroll();
           this.closeRipple();
+          dialogRef = null;
           this.observer.next(true);
         })
       });

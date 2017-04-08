@@ -4,9 +4,9 @@
      fxLayout="row"
      fxLayout.xs="column"
      fxLayoutWrap="wrap">
-  <div *ngFor="let columnIndex of getColumnsNumber()" fxFlex.gt-md="33.3333%" fxFlex.md="50" fxFlex="100"
+  <div *ngFor="let columnIndex of getColumnsNumber()" fxFlex.gt-md="33" fxFlex.md="50" fxFlex="100"
        class="padding-column">
-    <template ngFor let-project [ngForOf]="projects" let-i="index">
+    <ng-template ngFor let-project [ngForOf]="projects" let-i="index">
       <card *ngIf="((i + 1) - columnIndex) % numberOfColumns === 0"
             class="card padding-card"
             [location]="getEmployerFromProject(project?.id)?.location"
@@ -37,6 +37,6 @@
              color="primary">{{ 'labels.url' | translate }}</a>
         </div>
       </card>
-    </template>
+    </ng-template>
   </div>
 </div>

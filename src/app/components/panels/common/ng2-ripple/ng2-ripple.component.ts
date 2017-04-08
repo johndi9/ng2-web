@@ -22,7 +22,7 @@ export class Ng2Ripple {
 
   public fadeOutAll(): void {
     if (this.ripple) {
-      // this.ripple.fadeOutAll();
+      this.ripple.fadeOutAll();
     }
   }
 }

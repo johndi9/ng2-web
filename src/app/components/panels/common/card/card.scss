@@ -1,5 +1,6 @@
 $mat-card-header-size: auto !default;
 $mat-card-header-title-font-size: 1.3rem !default;
+$logo-avatar-size: 50px !default;
 
 @include card-vertical-icon;
 
@@ -52,4 +53,6 @@ $mat-card-header-title-font-size: 1.3rem !default;
 .mat-card-avatar {
   @include mat-elevation(2);
   border-radius: rem(5);
+  height: $logo-avatar-size;
+  width: $logo-avatar-size;
 }

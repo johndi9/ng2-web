@@ -4,9 +4,13 @@
                     fxLayoutAlign="center center">
       <div md-card-avatar
            fxFlex="{{ logoWidth }}">
-        <img class="mat-card-avatar"
+        <img *ngIf="logo"
+             class="mat-card-avatar"
              [ngStyle]="{ 'width': logoWidth, 'height': logoHeight }"
              src="{{ '/assets/images/' + logo }}">
+        <md-icon *ngIf="!logo"
+                 class="no-logo-icon">business
+        </md-icon>
       </div>
 
       <div class="mat-card-header-text" fxFlex>

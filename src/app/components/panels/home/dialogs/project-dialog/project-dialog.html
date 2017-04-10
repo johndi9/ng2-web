@@ -1,34 +1,77 @@
-<div fxLayout="row"
-     fxLayoutAlign="center center">
-  <h2 fxFlex class="fade-slide-in">{{ project.title }}</h2>
+<div class="dialog-wrapper">
 
-  <div fxFlex="50px">
-    <button md-icon-button
-            md-dialog-close>
-      <md-icon class="md-24">highlight_off</md-icon>
-    </button>
+  <div class="dialog-header"
+       fxLayout="row"
+       fxLayoutAlign="center center"
+       [ngStyle]="{'color': project?.color, 'background': project?.backgroundColor }">
+    <h2 fxFlex class="fade-slide-in">{{ project?.title }}</h2>
+
+    <div fxFlex="50px">
+      <button md-icon-button
+              md-dialog-close>
+        <md-icon class="md-24">highlight_off</md-icon>
+      </button>
+    </div>
   </div>
+
+  <div class="dialog-body">
+
+    <md-dialog-content class="fade-slide-in delay100">
+
+      <div class="block">
+        <div fxLayout="row">
+          <md-icon fxFlex="30px">business</md-icon>
+          <span fxFlex>{{ employ?.employer }}</span>
+        </div>
+
+        <div fxLayout="row">
+          <md-icon fxFlex="30px">place</md-icon>
+          <span fxFlex>{{ employ?.location }}</span>
+        </div>
+
+        <div fxLayout="row">
+          <md-icon fxFlex="30px">date_range</md-icon>
+          <card-date-range [startDate]="project?.start"
+                           [endDate]="project?.end"
+                           [calculateDuration]="true"></card-date-range>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3 class="dialog-subtitle">{{ project.role }}</h3>
+
+        <ul class="items">
+          <li>{{ project.summary }}</li>
+          <li *ngFor="let highlight of project?.highlights">
+            {{ highlight }}
+          </li>
+        </ul>
+      </div>
+
+      <div class="block" *ngIf="employ?.keywords?.length > 1">
+        <h3 class="dialog-subtitle">{{ 'labels.skills' | translate }}</h3>
+
+        <div class="chip-wrapper">
+          <md-chip-list>
+            <div class="skill-container">
+              <md-chip *ngFor="let key of employ?.keywords" [color]="color">
+                {{ key }}
+              </md-chip>
+            </div>
+          </md-chip-list>
+        </div>
+      </div>
+
+      <div>
+        <a *ngIf="project?.url"
+           md-raised-button
+           href="{{ project?.url }}"
+           target="_blank"
+           color="primary">{{ 'labels.url' | translate }}</a>
+      </div>
+
+    </md-dialog-content>
+
+  </div>
+
 </div>
-
-<md-dialog-content class="fade-slide-in delay100">
-  <p>{{ project.category }} {{ project.role }}</p>
-  <p>{{ project.employer }}</p>
-  <p>{{ project.start }} - {{ project.end ? project.end : 'currently' }}</p>
-  <p>{{ project.summary }}</p>
-  <ul class="items">
-    <li *ngFor="let highlight of project.highlights">
-      {{ highlight }}
-    </li>
-  </ul>
-</md-dialog-content>
-
-<md-dialog-actions class="fade-slide-in delay200">
-  <a *ngIf="project.url"
-     md-raised-button
-     href="{{ project.url }}"
-     target="_blank"
-     color="primary">{{ 'labels.url' | translate }}</a>
-  <button
-    md-button
-    md-dialog-close>{{ 'labels.close' | translate }}</button>
-</md-dialog-actions>

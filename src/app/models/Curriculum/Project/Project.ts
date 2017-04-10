@@ -6,6 +6,8 @@ export class Project {
   role: string;
   url: string;
   logo: string;
+  backgroundColor: string;
+  color: string;
   start: Date;
   end: Date;
   description: string;
@@ -21,6 +23,8 @@ export class Project {
     this.role = undefined;
     this.url = undefined;
     this.logo = undefined;
+    this.backgroundColor = undefined;
+    this.color = undefined;
     this.start = undefined;
     this.end = undefined;
     this.description = undefined;

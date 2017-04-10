@@ -96,3 +96,91 @@
   padding-left: 16px;
   padding-right: 16px;
 }
+
+@mixin expand-dialog-section {
+  margin-left: -24px;
+  margin-right: -24px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+@mixin dialog-structure {
+  .dialog-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+
+  .dialog-header {
+    border-bottom: 1px solid $gray-lighter;
+    padding: 24px;
+  }
+
+  .dialog-subtitle {
+    @include expand-dialog-section;
+    border-bottom: 1px solid $gray-lighter;
+    padding-bottom: 20px;
+  }
+
+  .dialog-body {
+    flex: 1;
+    padding: 0 24px;
+    overflow: scroll;
+  }
+
+  .block {
+    margin-bottom: 3rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 0;
+  }
+
+  h3 {
+    font-size: 1.6rem;
+  }
+
+  ul {
+    padding-left: 2rem;
+  }
+
+  .mat-icon-button {
+    text-align: right;
+
+    .mat-icon {
+      font-size: 2.2rem;
+      height: auto;
+      width: auto;
+    }
+  }
+}
+
+@mixin skills-structure {
+  .chip-wrapper {
+    padding: 0 20px;
+  }
+
+  .skill-title {
+    margin-bottom: 1.4rem;
+    width: 100%;
+
+    .mat-icon {
+      @extend %list-icon-style;
+    }
+
+    .mat-icon,
+    span {
+      vertical-align: middle;
+    }
+  }
+
+  .skill-container {
+    margin-bottom: 1.8rem;
+    width: 100%;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

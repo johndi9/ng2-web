@@ -56,3 +56,9 @@ $logo-avatar-size: 50px !default;
   height: $logo-avatar-size;
   width: $logo-avatar-size;
 }
+
+.no-logo-icon {
+  color: $gray-1;
+  font-size: 2.5rem;
+  padding: 5px;
+}

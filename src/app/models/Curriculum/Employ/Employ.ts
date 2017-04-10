@@ -4,6 +4,8 @@ export class Employ {
   location: string;
   url: number;
   logo: string;
+  backgroundColor: string;
+  color: string;
   position: number;
   summary: string;
   start: Date;
@@ -17,6 +19,8 @@ export class Employ {
     this.location = undefined;
     this.url = undefined;
     this.logo = undefined;
+    this.backgroundColor = undefined;
+    this.color = undefined;
     this.position = undefined;
     this.summary = undefined;
     this.start = undefined;

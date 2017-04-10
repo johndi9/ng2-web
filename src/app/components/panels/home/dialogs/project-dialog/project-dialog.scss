@@ -1,16 +1,4 @@
 @include sub-heading-styles;
-
-h2 {
-  font-size: 2.5rem;
-}
-
-.mat-icon-button {
-  margin-bottom: 2rem;
-  text-align: right;
-
-  .mat-icon {
-    font-size: 2.2rem;
-    height: auto;
-    width: auto;
-  }
-}
+@include shared-common-styles;
+@include skills-structure;
+@include dialog-structure;

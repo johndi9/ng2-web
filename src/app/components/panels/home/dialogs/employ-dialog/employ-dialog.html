@@ -1,24 +1,71 @@
-<h2 md-dialog-title class="fade-slide-in">{{ employ.employer }}</h2>
+<div class="dialog-wrapper">
 
-<md-dialog-content class="fade-slide-in delay100">
-  <p>{{ employ.position }}</p>
-  <p>{{ employ.location }}</p>
-  <p>{{ employ.start }} - {{ employ.end ? employ.end : 'currently' }}</p>
-  <p>{{ employ.summary }}</p>
-  <ul class="items">
-    <li *ngFor="let highlight of employ.highlights">
-      {{ highlight }}
-    </li>
-  </ul>
-</md-dialog-content>
+  <div class="dialog-header"
+       fxLayout="row"
+       fxLayoutAlign="center center"
+       [ngStyle]="{'color': employ?.color, 'background': employ?.backgroundColor }">
+    <h2 fxFlex class="fade-slide-in">{{ employ?.employer }}</h2>
 
-<md-dialog-actions class="fade-slide-in delay200">
-  <a *ngIf="employ.url"
-     md-raised-button
-     href="{{ employ.url }}"
-     target="_blank"
-     color="primary">{{ 'labels.url' | translate }}</a>
-  <button
-    md-button
-    md-dialog-close>{{ 'labels.close' | translate }}</button>
-</md-dialog-actions>
+    <div fxFlex="50px">
+      <button md-icon-button
+              md-dialog-close>
+        <md-icon class="md-24">highlight_off</md-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="dialog-body">
+
+    <md-dialog-content class="fade-slide-in delay100">
+
+      <div class="block">
+        <div *ngIf="employ.location" fxLayout="row">
+          <md-icon fxFlex="30px">place</md-icon>
+          <span fxFlex>{{ employ.location }}</span>
+        </div>
+
+        <div class="card-date-range" fxLayout="row">
+          <md-icon fxFlex="30px">date_range</md-icon>
+          <card-date-range [startDate]="employ?.start"
+                           [endDate]="employ?.end"
+                           [calculateDuration]="true"></card-date-range>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3 class="dialog-subtitle">{{ employ.summary }}</h3>
+
+        <ul class="items">
+          <li *ngFor="let highlight of employ?.highlights">
+            {{ highlight }}
+          </li>
+        </ul>
+      </div>
+
+      <div class="block" *ngIf="employ?.keywords?.length > 1">
+        <h3 class="dialog-subtitle">{{ 'labels.skills' | translate }}</h3>
+
+        <div class="chip-wrapper">
+          <md-chip-list>
+            <div class="skill-container">
+              <md-chip *ngFor="let key of employ?.keywords" [color]="color">
+                {{ key }}
+              </md-chip>
+            </div>
+          </md-chip-list>
+        </div>
+      </div>
+
+      <div>
+        <a *ngIf="employ?.url"
+           md-raised-button
+           href="{{ employ?.url }}"
+           target="_blank"
+           color="primary">{{ 'labels.url' | translate }}</a>
+      </div>
+
+    </md-dialog-content>
+
+  </div>
+
+</div>

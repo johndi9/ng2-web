@@ -8,12 +8,16 @@
 
 .contact-wrapper,
 .social-wrapper {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 
   .mat-button {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: 300;
     padding: 0;
+  }
+
+  .mat-icon {
+    height: auto;
   }
 }
 

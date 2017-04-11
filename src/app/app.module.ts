@@ -46,6 +46,7 @@ import { OtherInfoWrapper } from './components/panels/home/cv-container/other-in
 import { PersonalInfoWrapper } from './components/panels/home/cv-container/personal-info-wrapper/personal-info-wrapper.component';
 import { ProjectDialog } from './components/panels/home/dialogs/project-dialog/project-dialog.component';
 import { ProjectWrapper } from './components/panels/home/cv-container/project-wrapper/project-wrapper.component';
+import { ShareButton } from './components/panels/home/share-button/share-button.component';
 import { SidebarLoadingWrapper } from './components/panels/home/cv-container-loading/sidebar-loading-wrapper/sidebar-loading-wrapper.component';
 import { VideoBg } from './components/panels/home/video-bg/video-bg.component';
 
@@ -108,7 +109,8 @@ export function createTranslateLoader(http: Http) {
     ModuleLoadingWrapper,
     SidebarLoadingWrapper,
     Ng2Ripple,
-    CardDateRange
+    CardDateRange,
+    ShareButton
   ],
   imports: [
     BrowserModule,

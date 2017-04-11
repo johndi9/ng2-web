@@ -21,4 +21,11 @@
     <span class="sr-only">{{ 'labels.facebookShare' | translate }}</span>
   </a>
 
+  <a md-button
+     href="{{ socialShare.linkedIn }}"
+     (click)="openSocialModal(socialShare.linkedIn)">
+    <i class="fa fa-linkedin" aria-hidden="true"></i>
+    <span class="sr-only">{{ 'labels.linkedInShare' | translate }}</span>
+  </a>
+
 </div>

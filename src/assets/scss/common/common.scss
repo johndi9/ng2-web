@@ -59,9 +59,12 @@ ul {
   padding-top: 0;
 }
 
-.cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
-  background: $white;
-  opacity: 1;
+div.mat-menu-panel {
+  width: $mat-menu-container-width;
+
+  .mat-menu-content {
+    padding: 0;
+  }
 }
 
 .cdk-overlay-container .mat-dialog-container {

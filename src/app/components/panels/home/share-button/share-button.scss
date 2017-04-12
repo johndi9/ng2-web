@@ -1,0 +1,28 @@
+.mat-toolbar {
+  background-color: transparent;
+}
+
+.share-wrapper {
+  padding: 16px;
+
+  .mat-button {
+    color: $gray-1;
+    font-size: 1rem;
+    text-align: left;
+    width: 100%;
+  }
+}
+
+h3 {
+  @include expand-card-section;
+
+  border-bottom: 1px solid $gray-lighter;
+  font-size: 1.8rem;
+  margin-bottom: .5rem;
+  padding-bottom: .5rem;
+}
+
+i {
+  margin-right: 5px;
+  width: 24px;
+}

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Platform } from '@angular/material';
 
 import { SOCIAL_SHARE } from '../../../../variables/social-share';
 
@@ -12,7 +13,7 @@ import { SOCIAL_SHARE } from '../../../../variables/social-share';
 export class ShareButton {
   private socialShare = SOCIAL_SHARE;
 
-  constructor() {
+  constructor(private platform: Platform) {
   }
 
   private openSocialModal(href: string) {

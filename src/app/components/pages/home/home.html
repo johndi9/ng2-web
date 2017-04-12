@@ -4,6 +4,7 @@
                 [curriculum]="curriculum"
                 [typeScreen]="typeScreen"></cv-container>
   <cv-container-loading *ngIf="!curriculum"></cv-container-loading>
+  <share-button class="share-button"></share-button>
 </div>
 
 <ng2-footer [name]="curriculum?.name"></ng2-footer>

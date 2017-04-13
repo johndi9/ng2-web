@@ -33,10 +33,15 @@
 @mixin loading-modules {
   .module {
     background: $white;
+    padding: 10px;
   }
 
   .separation {
     margin-bottom: 20px;
+  }
+
+  p {
+    margin: 0;
   }
 
   .line-wrapper {

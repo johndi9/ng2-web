@@ -9,7 +9,7 @@
                      [typeScreen]="typeScreen"></cv-menu-wrapper>
   </div>
 
-  <div class="container-wrapper {{bgClass}}" fxFlex fxFlex.gt-md="calc(100vw - {{ SIDEBAR_MAX_WIDTH }})" fxFlex.md="75">
+  <div class="container-wrapper {{bgClass}}" fxFlex fxFlex.md="75">
     <swiper (indexChange)="onIndexSwiperChange($event)" class="fade-slide-in delay350">
       <div class="swiper-slide" fxLayout="column">
         <personal-info-wrapper [info]="curriculum?.info"

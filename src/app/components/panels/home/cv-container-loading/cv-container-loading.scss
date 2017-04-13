@@ -1,8 +1,5 @@
-$total-height: 500px;
-
 .loading {
   background: $white;
-  height: $total-height;
   margin-top: calc(100vh - #{$video-overflow-visible-y});
 }
 
@@ -10,6 +7,10 @@ $total-height: 500px;
 .loading-container {
   background: $white;
   box-shadow: 10px 0 14px 0 $black-02;
-  padding-top: 25px;
   z-index: 1;
+}
+
+.loading-container {
+  padding-bottom: 100px;
+  padding-top: 25px;
 }

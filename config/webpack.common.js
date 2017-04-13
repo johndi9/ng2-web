@@ -11,6 +11,7 @@ const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin')
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlElementsPlugin = require('./html-elements-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
@@ -251,12 +252,41 @@ module.exports = function (options) {
           test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
           loader: 'url-loader?limit=10000&minetype=application/font-woff'
         },
+        {
+          test: /initial\.scss$/,
+          use: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: [
+              {
+                loader: 'css-loader',
+                options: {
+                  importLoaders: 1
+                }
+              },
+              {
+                loader: 'postcss-loader',
+                options: {
+                  sourceMap: 'inline'
+                }
+              },
+              {
+                loader: 'sass-loader'
+              },
+              {
+                loader: 'sass-resources-loader',
+                query: {
+                  resources: [path.resolve(__dirname, './../src/assets/scss/utils/_utils.scss')]
+                },
+              }
+            ]
+          })
+        },
 
         /*
          * File loader for supporting SASS files
          */
         {
-          test: /\.scss$/,
+          test: /^((?!initial).)*\.scss$/,
           use: [
             'to-string-loader',
             {
@@ -281,7 +311,7 @@ module.exports = function (options) {
               },
             }
           ],
-          exclude: [helpers.root('src', 'styles')]
+          exclude: [helpers.root('src', 'styles'), helpers.root('src', 'scss', 'initial.scss')]
         }
       ],
     },
@@ -449,6 +479,8 @@ module.exports = function (options) {
         failOnWarning: false,
         failOnError: false
       }),
+
+      new ExtractTextPlugin('css/initial.css')
 
     ],
 

@@ -54,7 +54,7 @@ import { VideoBg } from './components/panels/home/video-bg/video-bg.component';
 import 'hammerjs';
 import { MomentModule } from 'angular2-moment';
 import { SWIPER_CONFIG } from './variables/variables';
-import { SwiperModule } from 'angular2-swiper-wrapper';
+import { SwiperModule } from 'ngx-swiper-wrapper';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 

@@ -1,4 +1,4 @@
-import { SwiperConfigInterface } from 'angular2-swiper-wrapper';
+import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
 export enum STATE_KEYS {
   CV_OPTION_SELECTED,

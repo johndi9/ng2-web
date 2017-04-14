@@ -9,8 +9,9 @@ const path = require('path');
  */
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
-const NamedModulesPlugin = require('webpack/lib/NamedModulesPlugin');
+const DllBundlesPlugin = require('webpack-dll-bundles-plugin').DllBundlesPlugin;
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
+const NamedModulesPlugin = require('webpack/lib/NamedModulesPlugin');
 
 /**
  * Webpack Constants
@@ -19,14 +20,13 @@ const ENV = process.env.ENV = process.env.NODE_ENV = 'development';
 const HOST = process.env.HOST || 'localhost';
 const PORT = process.env.PORT || 3000;
 const HMR = helpers.hasProcessFlag('hot');
+
 const METADATA = webpackMerge(commonConfig({env: ENV}).metadata, {
   host: HOST,
   port: PORT,
   ENV: ENV,
   HMR: HMR
 });
-
-const DllBundlesPlugin = require('webpack-dll-bundles-plugin').DllBundlesPlugin;
 
 
 /**

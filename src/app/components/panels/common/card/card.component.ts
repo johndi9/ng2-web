@@ -28,8 +28,8 @@ export class Card implements OnInit {
   @Input() hideCardActions: boolean;
   @Input() willTriggerModal: boolean;
 
-  private logoWidth: string;
-  private logoHeight: string;
+  logoWidth: string;
+  logoHeight: string;
 
   private LOGO_SIZE: string = '50px';
 
@@ -42,7 +42,7 @@ export class Card implements OnInit {
   ngOnInit(): void {
   }
 
-  private openModal(event: MouseEvent): void {
+  openModal(event: MouseEvent): void {
     this.notifyDialogChange(event, this.type);
 
     this._dialogService.open(this.dialog, null, null, event, this.typeScreen !== SCREEN_TYPES.MOBILE);

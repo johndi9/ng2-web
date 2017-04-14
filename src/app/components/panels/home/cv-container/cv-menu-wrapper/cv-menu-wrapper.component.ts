@@ -31,7 +31,7 @@ export class CvMenuWrapper implements AfterViewInit, OnChanges {
     ['personalInfoTitle', 'projectsTitle', 'employsTitle', 'educationTitle', 'otherInfoTitle', 'contactTitle'];
   private scrollableContainer: HTMLElement;
 
-  private SCREEN_TYPES = SCREEN_TYPES;
+  SCREEN_TYPES = SCREEN_TYPES;
   private readonly TAB_WIDTH: number = 160;
 
   constructor(private _appState: AppState,

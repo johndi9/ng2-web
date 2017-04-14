@@ -14,7 +14,7 @@ export class CardDateRange implements OnInit {
   @Input() calculateDuration: boolean;
   @Input() showOnlyYear: boolean;
 
-  private dateFormat: string;
+  dateFormat: string;
 
   private readonly YEAR_MONTH_FORMAT: string = 'y/MM';
   private readonly YEAR_FORMAT: string = 'y';

@@ -27,7 +27,7 @@ export class Home implements OnInit, OnDestroy, AfterViewInit {
   private resizeChangeSubscription: Subscription;
   private modalOpenedSubscription: Subscription;
 
-  private curriculum: Curriculum;
+  curriculum: Curriculum;
   private typeScreen: number;
   private rippleContainer: HTMLElement;
 

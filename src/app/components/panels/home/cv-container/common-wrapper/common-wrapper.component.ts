@@ -27,7 +27,7 @@ export class CommonWrapper implements OnChanges {
     this.numberOfColumns = this.typeScreen + 1;
   }
 
-  private getColumnsNumber(): Array<number> {
+  getColumnsNumber(): Array<number> {
     return Array(this.numberOfColumns).fill(0).map((x, i) => i + 1);
   }
 }

@@ -14,8 +14,8 @@ import { Project } from '../../../../../models/Curriculum/Project/Project';
 })
 
 export class ProjectDialog implements OnInit {
-  private project: Project;
-  private employ: Employ;
+  project: Project;
+  employ: Employ;
 
   constructor(private _curriculumService: CurriculumService) {
   }

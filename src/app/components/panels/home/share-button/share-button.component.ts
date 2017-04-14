@@ -11,12 +11,14 @@ import { SOCIAL_SHARE } from '../../../../variables/social-share';
 })
 
 export class ShareButton {
-  private socialShare = SOCIAL_SHARE;
+  socialShare = SOCIAL_SHARE;
+  platform: Platform;
 
-  constructor(private platform: Platform) {
+  constructor(platform: Platform) {
+    this.platform = platform;
   }
 
-  private openSocialModal(href: string) {
+  openSocialModal(href: string) {
     window.open(href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
     return false;
   }

@@ -22,11 +22,11 @@ export class CvContainer implements OnInit, OnDestroy {
 
   private optionChangeSubscription: Subscription;
 
-  private tabSelected: number;
-  private bgClass: string;
+  tabSelected: number;
+  bgClass: string;
 
   private readonly DEFAULT_OPTION: number = 0;
-  private readonly SIDEBAR_MAX_WIDTH: string = '320px';
+  readonly SIDEBAR_MAX_WIDTH: string = '320px';
 
   constructor(private _appState: AppState,
               private _notificationService: NotificationService,
@@ -50,7 +50,7 @@ export class CvContainer implements OnInit, OnDestroy {
    * Index change based on a swiper action
    * @param index
    */
-  private onIndexSwiperChange(option: number) {
+  onIndexSwiperChange(option: number) {
     this.updateTabSelection(option);
   }
 

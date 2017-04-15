@@ -130,7 +130,7 @@
   .dialog-body {
     flex: 1;
     padding: 0 24px;
-    overflow: scroll;
+    overflow-y: auto;
   }
 
   .block {

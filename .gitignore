@@ -8,7 +8,6 @@
 /dist/
 /src/assets/video*/
 /dll/
-/compiled/
 /todo.txt
-/src/app/animations/
-/src/app/animationFactory.ts
+/src/app/variables/keys.ts
+/compiled/

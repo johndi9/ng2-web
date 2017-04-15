@@ -18,7 +18,7 @@ export class GoogleMapsService {
   }
 
   public getGoogleMapsUrl(): string {
-    return `http://maps.googleapis.com/maps/api/js?key=${KEYS.googleMaps}&v=3&sensor=false&callback=googleMapsReady`;
+    return `http://maps.googleapis.com/maps/api/js?key=${KEYS.googleMaps}&v=3&callback=googleMapsReady`;
   }
 
   public createMap(mapDiv: Element, address: string): void {

@@ -31,7 +31,6 @@ export class AppState {
     // internally mutate our state
     // return this._state[prop] = value;
     this._state[prop] = value;
-    console.log(this._state);
     return this._state[prop];
   }
 

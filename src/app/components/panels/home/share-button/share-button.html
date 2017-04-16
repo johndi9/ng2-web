@@ -1,47 +1,69 @@
-<md-toolbar>
-  <button md-fab [mdMenuTriggerFor]="posYMenu">
-    <md-icon class="md-24">share</md-icon>
-  </button>
-</md-toolbar>
+<div class="flex-container"
+     fxLayout="column"
+     fxLayoutAlign="center center">
 
-<md-menu yPosition="above" #posYMenu="mdMenu">
-  <div class="share-wrapper">
-    <h3>{{ 'labels.share' | translate }}</h3>
+  <div fxFlex>
 
-    <a md-button
-       href="{{ socialShare.twitter }}"
-       (click)="openSocialModal(socialShare.twitter)">
-      <i class="fa fa-twitter" aria-hidden="true"></i>
-      <span>{{ 'labels.twitterShare' | translate }}</span>
-    </a>
+    <md-toolbar>
+      <button md-fab [mdMenuTriggerFor]="posYMenu">
+        <md-icon class="md-24">share</md-icon>
+      </button>
+    </md-toolbar>
 
-    <a md-button
-       href="{{ socialShare.googlePlus }}"
-       (click)="openSocialModal(socialShare.googlePlus)">
-      <i class="fa fa-google-plus" aria-hidden="true"></i>
-      <span>{{ 'labels.googlePlusShare' | translate }}</span>
-    </a>
+    <md-menu yPosition="above" #posYMenu="mdMenu">
+      <div class="share-wrapper">
+        <h3>{{ 'labels.share' | translate }}</h3>
 
-    <a md-button
-       href="{{ socialShare.facebook }}"
-       (click)="openSocialModal(socialShare.facebook)">
-      <i class="fa fa-facebook" aria-hidden="true"></i>
-      <span>{{ 'labels.facebookShare' | translate }}</span>
-    </a>
+        <a md-button
+           href="{{ socialShare.twitter }}"
+           (click)="openSocialModal(socialShare.twitter)">
+          <i class="fa fa-twitter" aria-hidden="true"></i>
+          <span>{{ 'labels.twitterShare' | translate }}</span>
+        </a>
 
-    <a md-button
-       href="{{ socialShare.linkedIn }}"
-       (click)="openSocialModal(socialShare.linkedIn)">
-      <i class="fa fa-linkedin" aria-hidden="true"></i>
-      <span>{{ 'labels.linkedInShare' | translate }}</span>
-    </a>
+        <a md-button
+           href="{{ socialShare.googlePlus }}"
+           (click)="openSocialModal(socialShare.googlePlus)">
+          <i class="fa fa-google-plus" aria-hidden="true"></i>
+          <span>{{ 'labels.googlePlusShare' | translate }}</span>
+        </a>
 
-    <a *ngIf="platform.ANDROID || platform.IOS"
-       md-button
-       href="{{ socialShare.whatsapp }}"
-       (click)="openSocialModal(socialShare.whatsapp)">
-      <i class="fa fa-whatsapp" aria-hidden="true"></i>
-      <span>{{ 'labels.whatsappShare' | translate }}</span>
-    </a>
+        <a md-button
+           href="{{ socialShare.facebook }}"
+           (click)="openSocialModal(socialShare.facebook)">
+          <i class="fa fa-facebook" aria-hidden="true"></i>
+          <span>{{ 'labels.facebookShare' | translate }}</span>
+        </a>
+
+        <a md-button
+           href="{{ socialShare.linkedIn }}"
+           (click)="openSocialModal(socialShare.linkedIn)">
+          <i class="fa fa-linkedin" aria-hidden="true"></i>
+          <span>{{ 'labels.linkedInShare' | translate }}</span>
+        </a>
+
+        <a *ngIf="platform.ANDROID || platform.IOS"
+           md-button
+           href="{{ socialShare.whatsapp }}"
+           (click)="openSocialModal(socialShare.whatsapp)">
+          <i class="fa fa-whatsapp" aria-hidden="true"></i>
+          <span>{{ 'labels.whatsappShare' | translate }}</span>
+        </a>
+      </div>
+    </md-menu>
+
   </div>
-</md-menu>
+
+  <div fxFlex
+       class="btn-separator">
+
+    <a md-fab
+       href="{{ '/assets/pdf/' + CV_FILE_NAME }}"
+       download
+       (click)="$event.stopPropagation()"
+       color="primary">
+      <md-icon>file_download</md-icon>
+    </a>
+
+  </div>
+</div>

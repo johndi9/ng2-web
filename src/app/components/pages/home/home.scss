@@ -1,6 +1,10 @@
 .share-button {
-  bottom: 25px;
+  bottom: $fab-btn-bottom;
   position: fixed;
-  right: 25px;
+  right: $fab-btn-right;
   z-index: 1;
+
+  @media ($mat-xsmall-down) {
+    right: $fab-btn-right-xs;
+  }
 }

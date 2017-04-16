@@ -56,12 +56,24 @@
         </div>
       </div>
 
-      <div>
+      <div *ngIf="employ?.url || employ?.download">
         <a *ngIf="employ?.url"
            md-raised-button
            href="{{ employ?.url }}"
            target="_blank"
-           color="primary">{{ 'labels.url' | translate }}</a>
+           color="primary">
+          {{ 'labels.url' | translate }}
+        </a>
+
+        <a *ngIf="employ?.download"
+           md-raised-button
+           href="{{ '/assets/pdf/' + employ?.download }}"
+           download
+           (click)="$event.stopPropagation()"
+           color="primary">
+          <md-icon>file_download</md-icon>
+          {{ 'labels.download' | translate }}
+        </a>
       </div>
 
     </md-dialog-content>

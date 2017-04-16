@@ -26,14 +26,28 @@
         </div>
         <div class="card-actions">
           <button md-button
-                  color="primary">{{ 'labels.moreDetails' | translate }}
+                  color="primary">
+            {{ 'labels.moreDetails' | translate }}
           </button>
+
           <a *ngIf="employ?.url"
              md-raised-button
              href="{{ employ?.url }}"
              target="_blank"
              (click)="$event.stopPropagation()"
-             color="primary">{{ 'labels.url' | translate }}</a>
+             color="primary">
+            {{ 'labels.url' | translate }}
+          </a>
+
+          <a *ngIf="employ?.download"
+             md-raised-button
+             href="{{ '/assets/pdf/' + employ?.download }}"
+             download
+             (click)="$event.stopPropagation()"
+             color="primary">
+            <md-icon>file_download</md-icon>
+            {{ 'labels.download' | translate }}
+          </a>
         </div>
       </card>
     </ng-template>

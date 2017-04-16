@@ -5,6 +5,7 @@ export class Project {
   category: string;
   role: string;
   url: string;
+  download: string;
   logo: string;
   backgroundColor: string;
   color: string;
@@ -22,6 +23,7 @@ export class Project {
     this.category = undefined;
     this.role = undefined;
     this.url = undefined;
+    this.download = undefined;
     this.logo = undefined;
     this.backgroundColor = undefined;
     this.color = undefined;

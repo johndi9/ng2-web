@@ -3,6 +3,7 @@ export class Employ {
   employer: string;
   location: string;
   url: number;
+  download: number;
   logo: string;
   backgroundColor: string;
   color: string;
@@ -18,6 +19,7 @@ export class Employ {
     this.employer = undefined;
     this.location = undefined;
     this.url = undefined;
+    this.download = undefined;
     this.logo = undefined;
     this.backgroundColor = undefined;
     this.color = undefined;

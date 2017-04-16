@@ -14,6 +14,8 @@ export class ShareButton {
   socialShare = SOCIAL_SHARE;
   platform: Platform;
 
+  readonly CV_FILE_NAME = 'CV_JuanDiegoMiguel_en.pdf';
+
   constructor(platform: Platform) {
     this.platform = platform;
   }

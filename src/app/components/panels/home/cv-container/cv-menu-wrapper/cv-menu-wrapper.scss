@@ -20,10 +20,6 @@ $container-tab-width: 960px !default;
 .tabs-container {
   background: $bg-base;
   overflow-x: auto;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
 }
 
 .mat-tab-link {

@@ -310,8 +310,7 @@ module.exports = function (options) {
                 resources: [path.resolve(__dirname, './../src/assets/scss/utils/_utils.scss')]
               },
             }
-          ],
-          exclude: [helpers.root('src', 'styles'), helpers.root('src', 'scss', 'initial.scss')]
+          ]
         }
       ],
     },
@@ -480,7 +479,7 @@ module.exports = function (options) {
         failOnError: false
       }),
 
-      new ExtractTextPlugin('css/initial.css')
+      new ExtractTextPlugin('assets/css/' + (isProd ? '[name].[contenthash].css' : '[name].css'))
 
     ],
 

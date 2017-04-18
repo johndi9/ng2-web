@@ -244,6 +244,7 @@ module.exports = function (env) {
         minimize: true,
         debug: false,
         options: {
+          context: helpers.root('.'),
 
           /**
            * Html loader advanced options

@@ -245,13 +245,29 @@ module.exports = function (options) {
          * File loader for supporting fonts
          */
         {
-          test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-          loader: 'file-loader'
+          test: /\.svg(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+          loader: 'url-loader?limit=65000&mimetype=image/svg+xml&name=assets/fonts/[name].[ext]'
         },
         {
-          test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-          loader: 'url-loader?limit=10000&minetype=application/font-woff'
+          test: /\.woff(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+          loader: 'url-loader?limit=65000&mimetype=application/font-woff&name=assets/fonts/[name].[ext]'
         },
+        {
+          test: /\.woff2(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+          loader: 'url-loader?limit=65000&mimetype=application/font-woff2&name=assets/fonts/[name].[ext]'
+        },
+        {
+          test: /\.[ot]tf(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+          loader: 'url-loader?limit=65000&mimetype=application/octet-stream&name=assets/fonts/[name].[ext]'
+        },
+        {
+          test: /\.eot(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+          loader: 'url-loader?limit=65000&mimetype=application/vnd.ms-fontobject&name=assets/fonts/[name].[ext]'
+        },
+
+        /*
+         * File loader for supporting SASS files
+         */
         {
           test: /initial\.scss$/,
           use: ExtractTextPlugin.extract({
@@ -281,10 +297,6 @@ module.exports = function (options) {
             ]
           })
         },
-
-        /*
-         * File loader for supporting SASS files
-         */
         {
           test: /^((?!initial).)*\.scss$/,
           use: [

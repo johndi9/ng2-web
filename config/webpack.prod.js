@@ -5,6 +5,7 @@ const commonConfig = require('./webpack.common.js'); // the settings that are co
 /**
  * Webpack Plugins
  */
+const CompressionPlugin = require('compression-webpack-plugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const IgnorePlugin = require('webpack/lib/IgnorePlugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
@@ -148,7 +149,8 @@ module.exports = function (env) {
           comments: false
         }, //prod
         mangle: {
-          screw_ie8: true
+          screw_ie8: true,
+          keep_fnames: true
         }, //prod
         compress: {
           screw_ie8: true,
@@ -163,6 +165,7 @@ module.exports = function (env) {
           join_vars: true,
           negate_iife: false // we need this for lazy v8
         },
+        comments: false
       }),
 
       /**
@@ -220,11 +223,10 @@ module.exports = function (env) {
        *
        * See: https://github.com/webpack/compression-webpack-plugin
        */
-      //  install compression-webpack-plugin
-      // new CompressionPlugin({
-      //   regExp: /\.css$|\.html$|\.js$|\.map$/,
-      //   threshold: 2 * 1024
-      // })
+      new CompressionPlugin({
+        regExp: /\.css$|\.html$|\.js$|\.map$/,
+        threshold: 2 * 1024
+      }),
 
       /**
        * Plugin LoaderOptionsPlugin (experimental)

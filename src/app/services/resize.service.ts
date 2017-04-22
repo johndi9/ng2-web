@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs/Rx';
+
+import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import 'rxjs/add/operator/pluck';
+import 'rxjs/add/operator/distinctUntilChanged';
 
 import { SCREEN_TYPES } from '../variables/variables';
 

@@ -8,7 +8,9 @@ import { Ng2Ripple } from '../components/panels/common/ng2-ripple/ng2-ripple.com
 
 import { Dialog } from '../models/Components/Dialog';
 
-import { Observer, Observable } from 'rxjs/Rx';
+import { Observer } from 'rxjs/Observer';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/delay';
 
 
 @Injectable()

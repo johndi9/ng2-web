@@ -25,6 +25,9 @@ require('rxjs/add/operator/share');
 require('rxjs/add/observable/of');
 require('rxjs/add/operator/merge');
 require('rxjs/add/operator/toArray');
+require('rxjs/add/operator/delay');
+require('rxjs/add/operator/pluck');
+require('rxjs/add/operator/distinctUntilChanged');
 
 if ('production' === ENV) {
   // Production

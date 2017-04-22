@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output, trigger, state, transition, style, animate, OnInit } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 
 
 @Component({

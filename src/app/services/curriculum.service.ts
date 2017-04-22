@@ -4,7 +4,8 @@ import { HttpService } from './http.service';
 
 import { Curriculum } from '../models/Curriculum/Curriculum';
 
-import { Observable, Subscription } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 import MapUtils from '../utils/modelParser';
 import { Employ } from '../models/Curriculum/Employ/Employ';
 import { Project } from '../models/Curriculum/Project/Project';

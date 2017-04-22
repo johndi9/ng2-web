@@ -9,7 +9,7 @@ import { ResizeService } from '../../../services/resize.service';
 import { Curriculum } from '../../../models/Curriculum/Curriculum';
 import { ModalOpened } from '../../../models/Components/Events';
 
-import { Subscription } from 'rxjs/Rx';
+import { Subscription } from 'rxjs/Subscription';
 
 import { STATE_KEYS } from '../../../variables/variables';
 

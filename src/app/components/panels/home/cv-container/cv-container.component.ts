@@ -5,7 +5,7 @@ import { NotificationService } from '../../../../services/notification.service';
 
 import { Curriculum } from '../../../../models/Curriculum/Curriculum';
 
-import { Subscription } from 'rxjs/Rx';
+import { Subscription } from 'rxjs/Subscription';
 
 import { STATE_KEYS, CV_OPTION_TYPES } from '../../../../variables/variables';
 

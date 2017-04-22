@@ -491,7 +491,9 @@ module.exports = function (options) {
         failOnError: false
       }),
 
-      new ExtractTextPlugin('assets/css/' + (isProd ? '[name].[contenthash].css' : '[name].css'))
+      new ExtractTextPlugin('assets/css/' + (isProd ? '[name].[contenthash].css' : '[name].css')),
+
+      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
 
     ],
 

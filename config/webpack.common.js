@@ -12,6 +12,7 @@ const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const FontminPlugin = require('fontmin-webpack')
 const HtmlElementsPlugin = require('./html-elements-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
@@ -384,6 +385,11 @@ module.exports = function (options) {
           {from: 'src/meta'},
         ], {ignore: ['*.scss']}
       ),
+
+      // new FontminPlugin({
+      //   autodetect: true, // automatically pull unicode characters from CSS
+      //   glyphs: ['\uf0c8', /* extra glyphs to include */]
+      // }),
 
       /*
        * Plugin: HtmlWebpackPlugin

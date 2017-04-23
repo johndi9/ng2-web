@@ -7,7 +7,9 @@
         <img *ngIf="logo"
              class="mat-card-avatar"
              [ngStyle]="{ 'width': logoWidth, 'height': logoHeight }"
-             src="{{ '/assets/images/' + logo }}">
+             [defaultImage]="'/assets/images/min/' + logo"
+             [lazyLoad]="'/assets/images/normal/' + logo"
+             [offset]="100">
         <md-icon *ngIf="!logo"
                  class="no-logo-icon">business
         </md-icon>

@@ -55,8 +55,9 @@ import 'hammerjs';
 import { MomentModule } from 'angular2-moment';
 import { SWIPER_CONFIG } from './variables/variables';
 import { SwiperModule } from 'ngx-swiper-wrapper';
-import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 // Routes
 import { ROUTES } from './app.routes';
@@ -117,6 +118,7 @@ export function createTranslateLoader(http: Http) {
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
+    LazyLoadImageModule,
     MomentModule,
     RouterModule.forRoot(ROUTES, { useHash: false }),
     MaterialModule,

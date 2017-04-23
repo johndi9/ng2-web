@@ -3,7 +3,10 @@
        fxLayout="row"
        fxLayoutAlign="center center">
     <div fxFlex="50px">
-      <img class="profile-pic-sm" src="{{ '/assets/images/' + info?.image }}">
+      <img class="profile-pic-sm"
+           [defaultImage]="'/assets/images/min/' + info?.image"
+           [lazyLoad]="'/assets/images/normal/' + info?.image"
+           [offset]="100">
     </div>
 
     <div class="name-wrapper-sm">
@@ -29,7 +32,10 @@
 
 <div *ngIf="typeScreen !== SCREEN_TYPES.MOBILE" class="sidebar-container fade-slide-in delay250">
   <div>
-    <img class="profile-pic" src="{{ '/assets/images/' + info?.image }}">
+    <img class="profile-pic"
+         [defaultImage]="'/assets/images/min/' + info?.image"
+         [lazyLoad]="'/assets/images/normal/' + info?.image"
+         [offset]="100">
     <span class="name-wrapper">{{ name }}</span>
   </div>
 

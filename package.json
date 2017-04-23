@@ -155,7 +155,6 @@
     "protractor": "^5.0.0",
     "raw-loader": "0.5.1",
     "rimraf": "^2.5.2",
-    "roboto-fontface": "^0.6.0",
     "sass-lint": "^1.9.1",
     "sass-loader": "^4.0.2",
     "sass-resources-loader": "^1.2.0-beta.2",

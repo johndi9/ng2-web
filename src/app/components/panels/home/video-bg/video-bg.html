@@ -2,18 +2,9 @@
 
   <logo></logo>
 
-  <div *ngIf="!videoLoaded"
-       class="video-bg"></div>
-
-  <video *ngIf="videoLoaded"
-         preload="auto"
+  <video preload="none"
          autoplay loop muted playsinline
          class="video-bg fade-slide-in delay150"
-         poster="{{ videoPath }}">
-    <source src="{{ videoPath }}" type="video/mp4">
-    Your browser does not support the video tag. I suggest you upgrade your browser.
-    <source src="{{ videoPath }}" type="video/webm">
-    Your browser does not support the video tag. I suggest you upgrade your browser.
-  </video>
+         poster="{{ cover }}"></video>
 
 </div>

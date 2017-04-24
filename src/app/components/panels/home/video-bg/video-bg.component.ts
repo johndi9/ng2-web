@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnInit } from '@angular/core';
+import { Platform } from '@angular/material';
 
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
@@ -7,19 +8,28 @@ import { Subscription } from 'rxjs/Subscription';
 @Component({
   selector: 'video-bg',
   styleUrls: ['./video-bg.scss'],
-  templateUrl: './video-bg.html'
+  templateUrl: './video-bg.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class VideoBg implements OnInit {
-  public videoLoaded: boolean;
-  private videoPath: string = '/assets/video/bg.mp4';
+  private videoPath: string;
   private subscription: Subscription;
 
-  constructor() {
+  cover: string;
+
+  constructor(private _elementRef: ElementRef,
+              private platform: Platform) {
+    this.videoPath = '/assets/video/' + (platform.ANDROID || platform.IOS ? 'bg-min.mp4' : 'bg.mp4')
+    this.cover = platform.ANDROID || platform.IOS ? '/assets/images/normal/cover/cover.png' : '';
   }
 
   ngOnInit(): void {
-    this.subscription = this.loadVideo().subscribe(() => this.videoLoaded = true);
+    this.subscription = this.loadVideo().subscribe(() => {
+      const video: HTMLVideoElement = this._elementRef.nativeElement.querySelector('video');
+
+      video.src = this.videoPath;
+    });
   }
 
   ngOnDestroy(): void {

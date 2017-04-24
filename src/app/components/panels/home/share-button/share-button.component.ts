@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Platform } from '@angular/material';
 
 import { SOCIAL_SHARE } from '../../../../variables/social-share';
@@ -7,7 +7,8 @@ import { SOCIAL_SHARE } from '../../../../variables/social-share';
 @Component({
   selector: 'share-button',
   styleUrls: ['./share-button.scss'],
-  templateUrl: './share-button.html'
+  templateUrl: './share-button.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class ShareButton {

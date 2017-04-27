@@ -1,4 +1,4 @@
-const website: string = 'http://jdmiguel.xyz';
+const website: string = 'https://jdmiguel.xyz';
 const title: string = 'Juan Diego de Miguel Website';
 const summary: string = 'Check my new website with Angular2 / Google Material';
 

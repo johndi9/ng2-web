@@ -20,6 +20,7 @@ const ngcWebpack = require('ngc-webpack');
 const NormalModuleReplacementPlugin = require('webpack/lib/NormalModuleReplacementPlugin');
 const SassLintPlugin = require('sasslint-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
+const StyleExtHtmlWebpackPlugin = require('style-ext-html-webpack-plugin');
 
 var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
@@ -498,6 +499,8 @@ module.exports = function (options) {
       }),
 
       new ExtractTextPlugin('assets/css/' + (isProd ? '[name].[contenthash].css' : '[name].css')),
+
+      new StyleExtHtmlWebpackPlugin(),
 
       new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
 

@@ -26,6 +26,7 @@
     <div *ngFor="let soc of social" class="separator">
       <i class="fa fa-{{ soc.icon }} contact-icon" aria-hidden="true"></i>
       <a md-button
+         class="social-link"
          href="{{ soc?.url }}"
          target="_blank">{{ soc?.url }}</a>
     </div>

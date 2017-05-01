@@ -8,7 +8,10 @@
 
 .menu-wrapper,
 .container-wrapper {
-  box-shadow: 10px 0 14px 0 $black-02;
+  @media ($mat-medium-up) {
+    @include shadow-default;
+  }
+
   z-index: 1;
 
   &.grey {
@@ -17,5 +20,11 @@
 
   &.white {
     background: $white;
+  }
+}
+
+.menu-wrapper {
+  @media ($mat-small-down) {
+    z-index: 2;
   }
 }

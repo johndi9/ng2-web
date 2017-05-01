@@ -1,5 +1,5 @@
 import {
-  Component, ChangeDetectionStrategy, Input, ElementRef, OnChanges, SimpleChanges, AfterViewInit
+  Component, ChangeDetectionStrategy, Input, ElementRef, OnChanges, SimpleChanges, AfterViewInit, HostListener
 } from '@angular/core';
 
 import { AppState } from '../../../../../services/app.service';
@@ -21,6 +21,12 @@ import { STATE_KEYS, CV_OPTION_TYPES, EVENT_TYPES, TABS, SCREEN_TYPES } from '..
 })
 
 export class CvMenuWrapper implements AfterViewInit, OnChanges {
+  @HostListener('window:scroll', ['$event'])
+  triggerFixPosition(event) {
+    const elementOffset: number = this.typeScreen === SCREEN_TYPES.MOBILE ? 75 : 140;
+    this.hasFixPosition = window.pageYOffset + 63 > window.innerHeight - elementOffset;
+  }
+
   @Input() name: string;
   @Input() info: Info;
   @Input() tabSelected: number;
@@ -32,6 +38,7 @@ export class CvMenuWrapper implements AfterViewInit, OnChanges {
   private scrollableContainer: HTMLElement;
 
   SCREEN_TYPES = SCREEN_TYPES;
+  hasFixPosition: boolean;
   private readonly TAB_WIDTH: number = 160;
 
   constructor(private _appState: AppState,
@@ -68,7 +75,7 @@ export class CvMenuWrapper implements AfterViewInit, OnChanges {
 
       // Reload the element if scrollLeft is not writable anymore
       if (!this.scrollableContainer || !this.scrollableContainer.scrollLeft) {
-        this.scrollableContainer = this._elementRef.nativeElement.querySelector('.tabs-container');
+        this.scrollableContainer = this._elementRef.nativeElement.querySelector('.tabs');
       }
       if (this.scrollableContainer) {
         this.scrollableContainer.scrollLeft = this.tabSelected * this.TAB_WIDTH - (totalVisibleWidth - this.TAB_WIDTH) / 2;

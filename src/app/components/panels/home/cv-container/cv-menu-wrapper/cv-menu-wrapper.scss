@@ -6,20 +6,44 @@ $sidebar-container-overflow-y-sm: -75px !default;
 $tab-height: 60px !default;
 $tab-width: 160px !default;
 $container-tab-width: 960px !default;
+$offset-top-fixed: 140px;
+$offset-top-fixed-sm: 75px;
+
 
 .sidebar-container {
   @include mat-elevation(6);
   background: $white;
   margin: $sidebar-container-overflow-y 10px 10px;
+  max-width: $mat-menu-sidebar-max-width;
+  width: calc(25vw - 20px); // 1/4 screen - padding
 
   [md-list-item] {
     color: $color-base;
   }
 }
 
-.tabs-container {
+.host-wrapper-sm {
+  @media ($mat-small-down) {
+    display: block;
+    margin-bottom: calc(#{$offset-top-fixed-sm} - 10px);
+  }
+}
+
+.fixed {
+  position: fixed;
+  top: $offset-top-fixed;
+}
+
+.fixed-sm {
+  @include shadow-default;
+  position: fixed;
+  top: $offset-top-fixed-sm;
+}
+
+.tabs {
   background: $bg-base;
   overflow-x: auto;
+  width: 100vw;
 }
 
 .mat-tab-link {
@@ -67,8 +91,8 @@ $container-tab-width: 960px !default;
   background: $white;
   border-bottom: 1px solid $border-color;
   margin-top: $sidebar-container-overflow-y-sm;
-  opacity: .95;
   padding: rem(10);
+  width: 100vw;
 }
 
 .name-wrapper {

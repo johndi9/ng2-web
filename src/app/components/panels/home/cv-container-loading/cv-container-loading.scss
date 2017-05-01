@@ -5,8 +5,8 @@
 
 .loading-sidebar,
 .loading-container {
+  @include shadow-default;
   background: $white;
-  box-shadow: 10px 0 14px 0 $black-02;
   z-index: 1;
 }
 

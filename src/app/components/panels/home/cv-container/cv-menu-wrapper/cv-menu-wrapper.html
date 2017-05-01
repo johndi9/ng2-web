@@ -1,36 +1,42 @@
-<div *ngIf="typeScreen === SCREEN_TYPES.MOBILE" class="fade-slide-in delay250">
-  <div class="profile-info-wrapper-sm"
-       fxLayout="row"
-       fxLayoutAlign="center center">
-    <div fxFlex="50px">
-      <img class="profile-pic-sm"
-           [defaultImage]="'/assets/images/min/' + info?.image"
-           [lazyLoad]="'/assets/images/normal/' + info?.image"
-           [offset]="100">
+<div [ngClass]="{ 'host-wrapper-sm': hasFixPosition }">
+  <div *ngIf="typeScreen === SCREEN_TYPES.MOBILE"
+       class="tabs-container fade-slide-in delay250"
+       [ngClass]="{ 'fixed-sm': hasFixPosition }">
+    <div class="profile-info-wrapper-sm"
+         fxLayout="row"
+         fxLayoutAlign="center center">
+      <div fxFlex="50px">
+        <img class="profile-pic-sm"
+             [defaultImage]="'/assets/images/min/' + info?.image"
+             [lazyLoad]="'/assets/images/normal/' + info?.image"
+             [offset]="100">
+      </div>
+
+      <div class="name-wrapper-sm">
+        {{ name }}
+      </div>
     </div>
 
-    <div class="name-wrapper-sm">
-      {{ name }}
+    <div class="tabs">
+      <nav md-tab-nav-bar
+           aria-label="curriculum navigation links">
+        <a md-tab-link
+           *ngFor="let tab of tabs; let i = index"
+           [active]="tab.id === tabSelected"
+           (click)="selectOption(tab.id)">
+          <div class="md-tab-link-inner" fxLayoutAlign="center center">
+            <md-icon class="tab-link-icon">{{ tab.iconName }}</md-icon>
+            <span fxFlex>{{ ('labels.' + tabKeys[i]) | translate }}</span>
+          </div>
+        </a>
+      </nav>
     </div>
-  </div>
-
-  <div class="tabs-container">
-    <nav md-tab-nav-bar
-         aria-label="curriculum navigation links">
-      <a md-tab-link
-         *ngFor="let tab of tabs; let i = index"
-         [active]="tab.id === tabSelected"
-         (click)="selectOption(tab.id)">
-        <div class="md-tab-link-inner" fxLayoutAlign="center center">
-          <md-icon class="tab-link-icon">{{ tab.iconName }}</md-icon>
-          <span fxFlex>{{ ('labels.' + tabKeys[i]) | translate }}</span>
-        </div>
-      </a>
-    </nav>
   </div>
 </div>
 
-<div *ngIf="typeScreen !== SCREEN_TYPES.MOBILE" class="sidebar-container fade-slide-in delay250">
+<div *ngIf="typeScreen !== SCREEN_TYPES.MOBILE"
+     class="sidebar-container fade-slide-in delay250"
+     [ngClass]="{ 'fixed': hasFixPosition }">
   <div>
     <img class="profile-pic"
          [defaultImage]="'/assets/images/min/' + info?.image"

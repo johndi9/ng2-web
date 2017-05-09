@@ -33,14 +33,22 @@ module.exports = {
     { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/assets/icon/favicon-32x32.png' },
     { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/assets/icon/favicon-16x16.png' },
 
-    { rel: 'mask-icon', href: '/assets/icon/safari-pinned-tab.svg', color: '#5bbad5' },
+    { rel: 'mask-icon', href: '/assets/icon/safari-pinned-tab.svg', color: '#3f51b5' },
 
     /** <link> tags for a Web App Manifest **/
     { rel: 'manifest', href: '/assets/manifest.json' }
   ],
   meta: [
-    { name: 'msapplication-TileColor', content: '#da532c' },
+    /** Windows Phone **/
+    { name: 'msapplication-navbutton-color', content: '#3f51b5' },
+    { name: 'msapplication-TileColor', content: '#3f51b5' },
     { name: 'msapplication-TileImage', content: '/assets/icon/ms-icon-144x144.png', '=content': true },
-    { name: 'theme-color', content: '#ffffff' }
+
+    /** IOS Safari **/
+    { name: 'apple-mobile-web-app-capable', content: 'yes' },
+    { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
+
+    /** Chrome, Firefox OS and Opera **/
+    { name: 'theme-color', content: '#3f51b5' }
   ]
 };

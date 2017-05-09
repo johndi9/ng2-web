@@ -1,6 +1,6 @@
 const website: string = 'https://jdmiguel.xyz';
 const title: string = 'Juan Diego de Miguel Website';
-const summary: string = 'Check my new website with Angular2 / Google Material';
+const summary: string = 'New website coded with Angular4 / Google Material';
 
 export const SOCIAL_SHARE = {
   twitter: encodeURI(`https://twitter.com/intent/tweet?text=${summary}&via=juandiegodemi&url=${website}`),

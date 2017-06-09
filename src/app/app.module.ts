@@ -1,25 +1,20 @@
-import { NgModule, ApplicationRef } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { FormsModule } from '@angular/forms';
 import { HttpModule, Http } from '@angular/http';
 import { MaterialModule } from '@angular/material';
-import { RouterModule } from '@angular/router';
-import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
 
 // Providers/directives/pipes
 import { ENV_PROVIDERS } from './environment';
 
 // Services
-import { APP_RESOLVER_PROVIDERS } from './app.resolver';
-import { AppState, InternalStateType } from './services/app.service';
 import { CurriculumService } from './services/curriculum.service';
 import { DialogService } from './services/dialog.service';
 import { GoogleMapsService } from './services/googleMaps.service';
 import { InjectionService } from './services/injection.service';
 import { HttpService } from './services/http.service';
-import { NotificationService } from './services/notification.service';
 import { ResizeService } from './services/resize.service';
 
 // Components
@@ -65,17 +60,6 @@ import { ROUTES } from './app.routes';
 // Pipes
 import { MonthsDurationPipe } from './pipes/months-duration.pipe';
 
-// Application wide providers
-const APP_PROVIDERS = [
-  ...APP_RESOLVER_PROVIDERS,
-  AppState
-];
-
-type StoreType = {
-  state: InternalStateType,
-  restoreInputValues: () => void,
-  disposeOldHosts: () => void
-};
 
 export function createTranslateLoader(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -134,10 +118,8 @@ export function createTranslateLoader(http: Http) {
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
-    APP_PROVIDERS,
     CurriculumService,
     HttpService,
-    NotificationService,
     ResizeService,
     DialogService,
     InjectionService,
@@ -151,43 +133,7 @@ export function createTranslateLoader(http: Http) {
 })
 
 export class AppModule {
-  constructor(public appRef: ApplicationRef, public appState: AppState) {
+  constructor() {
   }
-
-  hmrOnInit(store: StoreType) {
-    if (!store || !store.state) return;
-    console.log('HMR store', JSON.stringify(store, null, 2));
-    // set state
-    this.appState._state = store.state;
-    // set input values
-    if ('restoreInputValues' in store) {
-      let restoreInputValues = store.restoreInputValues;
-      setTimeout(restoreInputValues);
-    }
-
-    this.appRef.tick();
-    delete store.state;
-    delete store.restoreInputValues;
-  }
-
-  hmrOnDestroy(store: StoreType) {
-    const cmpLocation = this.appRef.components.map(cmp => cmp.location.nativeElement);
-    // save state
-    const state = this.appState._state;
-    store.state = state;
-    // recreate root elements
-    store.disposeOldHosts = createNewHosts(cmpLocation);
-    // save input values
-    store.restoreInputValues = createInputTransfer();
-    // remove styles
-    removeNgStyles();
-  }
-
-  hmrAfterDestroy(store: StoreType) {
-    // display new elements
-    store.disposeOldHosts();
-    delete store.disposeOldHosts;
-  }
-
 }
 

@@ -6,6 +6,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { FormsModule } from '@angular/forms';
 import { HttpModule, Http } from '@angular/http';
 import { MaterialModule } from '@angular/material';
+import { RouteReuseStrategy, RouterModule } from '@angular/router';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 
@@ -14,6 +15,7 @@ import { ENV_PROVIDERS } from './environment';
 
 // Services
 import { CurriculumService } from './services/curriculum.service';
+import { CustomReuseStrategy } from './reuse-strategy';
 import { DialogService } from './services/dialog.service';
 import { GlobalActions } from './actions/global-actions';
 import { GoogleMapsService } from './services/googleMaps.service';
@@ -131,6 +133,7 @@ export function createTranslateLoader(http: Http) {
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
     CurriculumService,
+    HomeService,
     HttpService,
     ResizeService,
     DialogService,
@@ -138,6 +141,7 @@ export function createTranslateLoader(http: Http) {
     GoogleMapsService,
     HomeActions,
     GlobalActions,
+    { provide: RouteReuseStrategy, useClass: CustomReuseStrategy }
   ],
   entryComponents: [
     ProjectDialog,

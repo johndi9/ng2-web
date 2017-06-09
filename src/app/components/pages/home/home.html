@@ -1,10 +1,12 @@
 <div>
   <video-bg></video-bg>
-  <cv-container *ngIf="curriculum"
-                [curriculum]="curriculum"
+  <cv-container *ngIf="(cv$ | async)?.name"
+                [curriculum]="cv$ | async"
+                [tabSelected]="tabSelected$ | async"
+                [modalOpened]="modalOpened$ | async"
                 [typeScreen]="typeScreen"></cv-container>
-  <cv-container-loading *ngIf="!curriculum"></cv-container-loading>
+  <cv-container-loading *ngIf="!(cv$ | async)?.name"></cv-container-loading>
   <share-button class="share-button"></share-button>
 </div>
 
-<ng2-footer [name]="curriculum?.name"></ng2-footer>
+<ng2-footer [name]="(cv$ | async)?.name"></ng2-footer>

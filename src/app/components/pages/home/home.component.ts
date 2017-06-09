@@ -1,17 +1,16 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { MdRipple } from '@angular/material';
+import { Component, OnInit, OnDestroy, ElementRef, AfterViewInit } from '@angular/core';
+import { NavigationStart, Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+import { TranslateService } from '@ngx-translate/core';
 
-import { AppState } from '../../../services/app.service';
-import { CurriculumService } from '../../../services/curriculum.service';
-import { NotificationService } from '../../../services/notification.service';
+import { HomeActions } from '../../../actions/home-actions';
+import { HomeService } from '../../../services/home.service';
 import { ResizeService } from '../../../services/resize.service';
 
 import { Curriculum } from '../../../models/Curriculum/Curriculum';
-import { ModalOpened } from '../../../models/Components/Events';
 
-import { Subscription } from 'rxjs/Subscription';
-
-import { STATE_KEYS } from '../../../variables/variables';
+import { TAB_URL_PATHS } from '../../../variables/variables';
 
 
 @Component({
@@ -21,62 +20,72 @@ import { STATE_KEYS } from '../../../variables/variables';
 })
 
 export class Home implements OnInit, OnDestroy, AfterViewInit {
-  @ViewChild(MdRipple) ripple: MdRipple;
-
-  private curriculumLoadedSubscription: Subscription;
   private resizeChangeSubscription: Subscription;
-  private modalOpenedSubscription: Subscription;
 
-  curriculum: Curriculum;
+  cv$: Observable<Curriculum>;
+  tabSelected$: Observable<number>;
+  modalOpened$: Observable<{ index: number, type: number }>;
+
   private typeScreen: number;
   private rippleContainer: HTMLElement;
 
-  constructor(private _appState: AppState,
-              private _resizeService: ResizeService,
-              private _curriculumService: CurriculumService,
-              private _notificationService: NotificationService,
-              private _element: ElementRef) {
-  }
-
-  ngOnInit(): void {
-    this.retrieveCurriculum();
-
-    this.resizeChangeSubscription = this._resizeService.resizeChange
-      .subscribe((typeScreen: number) => this.typeScreen = typeScreen);
-
-    this.modalOpenedSubscription = this._notificationService.modalOpened.subscribe((modalOpened: ModalOpened) => {
-      this.updateModalOpenedState(modalOpened.type);
+  constructor(private _resizeService: ResizeService,
+              private _homeService: HomeService,
+              private _homeActions: HomeActions,
+              private _translate: TranslateService,
+              private _element: ElementRef,
+              private _router: Router) {
+    this.linkUrlToState(this._router.url, true);
+    _router.events.subscribe((nav) => {
+      if (nav instanceof NavigationStart) {
+        this.linkUrlToState(nav.url);
+      }
     });
   }
 
+  ngOnInit(): void {
+    this._homeActions.loadCV(this._translate.currentLang);
+
+    this.cv$ = this._homeService.cvs$
+      .map(cv => cv[this._translate.currentLang])
+      .filter(cv => !!cv);
+    this.tabSelected$ = this._homeService.tabSelected$;
+    this.modalOpened$ = this._homeService.modalOpened$;
+
+    this.resizeChangeSubscription = this._resizeService.resizeChange
+      .subscribe((typeScreen: number) => this.typeScreen = typeScreen);
+  }
+
   ngOnDestroy(): void {
-    this.curriculumLoadedSubscription.unsubscribe();
     this.resizeChangeSubscription.unsubscribe();
-    this.modalOpenedSubscription.unsubscribe();
   }
 
   ngAfterViewInit(): void {
     this.rippleContainer = this._element.nativeElement.querySelector('[md-ripple]');
   }
 
-  /**
-   * Retrieve the curriculum based on the observable
-   */
-  private retrieveCurriculum(): void {
-    if (this._curriculumService.curriculum) {
-      this.curriculum = this._curriculumService.curriculum
+  private linkUrlToState(url: String, initial?: boolean): void {
+    const option = this.getOptionSelected(url);
+    const idModal = this.getModalIdSelected(url);
+    if (idModal !== undefined) {
+      this._homeActions.openModal(idModal, option);
+      if (initial) {
+        this._homeActions.changeTab(option);
+      }
     } else {
-      this.curriculumLoadedSubscription = this._curriculumService.updateCurriculumJSON()
-        .subscribe(() => this.curriculum = this._curriculumService.curriculum);
+      this._homeActions.changeTab(option);
+      this._homeActions.closeModal(option);
     }
   }
 
-  /**
-   * Update modal opened state
-   * @param type
-   */
-  private updateModalOpenedState(type: number): void {
-    this._appState.set(STATE_KEYS[STATE_KEYS.MODAL_TYPE_OPENED], type);
+  private getOptionSelected(url: String): number {
+    const option = Object.keys(TAB_URL_PATHS).find(key => url.includes(TAB_URL_PATHS[key]));
+    return parseInt(option);
+  }
+
+  private getModalIdSelected(url: String): number {
+    const idModal = url.split("/")[2];
+    return idModal && parseInt(idModal);
   }
 
 }

@@ -1,22 +1,21 @@
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
-export enum STATE_KEYS {
-  CV_OPTION_SELECTED,
-  MODAL_TYPE_OPENED
-};
-
-export enum EVENT_TYPES {
-  CV_OPTION_CHANGED,
-  MODAL_OPENED
-};
-
-export enum CV_OPTION_TYPES {
+export enum TAB_OPTIONS {
   PERSONAL_INFO,
   PROJECTS,
   EMPLOYS,
   EDUCATION,
   OTHER_INFO,
   CONTACT
+};
+
+export const TAB_URL_PATHS = {
+  0: 'personal',
+  1: 'projects',
+  2: 'employers',
+  3: 'education',
+  4: 'other',
+  5: 'contact'
 };
 
 export const SWIPER_CONFIG: SwiperConfigInterface = {
@@ -30,14 +29,6 @@ export enum SCREEN_TYPES {
   MOBILE,
   TABLET,
   DESKTOP
-};
-
-export enum ANIMATION_TYPES {
-  bounceInRight = <any>'bounceInRight',
-  bounceOutRight = <any>'bounceOutRight',
-  bounceInLeft = <any>'bounceInLeft',
-  bounceOutLeft = <any>'bounceOutLeft',
-  hideElement = <any>'hideElement',
 };
 
 export const TABS = [

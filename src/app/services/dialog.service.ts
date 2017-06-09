@@ -20,6 +20,7 @@ export class DialogService {
 
   private doc: any;
   private rippleContainer: ComponentRef<any>;
+  private storedDialogRef: MdDialogRef<any>;
 
   private readonly DEFAULT_CONFIG: MdDialogConfig = {
     disableClose: false,
@@ -71,6 +72,8 @@ export class DialogService {
 
       this.rippleContainer.location.nativeElement.querySelector('.mat-ripple-element').style.transition = `transform ${this.RIPPLE_FADE_IN_DURATION}ms ease`;
 
+      this.storedDialogRef = dialogRef;
+
       dialogRef.afterClosed().subscribe(() => {
         this.rippleContainer.location.nativeElement.querySelector('.mat-ripple-element').style.transform = 'scale(0)';
         // this.rippleContainer.location.nativeElement.querySelector('.mat-ripple-element').style.transition = `transform ${this.RIPPLE_FADE_OUT_DURATION}ms ease`;
@@ -85,13 +88,20 @@ export class DialogService {
   }
 
   /**
+   * Close dialog layer
+   */
+  public close(): void {
+    this.mdDialog.closeAll();
+  }
+
+  /**
    * Block the modal until the ripple animation has finished
    * @param isMediumUpView
    * @param isOpening
    * @return {any}
    */
   private blockModalOpenAnimation(isMediumUpView: boolean, isOpening: boolean): Observable<boolean> {
-    let duration = this.getSpeedDuration(isMediumUpView, isOpening)/3;
+    let duration = this.getSpeedDuration(isMediumUpView, isOpening) / 3;
 
     return Observable.of(true).delay(duration);
   }
@@ -102,18 +112,21 @@ export class DialogService {
    * @param isMediumUpView
    */
   private triggerRipple(event: MouseEvent, isMediumUpView: boolean): Observable<boolean> {
-    const radius: number = this.RIPPLE_SIZE_FACTOR * this.getMaximumSquareSide(event);
+    const radius: number = this.RIPPLE_SIZE_FACTOR *
+      (event ? this.getMaximumSquareSide(event) : Math.max(window.innerWidth, window.innerHeight));
     const speedFactor: number = this.getSpeedFactor(isMediumUpView);
 
     if (!this.rippleContainer) {
       this.appendRipple();
     }
 
-    this.setInitialCoordinatesRipple(event);
+    if (event) {
+      this.setInitialCoordinatesRipple(event);
+    }
 
     // Trigger ripple
-    (<Ng2Ripple>this.rippleContainer.instance).launch(event.pageX, event.pageY,
-      { centered: false, persistent: true, radius: radius, color: 'white', speedFactor: speedFactor });
+    (<Ng2Ripple>this.rippleContainer.instance).launch(event ? event.pageX : 0, event ? event.pageY : 0,
+      { centered: !event, persistent: true, radius: radius, color: 'white', speedFactor: speedFactor });
 
     return this.blockModalOpenAnimation(isMediumUpView, true);
   }

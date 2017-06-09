@@ -1,18 +1,25 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EffectsModule } from '@ngrx/effects';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { FormsModule } from '@angular/forms';
 import { HttpModule, Http } from '@angular/http';
 import { MaterialModule } from '@angular/material';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { StoreModule } from '@ngrx/store';
 
-// Providers/directives/pipes
+// Providers/directives
 import { ENV_PROVIDERS } from './environment';
 
 // Services
 import { CurriculumService } from './services/curriculum.service';
 import { DialogService } from './services/dialog.service';
+import { GlobalActions } from './actions/global-actions';
 import { GoogleMapsService } from './services/googleMaps.service';
+import { HomeActions } from './actions/home-actions';
+import { HomeEffects } from './effects/home-effects';
+import { HomeService } from './services/home.service';
 import { InjectionService } from './services/injection.service';
 import { HttpService } from './services/http.service';
 import { ResizeService } from './services/resize.service';
@@ -60,6 +67,8 @@ import { ROUTES } from './app.routes';
 // Pipes
 import { MonthsDurationPipe } from './pipes/months-duration.pipe';
 
+// Reducers
+import { reducer } from './reducers/index';
 
 export function createTranslateLoader(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -100,6 +109,7 @@ export function createTranslateLoader(http: Http) {
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    EffectsModule.run(HomeEffects),
     FormsModule,
     HttpModule,
     LazyLoadImageModule,
@@ -107,6 +117,8 @@ export function createTranslateLoader(http: Http) {
     RouterModule.forRoot(ROUTES, { useHash: false }),
     MaterialModule,
     FlexLayoutModule,
+    StoreModule.provideStore(reducer),
+    StoreDevtoolsModule.instrumentOnlyWithExtension(),
     SwiperModule.forRoot(SWIPER_CONFIG),
     TranslateModule.forRoot({
       loader: {
@@ -123,7 +135,9 @@ export function createTranslateLoader(http: Http) {
     ResizeService,
     DialogService,
     InjectionService,
-    GoogleMapsService
+    GoogleMapsService,
+    HomeActions,
+    GlobalActions,
   ],
   entryComponents: [
     ProjectDialog,

@@ -1,57 +1,53 @@
-import { Component, OnInit, OnDestroy, ElementRef, Input } from '@angular/core';
-
-import { AppState } from '../../../../services/app.service';
-import { NotificationService } from '../../../../services/notification.service';
+import { Component, OnInit, ElementRef, Input, OnChanges, ChangeDetectionStrategy, SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Curriculum } from '../../../../models/Curriculum/Curriculum';
 
-import { Subscription } from 'rxjs/Subscription';
-
-import { STATE_KEYS, CV_OPTION_TYPES } from '../../../../variables/variables';
+import { TAB_OPTIONS, TAB_URL_PATHS } from '../../../../variables/variables';
 
 
 @Component({
   selector: 'cv-container',
   styleUrls: ['./cv-container.scss'],
-  templateUrl: './cv-container.html'
+  templateUrl: './cv-container.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class CvContainer implements OnInit, OnDestroy {
+export class CvContainer implements OnInit, OnChanges {
   @Input() curriculum: Curriculum;
+  @Input() tabSelected: number;
+  @Input() modalOpened: { index: number, type: number };
   @Input() typeScreen: number;
 
-  private optionChangeSubscription: Subscription;
-
-  tabSelected: number;
   bgClass: string;
 
-  private readonly DEFAULT_OPTION: number = 0;
   readonly SIDEBAR_MAX_WIDTH: string = '320px';
 
-  constructor(private _appState: AppState,
-              private _notificationService: NotificationService,
-              private _elementRef: ElementRef) {
+  constructor(private _elementRef: ElementRef,
+              private _router: Router) {
   }
 
   ngOnInit(): void {
-    this.updateTabSelection(this.DEFAULT_OPTION);
-
-    this.optionChangeSubscription = this._notificationService.triggerCVOptionChange.subscribe((option) => {
-      this.updateTabSelection(option);
-      this.updateSwiperSelection(option);
-    });
+    this.updateTabSelection(this.tabSelected);
   }
 
-  ngOnDestroy(): void {
-    this.optionChangeSubscription.unsubscribe();
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['tabSelected'] && changes['tabSelected'].currentValue !== changes['tabSelected'].previousValue) {
+      setTimeout(() => {
+        this.updateTabSelection(this.tabSelected);
+        this.updateSwiperSelection(this.tabSelected);
+      }, 0);
+    }
   }
 
   /**
-   * Index change based on a swiper action
+   * Index change based on a swiper action (mouse/finger swipe)
    * @param index
    */
-  onIndexSwiperChange(option: number) {
-    this.updateTabSelection(option);
+  onIndexSwiperChange(option: TAB_OPTIONS) {
+    if (this.tabSelected !== option) {
+      this._router.navigate(['/' + TAB_URL_PATHS[option]]);
+    }
   }
 
   /**
@@ -60,7 +56,24 @@ export class CvContainer implements OnInit, OnDestroy {
    * @param option
    */
   private updateSwiperSelection(option: number): void {
-    this._elementRef.nativeElement.getElementsByClassName('swiper-pagination-handle')[option].click();
+    const swiperSelection = this.getSwiperOption(option);
+    if (swiperSelection) {
+      swiperSelection.click();
+    } else {
+      // TODO: remove this case when NgxSwiper supports init Output
+      var checkExist = setInterval(() => {
+        const swiperSelection = this.getSwiperOption(option);
+        if (swiperSelection) {
+          swiperSelection.click();
+          clearInterval(checkExist);
+        }
+      }, 100);
+    }
+  }
+
+  private getSwiperOption(option: number) {
+    const swiperOption = this._elementRef.nativeElement.getElementsByClassName('swiper-pagination-handle');
+    return swiperOption && swiperOption[option];
   }
 
   /**
@@ -68,18 +81,9 @@ export class CvContainer implements OnInit, OnDestroy {
    * @param option
    */
   private updateTabSelection(option: number): void {
-    this.updateTabSelectionState(option);
     this.updateTabSelected(option);
     this.updateBgColor(option);
     this.resetScroll();
-  }
-
-  /**
-   * Update tab active state
-   * @param option
-   */
-  private updateTabSelectionState(option: number): void {
-    this._appState.set(STATE_KEYS[STATE_KEYS.CV_OPTION_SELECTED], option);
   }
 
   /**
@@ -96,10 +100,10 @@ export class CvContainer implements OnInit, OnDestroy {
    */
   private updateBgColor(option: number): void {
     switch (option) {
-      case CV_OPTION_TYPES.PROJECTS:
-      case CV_OPTION_TYPES.EMPLOYS:
-      case CV_OPTION_TYPES.EDUCATION:
-      case CV_OPTION_TYPES.OTHER_INFO:
+      case TAB_OPTIONS.PROJECTS:
+      case TAB_OPTIONS.EMPLOYS:
+      case TAB_OPTIONS.EDUCATION:
+      case TAB_OPTIONS.OTHER_INFO:
         this.bgClass = 'grey';
         break;
       default:

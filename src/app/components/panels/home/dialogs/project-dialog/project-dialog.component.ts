@@ -1,6 +1,4 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
-
-import { CurriculumService } from '../../../../../services/curriculum.service';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { Employ } from '../../../../../models/Curriculum/Employ/Employ';
 import { Project } from '../../../../../models/Curriculum/Project/Project';
@@ -13,15 +11,11 @@ import { Project } from '../../../../../models/Curriculum/Project/Project';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class ProjectDialog implements OnInit {
+export class ProjectDialog {
   project: Project;
   employ: Employ;
 
-  constructor(private _curriculumService: CurriculumService) {
-  }
-
-  ngOnInit(): void {
-    this.employ = this._curriculumService.getEmployerFromProject(this.project.id);
+  constructor() {
   }
 
 }

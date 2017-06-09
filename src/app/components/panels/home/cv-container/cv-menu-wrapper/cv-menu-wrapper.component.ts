@@ -2,15 +2,11 @@ import {
   Component, ChangeDetectionStrategy, Input, ElementRef, OnChanges, SimpleChanges, AfterViewInit, HostListener
 } from '@angular/core';
 
-import { AppState } from '../../../../../services/app.service';
-import { NotificationService } from '../../../../../services/notification.service';
-
 import { Info } from '../../../../../models/Curriculum/Info/Info';
 import { Tab } from '../../../../../models/Components/Tab';
 
 import MapUtils from '../../../../../utils/modelParser';
-
-import { STATE_KEYS, CV_OPTION_TYPES, EVENT_TYPES, TABS, SCREEN_TYPES } from '../../../../../variables/variables';
+import { TABS, SCREEN_TYPES, TAB_URL_PATHS } from '../../../../../variables/variables';
 
 
 @Component({
@@ -37,13 +33,12 @@ export class CvMenuWrapper implements AfterViewInit, OnChanges {
     ['personalInfoTitle', 'projectsTitle', 'employsTitle', 'educationTitle', 'otherInfoTitle', 'contactTitle'];
   private scrollableContainer: HTMLElement;
 
+  TAB_URL_PATHS = TAB_URL_PATHS;
   SCREEN_TYPES = SCREEN_TYPES;
   hasFixPosition: boolean;
   private readonly TAB_WIDTH: number = 160;
 
-  constructor(private _appState: AppState,
-              private _notificationService: NotificationService,
-              private _elementRef: ElementRef) {
+  constructor(private _elementRef: ElementRef) {
     this.tabs = TABS.map((tab) => MapUtils.deserialize(Tab, tab));
   }
 
@@ -53,16 +48,6 @@ export class CvMenuWrapper implements AfterViewInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.updateCentralTabPosition();
-  }
-
-  /**
-   * Notify the central CVContainer as soon as the user selects some tab here
-   * @param option
-   */
-  private selectOption(option: CV_OPTION_TYPES): void {
-    if (this._appState.get(STATE_KEYS[STATE_KEYS.CV_OPTION_SELECTED]) !== option) {
-      this._notificationService.notifyListener(EVENT_TYPES.CV_OPTION_CHANGED, option);
-    }
   }
 
   /**

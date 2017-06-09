@@ -6,9 +6,9 @@ require('../assets/scss/initial.scss');
 
 @Component({
   selector: 'app',
-  encapsulation: ViewEncapsulation.None,
   styleUrls: ['../assets/scss/index.scss', './app.scss'],
-  templateUrl: './app.html'
+  templateUrl: './app.html',
+  encapsulation: ViewEncapsulation.None
 })
 
 export class AppComponent {

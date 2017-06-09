@@ -9,13 +9,15 @@
     <ng-template ngFor let-project [ngForOf]="projects" let-i="index">
       <card *ngIf="((i + 1) - columnIndex) % numberOfColumns === 0"
             class="card padding-card"
+            [id]="project?.id"
             [location]="getEmployerFromProject(project?.id)?.location"
             [employer]="getEmployerFromProject(project?.id)?.employer"
             [dialog]="getDialog(project)"
-            [type]="CV_OPTION_TYPES.PROJECTS"
+            [type]="TAB_OPTIONS.PROJECTS"
             [logo]="project?.logo"
             [typeScreen]="typeScreen"
-            [willTriggerModal]="true">
+            [willTriggerModal]="true"
+            [modalOpened]="modalOpened">
         <div class="card-title">
           {{ project?.title }}
         </div>

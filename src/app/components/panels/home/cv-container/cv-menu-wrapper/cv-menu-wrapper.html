@@ -23,7 +23,7 @@
         <a md-tab-link
            *ngFor="let tab of tabs; let i = index"
            [active]="tab.id === tabSelected"
-           (click)="selectOption(tab.id)">
+           [routerLink]="'/' + TAB_URL_PATHS[tab.id]">
           <div class="md-tab-link-inner" fxLayoutAlign="center center">
             <md-icon class="tab-link-icon">{{ tab.iconName }}</md-icon>
             <span fxFlex>{{ ('labels.' + tabKeys[i]) | translate }}</span>
@@ -47,9 +47,9 @@
 
   <md-nav-list>
     <a md-list-item
-       [ngClass]="{'active': tab.id === tabSelected}"
        *ngFor="let tab of tabs; let i = index"
-       (click)="selectOption(tab.id)">
+       [ngClass]="{'active': tab.id === tabSelected}"
+       [routerLink]="'/' + TAB_URL_PATHS[tab.id]">
       <md-icon md-list-icon>{{ tab.iconName }}</md-icon>
       <span md-line>{{ ('labels.' + tabKeys[i]) | translate }}</span>
     </a>

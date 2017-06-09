@@ -9,6 +9,7 @@ import { Dialog } from '../../../../../models/Components/Dialog';
 import { Employ } from '../../../../../models/Curriculum/Employ/Employ';
 import { Project } from '../../../../../models/Curriculum/Project/Project';
 
+import { TAB_OPTIONS } from '../../../../../variables/variables';
 
 
 @Component({
@@ -20,16 +21,20 @@ import { Project } from '../../../../../models/Curriculum/Project/Project';
 
 export class ProjectWrapper extends CommonWrapper {
   @Input() projects: Project[];
+  @Input() employs: Employ[];
+
+  TAB_OPTIONS = TAB_OPTIONS;
 
   constructor(private _curriculumService: CurriculumService) {
     super();
   }
 
-  private getEmployerFromProject(projectId: number): Employ {
-    return this._curriculumService.getEmployerFromProject(projectId);
+  getEmployerFromProject(projectId: number): Employ {
+    return this._curriculumService.getEmployerFromProject(this.employs,
+      this._curriculumService.getProject(this.projects, projectId));
   }
 
-  private getDialog(project: Project) {
-    return new Dialog(ProjectDialog, ['project'], [project]);
+  getDialog(project: Project) {
+    return new Dialog(ProjectDialog, ['project', 'employ'], [project, this.getEmployerFromProject(project.id)]);
   }
 }

@@ -2,7 +2,7 @@ import { Component, Input, ChangeDetectionStrategy, SimpleChanges, OnChanges } f
 
 import { ProjectDialog } from '../../dialogs/common-dialog/common-dialog.component';
 
-import { CV_OPTION_TYPES, SCREEN_TYPES } from '../../../../../variables/variables';
+import { SCREEN_TYPES } from '../../../../../variables/variables';
 
 
 @Component({
@@ -14,10 +14,10 @@ import { CV_OPTION_TYPES, SCREEN_TYPES } from '../../../../../variables/variable
 
 export class CommonWrapper implements OnChanges {
   @Input() typeScreen: number;
+  @Input() modalOpened: { index: number, type: number };
 
   private numberOfColumns: number;
 
-  private CV_OPTION_TYPES = CV_OPTION_TYPES;
   private SCREEN_TYPES: SCREEN_TYPES;
 
   constructor() {

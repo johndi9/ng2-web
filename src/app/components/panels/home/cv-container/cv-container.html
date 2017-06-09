@@ -19,11 +19,14 @@
       </div>
       <div class="swiper-slide" fxLayout="column">
         <project-wrapper [typeScreen]="typeScreen"
-                         [projects]="curriculum?.projects"></project-wrapper>
+                         [projects]="curriculum?.projects"
+                         [employs]="curriculum?.employment?.history"
+                         [modalOpened]="modalOpened"></project-wrapper>
       </div>
       <div class="swiper-slide" fxLayout="column">
         <employ-wrapper [typeScreen]="typeScreen"
-                        [employs]="curriculum?.employment?.history"></employ-wrapper>
+                        [employs]="curriculum?.employment?.history"
+                        [modalOpened]="modalOpened"></employ-wrapper>
       </div>
       <div class="swiper-slide" fxLayout="column">
         <education-wrapper [typeScreen]="typeScreen"

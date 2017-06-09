@@ -1,55 +1,41 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 import { HttpService } from './http.service';
 
 import { Curriculum } from '../models/Curriculum/Curriculum';
-
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
-import MapUtils from '../utils/modelParser';
 import { Employ } from '../models/Curriculum/Employ/Employ';
 import { Project } from '../models/Curriculum/Project/Project';
+import MapUtils from '../utils/modelParser';
 
 
 @Injectable()
 export class CurriculumService {
   private readonly urlCVStored: string = 'https://raw.githubusercontent.com/johndi9/PersonalCV/master/curriculum/personal-cv.json';
 
-  private _curriculum: Curriculum;
-
-  get curriculum(): Curriculum {
-    return this._curriculum;
-  }
-
-  set curriculum(value: Curriculum) {
-    throw Error('The object ' + Curriculum.name + ' cannot be modified.');
-  }
-
   constructor(private _httpService: HttpService) {
   }
 
   /**
-   * Retrieve the curriculum json and parte it to the app model
-   * @returns {Subscription}
+   * Retrieve the curriculum json and parse it to the app model
+   * @param lan
+   * @returns {Observable<Curriculum>}
    */
-  public updateCurriculumJSON(): Observable<Curriculum> {
+  getCurriculum(lan: string): Observable<Curriculum> {
     const cvObservable: Observable<Curriculum> = this._httpService.getSingle(this.urlCVStored);
 
     cvObservable.subscribe(
-      (data) => this._curriculum = MapUtils.deserialize(Curriculum, data),
+      (data) => MapUtils.deserialize(Curriculum, data),
       (error: any) => Observable.throw(error));
 
     return cvObservable;
   }
 
-  public getEmployerFromProject(idProject: number): any {
-    const project: Project = this.getProject(idProject);
-
-    return this.curriculum && project ?
-      this.curriculum.employment.history.find((employ: Employ) => employ.id === project.employerId) : null;
+  public getEmployerFromProject(employs: Employ[] = [], project: Project): Employ {
+    return project && employs.find((employ: Employ) => employ.id === project.employerId);
   }
 
-  public getProject(idProject: number): Project {
-    return this.curriculum && this.curriculum.projects.find((project: Project) => project.id === idProject);
+  public getProject(projects: Project[] = [], idProject: number): Project {
+    return projects.find((project: Project) => project.id === idProject);
   }
 }

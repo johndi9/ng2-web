@@ -18,7 +18,7 @@ import { TABS, SCREEN_TYPES, TAB_URL_PATHS } from '../../../../../variables/vari
 
 export class CvMenuWrapper implements AfterViewInit, OnChanges {
   @HostListener('window:scroll', ['$event'])
-  triggerFixPosition(event) {
+  triggerFixPosition() {
     const elementOffset: number = this.typeScreen === SCREEN_TYPES.MOBILE ? 75 : 140;
     this.hasFixPosition = window.pageYOffset + 63 > window.innerHeight - elementOffset;
   }
@@ -29,14 +29,13 @@ export class CvMenuWrapper implements AfterViewInit, OnChanges {
   @Input() typeScreen: number;
 
   private tabs: Tab[];
-  private tabKeys: string[] =
-    ['personalInfoTitle', 'projectsTitle', 'employsTitle', 'educationTitle', 'otherInfoTitle', 'contactTitle'];
   private scrollableContainer: HTMLElement;
-
-  TAB_URL_PATHS = TAB_URL_PATHS;
-  SCREEN_TYPES = SCREEN_TYPES;
   hasFixPosition: boolean;
+
   private readonly TAB_WIDTH: number = 160;
+  TAB_URL_PATHS = TAB_URL_PATHS;
+  tabKeys: string[] = ['personalInfoTitle', 'projectsTitle', 'employsTitle', 'educationTitle', 'otherInfoTitle', 'contactTitle'];
+  SCREEN_TYPES = SCREEN_TYPES;
 
   constructor(private _elementRef: ElementRef) {
     this.tabs = TABS.map((tab) => MapUtils.deserialize(Tab, tab));

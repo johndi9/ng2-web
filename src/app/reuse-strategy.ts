@@ -28,7 +28,7 @@ export class CustomReuseStrategy implements RouteReuseStrategy {
    */
   shouldDetach(route: ActivatedRouteSnapshot): boolean {
     let detach: boolean = true;
-    console.log('detaching', route, 'return: ', detach);
+
     return detach;
   }
 
@@ -43,7 +43,6 @@ export class CustomReuseStrategy implements RouteReuseStrategy {
       handle: handle
     };
 
-    console.log('store:', storedRoute, 'into: ', this.storedRoutes);
     // routes are stored by path - the key is the path name, and the handle is stored under it so that you can only ever have one object stored for a single path
     this.storedRoutes[route.routeConfig.path] = storedRoute;
   }
@@ -65,7 +64,6 @@ export class CustomReuseStrategy implements RouteReuseStrategy {
       let paramsMatch: boolean = this.compareObjects(route.params, this.storedRoutes[route.routeConfig.path].snapshot.params);
       let queryParamsMatch: boolean = this.compareObjects(route.queryParams, this.storedRoutes[route.routeConfig.path].snapshot.queryParams);
 
-      console.log('deciding to attach...', route, 'does it match?', this.storedRoutes[route.routeConfig.path].snapshot, 'return: ', paramsMatch && queryParamsMatch);
       return paramsMatch && queryParamsMatch;
     } else {
       return false;
@@ -81,7 +79,6 @@ export class CustomReuseStrategy implements RouteReuseStrategy {
 
     // return null if the path does not have a routerConfig OR if there is no stored route for that routerConfig
     if (!route.routeConfig || !this.storedRoutes[route.routeConfig.path]) return null;
-    console.log('retrieving', 'return: ', this.storedRoutes[route.routeConfig.path]);
 
     /** returns handle when the route.routeConfig.path is already stored */
     return this.storedRoutes[route.routeConfig.path].handle;
@@ -95,7 +92,7 @@ export class CustomReuseStrategy implements RouteReuseStrategy {
    */
   shouldReuseRoute(future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean {
     const hasSameObj = curr.component && (future.component as any).name === (curr.component as any).name;
-    console.log('deciding to reuse', 'future', future.routeConfig, 'current', curr.routeConfig, 'return: ', future.routeConfig === curr.routeConfig || hasSameObj);
+
     return future.routeConfig === curr.routeConfig || hasSameObj;
   }
 

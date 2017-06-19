@@ -38,6 +38,11 @@ i {
 }
 
 .separator {
+  font-weight: 300;
   line-height: 2rem;
   margin-bottom: 1rem;
+}
+
+.separator + div {
+  font-weight: 300;
 }

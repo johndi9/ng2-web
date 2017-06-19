@@ -86,7 +86,8 @@ div.mat-chip-list-wrapper .mat-chip:not(.mat-basic-chip) {
 
 div.mat-chip-list-wrapper .mat-chip:not(.mat-basic-chip),
 div.mat-chip-list-wrapper .mat-chip:not(.mat-basic-chip):first-child,
-div.mat-chip-list-wrapper .mat-chip:not(.mat-basic-chip):last-child {
+div.mat-chip-list-wrapper .mat-chip:not(.mat-basic-chip):last-child,
+div.mat-chip-list-wrapper .mat-chip:not(.mat-basic-chip) + .mat-chip:not(.mat-basic-chip){
   margin: 0 7px 7px 0;
 }
 

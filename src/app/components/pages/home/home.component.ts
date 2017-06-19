@@ -28,6 +28,9 @@ export class Home implements OnInit, OnDestroy, AfterViewInit {
 
   private typeScreen: number;
   private rippleContainer: HTMLElement;
+  private lastUrl: string;
+
+  private readonly DEFAULT_TAB: number = 0;
 
   constructor(private _resizeService: ResizeService,
               private _homeService: HomeService,
@@ -35,15 +38,16 @@ export class Home implements OnInit, OnDestroy, AfterViewInit {
               private _translate: TranslateService,
               private _element: ElementRef,
               private _router: Router) {
-    this.linkUrlToState(this._router.url, true);
-    _router.events.subscribe((nav) => {
-      if (nav instanceof NavigationStart) {
-        this.linkUrlToState(nav.url);
-      }
-    });
   }
 
   ngOnInit(): void {
+    this.updateStateFromUrl(this._router.url, true);
+    this._router.events.subscribe((nav) => {
+      if (nav instanceof NavigationStart) {
+        this.updateStateFromUrl(nav.url);
+      }
+    });
+
     this._homeActions.loadCV(this._translate.currentLang);
 
     this.cv$ = this._homeService.cvs$
@@ -64,27 +68,35 @@ export class Home implements OnInit, OnDestroy, AfterViewInit {
     this.rippleContainer = this._element.nativeElement.querySelector('[md-ripple]');
   }
 
-  private linkUrlToState(url: String, initial?: boolean): void {
+  private updateStateFromUrl(url: string, initial?: boolean): void {
     const option = this.getOptionSelected(url);
     const idModal = this.getModalIdSelected(url);
+
     if (idModal !== undefined) {
       this._homeActions.openModal(idModal, option);
-      if (initial) {
+      if (initial && option !== this.DEFAULT_TAB) {
         this._homeActions.changeTab(option);
       }
     } else {
-      this._homeActions.changeTab(option);
-      this._homeActions.closeModal(option);
+      const lastIdModal = this.lastUrl && this.getModalIdSelected(this.lastUrl);
+
+      if (lastIdModal !== undefined) {
+        this._homeActions.closeModal(option);
+      } else {
+        this._homeActions.changeTab(option);
+      }
     }
+
+    this.lastUrl = url;
   }
 
-  private getOptionSelected(url: String): number {
+  private getOptionSelected(url: string): number {
     const option = Object.keys(TAB_URL_PATHS).find(key => url.includes(TAB_URL_PATHS[key]));
-    return parseInt(option);
+    return option ? parseInt(option) : this.DEFAULT_TAB;
   }
 
-  private getModalIdSelected(url: String): number {
-    const idModal = url.split("/")[2];
+  private getModalIdSelected(url: string): number {
+    const idModal = url.split('/')[2];
     return idModal && parseInt(idModal);
   }
 

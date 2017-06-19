@@ -62,12 +62,6 @@ export class CustomReuseStrategy implements RouteReuseStrategy {
     // at this point we already know that the paths match because the storedResults key is the route.routeConfig.path
     // so, if the route.params and route.queryParams also match, then we should reuse the component
     if (canAttach) {
-      let willAttach: boolean = true;
-      console.log('param comparison:');
-      console.log(this.compareObjects(route.params, this.storedRoutes[route.routeConfig.path].snapshot.params));
-      console.log('query param comparison');
-      console.log(this.compareObjects(route.queryParams, this.storedRoutes[route.routeConfig.path].snapshot.queryParams));
-
       let paramsMatch: boolean = this.compareObjects(route.params, this.storedRoutes[route.routeConfig.path].snapshot.params);
       let queryParamsMatch: boolean = this.compareObjects(route.queryParams, this.storedRoutes[route.routeConfig.path].snapshot.queryParams);
 

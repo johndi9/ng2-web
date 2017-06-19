@@ -28,7 +28,7 @@
           {{ project?.summary }}
         </div>
         <div class="card-actions">
-          <button md-button
+          <button md-raised-button
                   color="primary">
             {{ 'labels.moreDetails' | translate }}
           </button>
@@ -37,8 +37,7 @@
              md-raised-button
              href="{{ project?.url }}"
              target="_blank"
-             (click)="$event.stopPropagation()"
-             color="primary">
+             (click)="$event.stopPropagation()">
             {{ 'labels.url' | translate }}
           </a>
 
@@ -46,8 +45,7 @@
              md-raised-button
              href="{{ '/assets/pdf/' + project?.download }}"
              download
-             (click)="$event.stopPropagation()"
-             color="primary">
+             (click)="$event.stopPropagation()">
             <md-icon>file_download</md-icon>
             {{ 'labels.download' | translate }}
           </a>
